@@ -18,3 +18,4 @@ Raw material only. Files here are captured, dated, and never rewritten — synth
 | `customers/` | Asks, objections, win/loss reasons | Captured from calls, emails, anywhere |
 | `notes/` | Kurt's raw thinking | Write freely; Claude files the signal |
 | `research/` | External research: competitors, market, DOSS public positioning | Claude web research, analyst pieces, press |
+| `internal/` | Internal DOSS strategy / VoC / telemetry exports | Kurt drops files here directly; preserve originals and synthesize into hypotheses/strategy |

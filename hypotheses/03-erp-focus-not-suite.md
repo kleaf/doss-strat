@@ -40,3 +40,9 @@ The Intuit relationship cuts both ways: it cements focus today but could constra
 
 - Log every out-of-scope customer ask in [inputs/customers/](../inputs/customers/) with what they'd pay / whether it blocked the deal. Review quarterly: is any adjacent area blocking >20% of deals?
 - Define the revisit trigger for finance explicitly (e.g., "when N customers cite QuickBooks limits as their top pain").
+
+## V4 update (2026-07-06): focus becomes loop-shaped delivery
+
+Additional evidence for:
+- 2026-07-06 (V4): Internal requirements cluster around operational resource planning and the accounting boundary: inventory, POs, COGS/landed cost, retail/EDI, order routing, planning/MRP, and keeping the GL while moving operations onto DOSS. There is still no evidence to expand into HR/CRM-style suite breadth ([internal VoC](../inputs/internal/Top-10-Customer-ERP-Ops-Requirements---1H-FY26-SPICED-LIR.html)).
+- 2026-07-06 (V4): The Value Loops model resolves suite-vs-focus tension: contracts can remain suite-shaped, but delivery and expansion should be loop-shaped, one transaction cycle at a time ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).

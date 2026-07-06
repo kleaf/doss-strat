@@ -39,3 +39,11 @@ Two sharper sub-claims worth testing:
 
 - Review the next 5 Fireflies transcripts: timestamp where value proposition first appears, and in whose words (ours or the customer's). Capture in [inputs/calls/](../inputs/calls/).
 - Draft the one-sentence pain + secret-sauce statement, A/B it in live calls, and track whether discovery conversations change shape.
+
+## V4 update (2026-07-06): the value story is an outcome receipt
+
+Additional evidence for:
+- 2026-07-06 (V4): Internal LIR work says customers retain when a recurring transaction cycle runs automatically through DOSS and stays there. The value proposition can be stated as loop activation plus an outcome receipt: close in days, compliant retail round-trips, weekly acknowledged POs, daily reconciled inventory, zero manual fallback ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).
+- 2026-07-06 (V4): Buyer language from discovery notes is already outcome-shaped: "run the whole business from one set of numbers," "know exactly what I have," "scale without scaling headcount," "ship retail-compliant on day one," and "keep my GL, lose the ERP pain" ([internal VoC](../inputs/internal/Top-10-Customer-ERP-Ops-Requirements---1H-FY26-SPICED-LIR.html)).
+
+Current synthesis: lead discovery with the buyer's loop and the receipt it will produce; integration detail should prove the activation predicate, not become the pitch.

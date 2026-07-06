@@ -64,3 +64,7 @@ The e.l.f. footnote matters: e.l.f. runs NetSuite — the edge is the *capabilit
 2. Does DOSS today ingest the EDI documents (850/855/856/810) and retailer scorecards needed for the compliance agent — and if not, what's the lift?
 3. Which existing customer is the best "Zara loop" story candidate — fastest signal→PO cycle we've enabled?
 4. Legal/positioning: deduction *prevention* is safe ground; deduction *disputes* (drafting claims against Walmart/Target) — any channel-relationship risk?
+
+## V4 addendum — proof points become outcome receipts
+
+The internal LIR work keeps the V3 proof-economics direction but changes the packaging. The unit of proof is now an **outcome receipt** for a Value Loop: Close in days with JEs posted and no Excel fallback; Retail orders round-tripped with compliant 856/810 and zero chargebacks; weekly POs created/sent/acknowledged; daily reconciled inventory within tolerance. Deduction recovery/prevention remains a powerful hard-dollar receipt, but the internal heavy-hitter ranking treats it as whitespace after Retail O2C is reliable, not the first rail to harden ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).

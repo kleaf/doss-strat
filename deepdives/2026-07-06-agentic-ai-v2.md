@@ -94,3 +94,7 @@ Phases 1–2 are almost entirely LLM-engineering on data DOSS already holds — 
 3. **Point tools add execution** via deeper integrations (Cogsy cutting POs in DOSS/NetSuite via API) — partial loop closure without owning the record.
 4. Open: what are the **top 5 exception types by volume** across current customers? (Answerable from DOSS's own data today — first thing to ask the team.)
 5. Open: how much of current implementation time is the five jobs above vs. sales/org delays that AI can't compress?
+
+## V4 addendum — Value Loops change the sequencing
+
+The internal Value Loops / LIR work refines this V2 plan without overturning it. The implementation agent should now be specified as a **loop activation agent**: pick the lead Value Loop, stand up a day-1 rail, reach the first externally verified transaction, and repeat for two cycles. Runtime agency should first keep those loops healthy: failed GL posts, missing partner acknowledgements, pending ASNs, mismatched 3PL counts, and manual fallback events. Planning remains second-order until the Truth loop is reliable. Chargeback/deduction automation remains a high-value Retail follow-on, but the Retail O2C rail and partner-ack telemetry must be trustworthy first ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).

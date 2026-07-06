@@ -39,3 +39,11 @@ This is the strongest candidate answer to [H1](01-beyond-tables-and-forms.md) (d
 - Measure current DOSS implementation time end-to-end; compare to published NetSuite/SAP B1 mid-market baselines. If we're not already ≥5x faster, level 1 is aspiration, not asset.
 - Identify one real customer schema-evolution event that already happened (or manufacture one with a design partner) and write it up as the flagship story.
 - Pressure-test the trust model with 3 ops leaders: show the propose-and-approve flow, watch where they flinch.
+
+## V4 update (2026-07-06): implementation agent = loop activation agent
+
+Additional evidence for:
+- 2026-07-06 (V4): The Value Loops model gives the implementation agent a concrete objective: get one lead transaction cycle to external-boundary activation, then repeat for two cycles. This is more measurable than generic configuration completion or go-live ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).
+- 2026-07-06 (V4): Day-1 rails (forms, AI document parsing, CSV, email) plus durable rails (EDI, GL sync, 3PL APIs) create the practical path for AI-assisted implementation: start transaction throughput before full integration hardening, then swap durable rails underneath the same DOSS record ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).
+
+Refinement: the dynamic ERP should first prove it can activate and maintain Value Loops; schema/workflow self-evolution is the later architectural expression of the same capability.

@@ -1,6 +1,6 @@
 # H6 — The intersection bet: stable demand, accelerating change, adaptive systems
 
-**Status:** untested
+**Status:** gathering evidence
 **Opened:** 2026-07-06
 **Source:** [Kurt's initial observations](../inputs/notes/2026-07-06-initial-observations.md); ref: [bayeslord on AI capability trajectory](https://x.com/bayeslord/status/2072056960430789032)
 
@@ -37,3 +37,10 @@ Therefore: the need for an ERP that adapts as fast as the business grows *becaus
 - Pull industry data on SKU counts / launch cadence / channel mix in mid-market CPG over the last 5 years.
 - In customer calls, listen for change-pressure moments: "we added TikTok Shop / a second 3PL / a co-packer and everything broke." Tally frequency in [inputs/calls/](../inputs/calls/).
 - Write the investor-grade version of this narrative and stress-test it with 2–3 skeptical readers.
+
+## V4 update (2026-07-06): internal evidence supports operational change pressure
+
+Additional evidence for:
+- 2026-07-06 (V4): Internal discovery shows buyers are already feeling the complexity pressure the macro thesis predicts: real-time inventory across channels/locations (33/66), scale without headcount (22/66), retail/EDI readiness (18/66), order routing/allocation (16/66), and demand planning/MRP (16/66) ([internal VoC](../inputs/internal/Top-10-Customer-ERP-Ops-Requirements---1H-FY26-SPICED-LIR.html)).
+
+Status note: this strengthens the supply-side acceleration side qualitatively, but the hypothesis still needs external SKU/channel/proliferation trend data before moving beyond gathering evidence.

@@ -28,3 +28,13 @@ This is the sequencing decision for the entire rung-3 roadmap. Getting it wrong 
 - Pull exception-type volume from current DOSS customers: what are the top 5 exception types, weekly counts, and minutes-per-resolution? (If exceptions aren't actually a big time sink, this hypothesis dies.)
 - Prototype triage-and-propose on one exception type with one design partner; measure acceptance rate of agent proposals.
 - In customer calls, tally: do operators describe their day as planning or firefighting?
+
+## V4 update (2026-07-06): refined by internal Value Loop ranking
+
+Additional evidence for:
+- 2026-07-06 (V4): Internal LIR work confirms that work-leaving-DOSS events, manual fallbacks, failed external acknowledgements, pending ASNs, dormant QBO posting, and mismatched 3PL counts are the right class of runtime agent problems: they are the failure modes that precede churn ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).
+
+Additional evidence against / refinement:
+- 2026-07-06 (V4): The internal heavy-hitter ranking puts Close/QBO and Retail/partner-ack telemetry ahead of chargebacks/deductions. Chargebacks remain compelling hard-dollar whitespace, but the document itself says to build them after Retail is trustworthy because they depend on the same remittance/invoice/EDI data ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).
+
+Current synthesis: "exceptions before forecasts" still holds, but the first exception work should be loop reliability and external-boundary hardening. Deduction/compliance is a strong follow-on Retail loop, not necessarily the first runtime agency wedge.

@@ -1,6 +1,6 @@
 # H8 — The AI moat is the execution loop, not the model
 
-**Status:** untested
+**Status:** gathering evidence
 **Opened:** 2026-07-06
 **Source:** [Agentic AI V2 deep dive](../deepdives/2026-07-06-agentic-ai-v2.md)
 
@@ -29,3 +29,11 @@ Determines build-vs-buy for the ML stack (buy/standard), where AI engineering ef
 
 - Benchmark: standard open-source forecasting on DOSS's unified data vs. a point tool's output on Shopify-only data for the same brand. If completeness doesn't beat sophistication, part of this claim weakens.
 - Track one closed loop end-to-end with a design partner: does outcome data measurably improve the agent's next proposals within a quarter?
+
+## V4 update (2026-07-06): LIR makes the moat measurable
+
+Additional evidence for:
+- 2026-07-06 (V4): The proposed LIR defines the loop moat in measurable terms: P% of live ICP customers auto-process ≥5 transactional documents through DOSS every week with zero work-leaving-DOSS events in the trailing 30 days. This ties retention directly to closed-loop execution, not login activity or feature usage ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).
+- 2026-07-06 (V4): The runner-SUCCEEDED trap shows why owning the loop matters: internal success is insufficient unless the external boundary accepted the document, posted the GL entry, or matched the 3PL count. Point tools and copilots cannot claim that verification loop without being in the transactional path ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).
+
+Status note: this hypothesis should move from gathering evidence toward supported once the 12-week LIR baseline is restored from transactional instrumentation.

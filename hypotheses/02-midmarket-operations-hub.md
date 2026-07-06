@@ -41,3 +41,11 @@ If true, DOSS's near-term product priority is breadth of integration + a genuine
 
 - Where is the mid-market boundary for us — revenue band, SKU count, order volume, channel count?
 - Who feels the pain most acutely and has budget: COO, VP Ops, head of supply chain?
+
+## V4 update (2026-07-06): internal VoC materially supports the wedge
+
+Additional evidence for:
+- 2026-07-06 (V4): Salesforce discovery synthesis found the top buyer needs across 66 substantive 1H FY26 opportunities are exactly end-to-end operations pains: one source of truth (40/66), real-time inventory (33/66), scale without headcount (22/66), PO automation / three-way match (21/66), COGS/landed cost accuracy (18/66), retail/EDI readiness (18/66), order routing (16/66), planning/MRP (16/66), and offloading a failing ERP while keeping the GL (15/66) ([internal VoC](../inputs/internal/Top-10-Customer-ERP-Ops-Requirements---1H-FY26-SPICED-LIR.html)).
+- 2026-07-06 (V4): The SPICED archetypes map the wedge by buyer: Drowning Operator, We've Outgrown This, Disillusioned Incumbent, ERP Control Without the ERP, Numbers I Can't Trust, and Retail Is Coming. All are operational-system-of-record pains, not generic ERP-suite appetite ([internal VoC](../inputs/internal/Top-10-Customer-ERP-Ops-Requirements---1H-FY26-SPICED-LIR.html)).
+
+Status note: this hypothesis is now supported by market structure, public traction, and internal discovery data; remaining validation is win/loss causality.

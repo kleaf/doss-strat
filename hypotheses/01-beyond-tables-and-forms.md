@@ -37,3 +37,10 @@ STRATEGY.md now frames this as a three-rung ladder: composability (table stakes)
 - In every won/lost deal, capture *why* in [inputs/customers/](../inputs/customers/): did differentiation actually matter, and which kind?
 - Ask 5 current customers: "If DOSS disappeared tomorrow, what would you go back to and what would you miss most?" The answer locates the real differentiation.
 - Competitive teardown: what have NetSuite/Odoo/Fulfil/Cin7 shipped in the last 12 months that narrows any candidate gap?
+
+## V4 update (2026-07-06): composability is the rail, not the moat
+
+Internal Value Loops evidence sharpens the ladder: tables/forms/workflows matter because they create day-1 rails into real transactional throughput. The durable differentiation is not the configurable surface; it is external-boundary-verified transactions recurring through DOSS, then AI keeping those loops healthy and expanding them ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).
+
+Additional evidence for:
+- 2026-07-06 (V4): Confirmed churns and silent accounts share a throughput failure pattern: transaction volume never ran through DOSS automatically, or flowed and then left. This supports the claim that the product must be more than configurable tables/forms; it must own transaction cycles ([Value Loops / LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).
