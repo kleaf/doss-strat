@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Value Loops: Outcome-Based Productization and the DOSS LIR</title>
+<style>
+:root{
+  --bg-100:#ffffff;--bg-200:#fafafa;
+  --gray-100:#f2f2f2;--gray-200:#ebebeb;--gray-400:#ebebeb;--gray-500:#c9c9c9;
+  --gray-600:#757575;--gray-700:#6b6b6b;--gray-900:#4d4d4d;--gray-1000:#171717;
+  --alpha-100:#0000000a;--alpha-200:#0000000f;--alpha-400:#00000014;
+  --accent-700:hsl(212,100%,54%);--accent-900:hsl(211,100%,42%);
+  --red-700:hsl(358,75%,59%);--red-900:hsl(358,66%,48%);
+  --amber-700:hsl(39,100%,57%);--green-700:hsl(131,41%,46%);
+  --teal-700:hsl(173,80%,36%);--purple-700:hsl(272,51%,54%);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg-100);color:var(--gray-900);
+  font:400 14px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.page{max-width:880px;margin:0 auto;padding:56px 40px 80px}
+h1{font-size:28px;font-weight:600;letter-spacing:-.02em;color:var(--gray-1000);line-height:1.2;margin:8px 0 12px}
+h2{font-size:20px;font-weight:600;letter-spacing:-.01em;color:var(--gray-1000);margin:56px 0 16px}
+h3{font-size:15px;font-weight:600;color:var(--gray-1000);margin:28px 0 8px}
+p{margin:0 0 14px}
+.kicker{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-600)}
+.lede{font-size:16px;line-height:1.6;color:var(--gray-900)}
+.meta{display:flex;gap:24px;flex-wrap:wrap;margin:20px 0 0;padding:14px 0;border-top:1px solid var(--gray-400);border-bottom:1px solid var(--gray-400);font-size:12px;color:var(--gray-600)}
+.meta b{color:var(--gray-1000);font-weight:500}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-variant-numeric:tabular-nums}
+th{font-weight:500;color:var(--gray-900);font-size:13px;padding:8px 12px;border-bottom:1px solid var(--alpha-400);text-align:left}
+td{padding:10px 12px;border-bottom:1px solid var(--alpha-400);color:var(--gray-1000);font-size:13.5px;vertical-align:top}
+tr:hover{background:var(--alpha-100)}
+.quote{background:var(--bg-200);border:1px solid var(--alpha-400);border-radius:6px;padding:18px 22px;margin:14px 0}
+.quote .qt{font-size:14.5px;line-height:1.6;color:var(--gray-1000)}
+.quote .attr{font-size:12.5px;color:var(--gray-700);margin-top:6px}
+.badge{display:inline-block;border-radius:9999px;padding:2px 9px;font-size:11.5px;font-weight:500;background:var(--alpha-200);color:var(--gray-1000);white-space:nowrap}
+.badge.blue{background:hsl(212,100%,96%);color:var(--accent-900)}
+.badge.green{background:hsl(131,41%,94%);color:hsl(131,45%,30%)}
+.badge.red{background:hsl(358,75%,96%);color:var(--red-900)}
+.badge.amber{background:hsl(39,100%,93%);color:hsl(30,80%,35%)}
+.badge.purple{background:hsl(272,51%,95%);color:hsl(272,45%,40%)}
+code{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:4px;padding:2px 6px;font:400 13px ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.formula{background:var(--bg-200);border:1px solid var(--alpha-400);border-radius:6px;padding:20px 24px;margin:18px 0;font-size:15px;color:var(--gray-1000)}
+ul{margin:0 0 14px;padding-left:22px}
+li{margin-bottom:6px}
+.foot{margin-top:64px;padding-top:16px;border-top:1px solid var(--gray-400);font-size:12px;color:var(--gray-600);line-height:1.6}
+</style>
+<style data-tapestry="tokens">:root{
+--bg-100:#000;--bg-200:#050505;
+--g100:rgba(255,255,255,0.03);--g200:rgba(255,255,255,0.05);--g300:rgba(255,255,255,0.08);
+--ga200:#ffffff17;--ga300:#ffffff21;--ga400:#ffffff24;--ga500:#ffffff3d;
+--g500:hsl(0,0%,27%);--g600:hsl(0,0%,53%);--g700:hsl(0,0%,56%);--g900:hsl(0,0%,63%);--g1000:hsl(0,0%,93%);
+--blue-700:hsl(212,100%,48%);--blue-900:hsl(210,100%,66%);
+--teal-700:hsl(173,80%,36%);--teal-900:hsl(173,68%,55%);
+--purple-700:hsl(272,51%,54%);--purple-900:hsl(272,60%,70%);
+--amber-700:hsl(39,100%,57%);--amber-900:hsl(39,90%,50%);
+--green-700:hsl(131,41%,46%);--green-900:hsl(131,43%,57%);
+--red-700:hsl(358,75%,59%);--red-900:hsl(358,100%,69%);
+--pink-700:hsl(336,80%,58%);--pink-900:hsl(336,75%,68%);
+--font:"Geist","Geist Fallback",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+--mono:"Geist Mono","SF Mono","JetBrains Mono",monospace;
+}
+/* Light tokens. Apply when data-theme is forced to "light", OR when
+   data-theme="auto" AND the user's OS prefers light. Forced "dark" is the
+   default so no override needed. */
+:root[data-theme="light"]{--bg-100:#fff;--bg-200:#fafafa;--g100:#f2f2f2;--g200:#ebebeb;--g300:#e6e6e6;--ga200:#0000000a;--ga300:#0000000f;--ga400:#00000014;--ga500:#0000003d;--g500:hsl(0,0%,79%);--g600:hsl(0,0%,66%);--g700:hsl(0,0%,56%);--g900:hsl(0,0%,30%);--g1000:hsl(0,0%,9%);}
+@media (prefers-color-scheme:light){:root[data-theme="auto"]{--bg-100:#fff;--bg-200:#fafafa;--g100:#f2f2f2;--g200:#ebebeb;--g300:#e6e6e6;--ga200:#0000000a;--ga300:#0000000f;--ga400:#00000014;--ga500:#0000003d;--g500:hsl(0,0%,79%);--g600:hsl(0,0%,66%);--g700:hsl(0,0%,56%);--g900:hsl(0,0%,30%);--g1000:hsl(0,0%,9%);}}
+html,body{background:var(--bg-100);color:var(--g1000);font-family:var(--font);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+/* Layout variants. Default is "narrow" (920px, blog-post). Set
+   <html data-layout="wide"> for dashboard-width (1280px), "full" for
+   edge-to-edge (good for charts/diagrams that need every pixel), or "bare"
+   for zero layout opinion (the artifact owns its own padding/max-width;
+   theme tokens, prism, and charts still inject). Artifacts pin their
+   preferred variant with <meta name="tapestry-layout" content="...">,
+   applied at publish time; the chrome-bar toggle in the wrapper can still
+   override via postMessage. */
+body{margin:0 auto;padding:48px 40px 96px;max-width:920px}
+:root[data-layout="wide"] body{max-width:1280px;padding:40px 48px 96px}
+:root[data-layout="full"] body{max-width:none;padding:32px 48px 96px}
+:root[data-layout="bare"] body{max-width:none;padding:0;margin:0}
+h1{font-size:32px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;margin:0 0 12px;color:var(--g1000)}
+h2{font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1.25;margin:40px 0 12px;color:var(--g1000)}
+h3{font-size:17px;font-weight:600;line-height:1.3;margin:28px 0 10px;color:var(--g1000)}
+h4{font-size:14px;font-weight:600;line-height:1.4;margin:20px 0 8px;color:var(--g1000)}
+p{margin:0 0 12px;color:var(--g1000)}
+a{color:var(--blue-900);text-decoration:none;border-bottom:1px solid rgba(82,168,255,0.3)}
+a:hover{border-bottom-color:var(--blue-900)}
+ul,ol{margin:0 0 12px;padding-left:24px;color:var(--g1000)}
+li{margin:4px 0;line-height:1.55}
+hr{border:none;border-top:1px solid var(--ga400);margin:32px 0}
+strong,b{font-weight:600;color:var(--g1000)}
+em,i{font-style:italic}
+small{font-size:12px;color:var(--g900)}
+code{font-family:var(--mono);font-size:12.5px;background:var(--g100);border:1px solid var(--ga400);border-radius:4px;padding:1px 6px;color:var(--g1000)}
+pre code{background:transparent;border:none;padding:0}
+blockquote{margin:16px 0;padding:8px 16px;border-left:2px solid var(--ga400);color:var(--g900)}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+th{text-align:left;font-weight:500;color:var(--g900);font-size:12px;padding:8px 12px;border-bottom:1px solid var(--ga400);text-transform:uppercase;letter-spacing:0.04em;font-family:var(--mono)}
+td{padding:10px 12px;border-bottom:1px solid var(--ga200);color:var(--g1000)}
+tr:hover td{background:var(--ga200)}
+img,svg,video{max-width:100%;height:auto}
+::selection{background:rgba(0,112,243,0.35);color:#fff}
+</style>
+<style data-tapestry="components">
+.badge{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:9999px;font-size:11px;font-weight:500;line-height:1;font-family:var(--mono);letter-spacing:0.02em;border:1px solid var(--ga400)}
+.badge-exists{background:rgba(69,165,87,0.10);color:var(--green-900);border-color:rgba(69,165,87,0.25)}
+.badge-active{background:rgba(245,166,35,0.10);color:var(--amber-900);border-color:rgba(245,166,35,0.25)}
+.badge-proposed{background:rgba(0,112,243,0.12);color:var(--blue-900);border-color:rgba(0,112,243,0.30)}
+.badge-future{background:var(--g200);color:var(--g900)}
+.badge-risk{background:rgba(229,72,77,0.10);color:var(--red-900);border-color:rgba(229,72,77,0.30)}
+.badge-cut{background:var(--g200);color:var(--g600)}
+.callout{background:rgba(229,72,77,0.06);border-left:2px solid var(--red-700);border-radius:3px;padding:12px 16px;margin:16px 0;font-size:14px}
+.callout-amber{background:rgba(245,166,35,0.06);border-left:2px solid var(--amber-700);border-radius:3px;padding:12px 16px;margin:16px 0;font-size:14px}
+.meta{display:flex;align-items:center;gap:12px;color:var(--g600);font-size:12px;margin-bottom:32px;font-family:var(--mono)}
+.meta-dot{width:4px;height:4px;border-radius:50%;background:var(--g500)}
+.toc{background:var(--g100);border:1px solid var(--ga400);border-radius:4px;padding:16px 20px;margin:32px 0 8px}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--g600);margin-bottom:10px;font-weight:500}
+.toc ol{list-style:none;counter-reset:toc;padding-left:0}
+.toc li{counter-increment:toc;padding:4px 0;font-size:13px;display:flex;align-items:baseline;gap:12px}
+.toc li::before{content:counter(toc,decimal-leading-zero);font-family:var(--mono);color:var(--g500);font-size:11px}
+.toc a{color:var(--g1000);border:none;text-decoration:none}
+.toc a:hover{color:var(--blue-900)}
+.phase-row{display:grid;grid-template-columns:80px 120px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--ga200);align-items:baseline}
+.phase-row:last-child{border-bottom:none}
+.phase-num{font-family:var(--mono);font-size:11px;color:var(--g600);text-transform:uppercase;letter-spacing:0.08em}
+.phase-len{font-family:var(--mono);font-size:12px;color:var(--g900)}
+.phase-body{color:var(--g1000);font-size:14px;line-height:1.55}
+</style>
+<style data-tapestry="print">@media print{
+*,*::before,*::after{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}
+h1,h2,h3,h4,h5,h6{page-break-after:avoid;break-after:avoid-page}
+h1+*,h2+*,h3+*,h4+*{page-break-before:avoid;break-before:avoid-page}
+p{orphans:3;widows:3}
+.pill,.wip-marker,.kpi,.exec-card,.badge,.callout,.callout-amber,.phase-row,
+.card,figure,blockquote,pre,svg,img,
+.toc,.meta,.lede{page-break-inside:avoid;break-inside:avoid}
+table{break-inside:auto}
+thead{display:table-header-group}
+tfoot{display:table-footer-group}
+tr,td,th{page-break-inside:avoid;break-inside:avoid}
+ul,ol{page-break-inside:auto}
+li{page-break-inside:avoid;break-inside:avoid}
+}</style>
+<script data-tapestry="theme-listener">
+(function(){
+  function setTheme(t){ if(!t) return; if(t==='dark'||t==='light'||t==='auto') document.documentElement.setAttribute('data-theme', t); }
+  function setLayout(l){ if(!l) return; if(l==='narrow'||l==='wide'||l==='full') document.documentElement.setAttribute('data-layout', l); else if(l==='default') document.documentElement.removeAttribute('data-layout'); }
+  // Hash-based init: parent can include #theme=light&layout=wide in URL.
+  var hash = location.hash || '';
+  var mt = hash.match(/theme=(dark|light|auto)/); if (mt) setTheme(mt[1]);
+  var ml = hash.match(/layout=(narrow|wide|full)/); if (ml) setLayout(ml[1]);
+  window.addEventListener('message', function(e){
+    if (!e || !e.data) return;
+    if (e.data.type === 'tapestry:theme') setTheme(e.data.theme);
+    if (e.data.type === 'tapestry:layout') setLayout(e.data.layout);
+  });
+})();
+</script>
+<!--tapestry-runtime:v8-->
+</head>
+<body>
+<div class="page">
+
+<div class="kicker">Strategy · EPD + GTM + PMO · v2 · Jul 4, 2026</div>
+<h1>Value Loops: outcome-based productization and the DOSS Leading Indicator of Retention</h1>
+<p class="lede">DOSS sells a system of record but delivers value only when customer transactions flow through it automatically. Every confirmed churn either never reached automatic transactional throughput or lost it. The model: unbundle install <b>sequencing</b> (not pricing) into productized <b>Value Loops</b>, land in the transactional path in week 1 on a day-1 rail, define go-live as the loop's activation predicate at the external boundary, and run the LIR on transactional throughput.</p>
+
+<div class="meta">
+<span>Inputs · <b>SPICED buyer model (/a/7bcc314dffcc4d88)</b></span>
+<span><b>Q2 pipeline by archetype (/a/3183d5f1e46143c9)</b></span>
+<span><b>Science of Scaling LIR (/a/7f6df3abbca64dca)</b></span>
+<span><b>13 install maps · 95 gold cards · churn/problems/integrations gold tier</b></span>
+<span><b>L2L spec: l2l-app/docs/l2l-value-loops-instrumentation.md</b></span>
+</div>
+
+<h2>1 · What the evidence says</h2>
+
+<h3>Churn is a throughput failure, not a fit failure</h3>
+<p>Across 8 confirmed churns and every silent account: the customer never reached the state where real transactional volume (orders, POs, invoices, journal entries) ran through DOSS automatically, or reached it and lost it (SL Munson: Excel dependency at 7 months post-live; Echelon: bundle orders never flowed). The loudest behavioral precursor is <b>work leaving DOSS</b>: parallel spreadsheets and reverts to the old system (ABA "back to fully manual" then 139+ days silent; Popdarts shadow Sheets over a PO-editing gap).</p>
+<div class="quote"><div class="qt">"I only see 4 SOs in the system which were manually created. Shouldn't we be seeing all orders flowing into DOSS?"</div><div class="attr">MHH, Jan 13 2026</div></div>
+
+<h3>The value moment is a first successful end-to-end transaction</h3>
+<p>Sauz's first clean close (Feb COGS pushed DOSS → QBO) flipped the account Off Track → On Track the same week; Tersus hit self-sufficient invoicing Jun 1; Smalls' first co-man POs went live Mar 24; Verve's daily lot creation grew "truly exponential." Go-live is not the value event: Magic Mind went live Apr 1 and rolled back Jun 8. Narrow scope is fast (Final Boss Sour: ~6 weeks to live inventory); multi-module installs run 6-10 months to first value, and two churns were explicitly speed-driven (My Dad's Chips, Prime Matter Labs $250K).</p>
+
+<h3>False TTX and the runner-SUCCEEDED trap (install-map fleet telemetry)</h3>
+<p>The first transaction always lands at <b>order ingest</b>, a cheap read rail (Ark 56 SPS polls/wk; Pavoi 2.4M sales orders), while the value-bearing outbound/posting leg goes live last or never (Ark QBO invoice 0 runs/30d, 855 acks parked; De Soi 856 ASN 1 run/180d vs 38 Pending-ASN; Magic Mind 856 zero runtime; Ozlo QBO dormant 93 days). Reading someone else's orders is not being in the transactional path. And DOSS runner status is not the transaction: Mezcla freight tenders 100% SUCCEEDED while failing at the broker; Ark's April 855 complete in DOSS, never received by SPS. <b>Truth is read at the external boundary: partner accepted the document, the GL posted the entry, the 3PL count matches.</b></p>
+
+<h2>2 · The model: Value Loops [PROPOSED]</h2>
+<p>A Value Loop is one transaction cycle productized end-to-end. Loops have names, never letters (letters collide with the SPICED archetypes).</p>
+<table>
+<tr><th>Loop</th><th>Lead archetype</th><th>Cadence transaction (E)</th><th>Outcome sold</th></tr>
+<tr><td><b>Close</b> <span class="badge blue">Finance Bridge</span></td><td>C "Numbers I Can't Trust" + F "Disillusioned Incumbent"</td><td>Month-end close in DOSS, JEs auto-posted to GL, three-way match auto-cleared</td><td>Close in days; CFO-trustable COGS; keep the incumbent GL</td></tr>
+<tr><td><b>Retail</b> <span class="badge green">O2C / EDI</span></td><td>B "Retail Is Coming"</td><td>Retailer 850 auto-creates order; compliant 856/810 round-trips weekly</td><td>Live before the retail deadline; zero chargebacks</td></tr>
+<tr><td><b>Replenishment</b> <span class="badge purple">Co-man POs</span></td><td>A "Drowning Operator"</td><td>PO created → approved → sent → acknowledged weekly</td><td>Buyer time back; no missed re-orders</td></tr>
+<tr><td><b>Truth</b> <span class="badge amber">Inventory</span></td><td>D "We've Outgrown This" + foundation</td><td>Daily reconciled on-hand across 3PLs/channels within tolerance</td><td>"Flying blind" ends; scale channels safely</td></tr>
+<tr><td><b>Traceability</b> <span class="badge">Compliance</span></td><td>cross-cut</td><td>Lot-coded ASN passes retailer compliance per shipment</td><td>FSMA 204 / recall-ready</td></tr>
+</table>
+
+<h3>The four doctrines</h3>
+<ul>
+<li><b>Two rails per loop.</b> Every loop ships with a <b>day-1 rail</b> (native form, AI document parsing, CSV, email) and a <b>durable rail</b> (EDI, GL sync, 3PL API) producing the identical DOSS record. The durable rail swaps in underneath records that already exist. Consequence for the LIR: documents processed in DOSS count as throughput regardless of rail; the churn anti-signal is specifically work leaving DOSS.</li>
+<li><b>Landing.</b> One-click read-only ingest (Shopify / SPS / 3PL / QBO → BigQuery; ZebraDB landing zone later, registry/views as the stable contract) at kickoff or late-stage POC. Mapping starts day 1; the customer sees their own unified data in week 1; master-data work gets its inputs.</li>
+<li><b>Master data is a gate, not a loop.</b> Loops are flows; master data is stock. SKU/BOM/vendor coverage is a setup gate inside every loop's activation, seeded by Landing, maintained by the transactions themselves (SoT by accretion).</li>
+<li><b>Packaging unchanged.</b> Contracts stay suite-shaped; loops unbundle delivery sequencing, not pricing. The order form names the lead loop and its business objective so the program is contract-anchored to an outcome.</li>
+</ul>
+
+<h2>3 · Heavy hitters: the value ranking</h2>
+<p>Two axes, two rankings. §4 ranks by <i>speed into the path</i>; this section ranks by <i>value once working</i>. The loops most broken today are broken because they are the load-bearing ones; hardening them is the EPD mandate, not a reason to deprioritize.</p>
+<table>
+<tr><th>#</th><th>Heavy hitter</th><th>Why it wins</th></tr>
+<tr><td>1</td><td><b>Close the books on DOSS, get COGS right</b> <span class="badge blue">the franchise</span></td><td>Most-named workflow (29 customers); most common lead objective across all 13 install maps; evidence both directions (Sauz's first close flipped health; SLM churned on it; Tag Wall lost a TD Bank credit line); the explicit renewal case at the two largest accounts (Eight Sleep $240K WAC/COGS; Verve Phase 1); the winning F-archetype motion. Maximum switching cost: once the books close from DOSS, removing DOSS means losing financial truth. "Get COGS right" force-pulls receiving, lots, and landed cost into DOSS.</td></tr>
+<tr><td>2</td><td><b>Retail EDI order-to-cash, chargeback-free</b> <span class="badge green">the growth engine</span></td><td>#1 critical event in the SPICED model; hardest dollars ($500-5K per non-compliant ASN); ~80% of Mezcla's revenue transacts through it weekly; Gorgie won on it; 17 installs contracted it. Traceability/FSMA rides the same rail. The loop we market.</td></tr>
+<tr><td>3</td><td><b>Freight: quote → tender → freight bill → landed cost</b> <span class="badge purple">the differentiator</span></td><td>A spend loop with per-transaction ROI (Mezcla's own eval shows a 36% preferred-carrier premium; multi-broker quoting is direct margin). Freight bill feeds landed cost (12 customers) feeds COGS feeds the close. Nobody in this segment ties tender → landed cost → GL end-to-end. The most Ramp-like economics we own.</td></tr>
+<tr><td>4</td><td><b>AP / procure-to-pay with payments</b></td><td>Money-out path. Three-way match named "the core value prop for accounting" in the SLM post-mortem; its absence churned the account. Bill → match → pay via Bill.com/Ramp is the deepest entrenchment available.</td></tr>
+<tr><td>5</td><td><b>Receiving → lot → ledger</b></td><td>The substrate #1 and #2 price from; the most defect-dense cycle in the fleet because it is load-bearing (Eight Sleep 70% receiving no-match; Pavoi's top failing actions). Treated as the hidden half of Close, not a separate product.</td></tr>
+<tr><td>6</td><td><b>Chargebacks/deductions + cash application</b> <span class="badge amber">whitespace</span></td><td>No customer has it solved; guaranteed pain for every Walmart/Target/Costco seller; completes retail O2C to cash. "DOSS recovered $X in deductions" is an outcome receipt that pays for the subscription. Build after Retail is trustworthy (same remittance/invoice data).</td></tr>
+</table>
+<p>Hardening priority follows from the predicates: Close's QBO rail and Retail's partner-ack telemetry are the two external boundaries every L2L gate reads, so they get bulletproofed first.</p>
+
+<h2>4 · TTX on-ramps: into the transactional path in week 1</h2>
+<p><b>Existence proof:</b> Snackwise runs its entire business through DOSS with zero integrations. 345K lifetime executions across 44 actions: order portal (cart-sync 294K runs, highest in fleet) → pick-ticket PDF + email → consolidated monthly invoicing. Renewed on it. The pattern every Tier-1 on-ramp shares: <b>form or parsed document in → DOSS record → PDF out → email egress → counterparty ack back.</b> No OAuth, no EDI provisioning, verifiable boundary, deployable in week 1 (POC-eligible), and every transaction deposits master data.</p>
+<table>
+<tr><th>On-ramp</th><th>Proof / evidence</th><th>Feeds</th></tr>
+<tr><td><b>PO creation → vendor email</b></td><td>Carrom supplier email loop ~140 runs daily, zero failures, ready-dates flow back; Eight Sleep PO workflow live in Phase 1</td><td>Replenishment, AP</td></tr>
+<tr><td><b>Native SO entry + fulfillment docs + Stripe-linked invoicing</b></td><td>Snackwise end-to-end; STL auto-draft 119/119 clean, Stripe webhook = payment confirmation (QBO is the durable rail, swapped later)</td><td>Retail, Close</td></tr>
+<tr><td><b>Non-EDI retailer PO intake</b> (AI parse of PO PDFs/emails)</td><td>ABA already hand-keys Ed Don PDF POs into a DOSS form; Kahawa PDF upload exists; Mezcla manually entered a KeHE PO during an SPS gap</td><td>Retail, months before SPS provisions</td></tr>
+<tr><td><b>Vendor bill PDF intake → 3-way match staging</b></td><td>Athena Club scoping invoice-PDF parsing; Ark scoped ~3-day build; Eight Sleep bill staging populated</td><td>Close, AP</td></tr>
+<tr><td><b>Quote-to-order</b></td><td>Ark: 70% of customers require quotes; Brakefree quotes→PO shipped</td><td>Retail/order</td></tr>
+<tr><td><b>Price sheet generation + distribution</b></td><td>Ark: 30-40 sheets/week by hand, 70% of team time</td><td>Pricing SoT</td></tr>
+<tr><td><b>Co-man loop: WO PDF out + production report parse + receipt confirm</b></td><td>Verve Craftable PDF-parse rail built; Athena co-man receipt gap = #1 architectural risk 4 straight WPRs; email is the only rail most co-mans will ever have</td><td>Replenishment, Traceability</td></tr>
+<tr><td><b>3PL report ingestion</b> (daily CSV → snapshot)</td><td>Athena RJW CSV cadence already the chosen fallback; Eight Sleep portal exports requested</td><td>Truth (read-only), Landing</td></tr>
+<tr><td><b>Cycle count / adjustment form</b></td><td>Carrom "hours manually correcting"; Sauz close gated on 3PL count</td><td>Truth maintenance</td></tr>
+</table>
+<p>Default TTX bundle by archetype: A → PO-email + document suite · B → PO-PDF intake + quote-to-order (while SPS provisions) · C/F → vendor-bill intake + Stripe-linked invoicing (while QBO hardens) · D → 3PL CSV ingestion + cycle counts.</p>
+
+<h2>5 · The LIR [PROPOSED]</h2>
+<div class="formula"><b>LIR v1:</b> P% of live ICP customers auto-process <b>≥ 5 transactional documents</b> (SOs + POs + invoices/journal syncs) through DOSS <b>every week</b>, with <b>zero work-leaving-DOSS events</b> in the trailing 30 days.</div>
+<ul>
+<li>E counts documents processed in DOSS on <b>any rail</b> (a parsed PDF PO is throughput). The anti-signal is work leaving DOSS: shadow spreadsheets, reverts, export spikes, manual-creation ratio breaches.</li>
+<li>T = week for transactional loops; the Close loop overlays a monthly E (close executed in DOSS without Excel).</li>
+<li>P set from a 12-week baseline (Roberge band 60-80%), measured against the ratified ICP only. The engagement proxy already separates near-perfectly (every account active ≥6 of 8 weeks is off the watchlist; 33 of 35 watchlist/churned at zero).</li>
+<li>Maturity ladder: setup E (first e2e transaction, 2 consecutive cycles = the go-live gate) → engagement E (weekly cadence = the LIR) → ROI E (outcome receipts: hours avoided, close days, chargebacks at zero, freight saved vs benchmark).</li>
+</ul>
+
+<h2>6 · L2L instrumentation [PROPOSED, spec exists]</h2>
+<p>Full spec: <code>l2l-app/docs/l2l-value-loops-instrumentation.md</code> (companion to the L2L playbook data model; handed to the L2L workstream owner). Summary: <b>BusinessObjective</b> (customer's outcome verbatim, typed, criticalDate + consequence + counterparty required) captured at DISC and enforced at the KO gate, the discovery Appendix G handoff made structural, closing the churn-predictor-#1 gap ("hard deadline known to sales, not documented for implementation"). <b>LoopDeclaration</b> binds objectives to a lead loop with an activation predicate concrete to the customer's integrations, evaluated at the external boundary via a per-customer <b>Loop Metric Registry</b> entry. Stage wiring: BLD targets the first sentinel transaction (TTX clock inside build) → GL gate = predicate holds one full cycle → HC exit = two consecutive cycles, zero fallback (TTA) → SUS = LIR enrollment with an agent-run cadence watcher (the ni/mo:out exit). Gate conversion is cheap: the install maps' "Evidence required to close" cells are ~80% of the predicate text; Pavoi and Eight Sleep gates are already data-shaped.</p>
+
+<h2>7 · Decision log</h2>
+<table>
+<tr><th>Decision</th><th>Status</th><th>Position</th></tr>
+<tr><td>D1 · Land narrow vs full-suite ACV</td><td><span class="badge green">Resolved</span></td><td>Packaging unchanged; loops unbundle sequencing, not pricing. Suite-shaped contract, loop-shaped delivery.</td></tr>
+<tr><td>D2 · Rail hardening priority</td><td><span class="badge blue">Reframed</span></td><td>Not "harden before building loops" but "the heavy hitters ARE the broken rails." Close's QBO boundary and Retail's partner-ack telemetry first; they are the external boundaries every gate predicate reads.</td></tr>
+<tr><td>D3 · LIR on throughput, not WAU</td><td><span class="badge green">Held</span></td><td>Healthy accounts run single-digit WAU; automation is the product. TTX tracked separately for mid-install sensitivity.</td></tr>
+<tr><td>D4 · One composite E</td><td><span class="badge green">Held</span></td><td>One headline LIR; per-loop cadences as operating metrics beneath it.</td></tr>
+<tr><td>D5 · Master data: gate, not loop</td><td><span class="badge green">Held</span></td><td>Coverage %, seeded by Landing, maintained by transactions. Promote to a loop only if a recurring E emerges (e.g. retailer resets).</td></tr>
+</table>
+
+<h2>8 · What to do next</h2>
+<table>
+<tr><th>#</th><th>Action</th><th>Status</th></tr>
+<tr><td>1</td><td>Restore transactional instrumentation (deep_search sandbox: <code>SANDBOX_POOL_URL</code> unset; superset MCP bridge unexposed; Superset itself healthy) → 12-week LIR baseline, set N and P from data</td><td><span class="badge red">Blocked → unblock first</span></td></tr>
+<tr><td>2</td><td>Spec the top-3 TTX week-1 kits (PO-email, non-EDI PO intake, vendor-bill parse): form + template + parser + registry predicate; wire to the BLD sentinel-transaction target</td><td><span class="badge blue">PROPOSED</span></td></tr>
+<tr><td>3</td><td>Harden the two heavy-hitter boundaries: QBO post reliability (Close) + partner-ack telemetry as first-class data (Retail)</td><td><span class="badge blue">EPD mandate</span></td></tr>
+<tr><td>4</td><td>Ship outcome receipts (weekly digest per account from org_* data); starts the customer-voiced proof library, which is currently thin</td><td><span class="badge blue">PROPOSED</span></td></tr>
+<tr><td>5</td><td>Pilot gate conversion on Eight Sleep (already predicate-shaped) + De Soi (attestation-heavy, KeHE 753 hard date) before touching L2L canon</td><td><span class="badge blue">PROPOSED</span></td></tr>
+<tr><td>6</td><td>Ratify the ICP fence (SPICED open question #2); the LIR population depends on it</td><td><span class="badge amber">Exec decision</span></td></tr>
+</table>
+
+<div class="foot">
+v2 (2026-07-04). Change manifest vs v1: added heavy-hitter value ranking (§3) and TTX on-ramp catalog (§4, from a 26-cycle census of 13 install maps + 20-cycle manual-work hunt across 95 gold cards); folded in the four doctrines (two rails, Landing, master-data gate, packaging unchanged); LIR anti-signal redefined from "manual fallback" to "work leaving DOSS" (parsed-document intake counts as throughput); added L2L instrumentation summary (§6, spec at l2l-app/docs/l2l-value-loops-instrumentation.md); decision log statuses updated (D1 resolved, D2 reframed, D5 added). Evidence base: SPICED buyer model /a/7bcc314dffcc4d88 · Q2 FY26 qualified pipeline /a/3183d5f1e46143c9 · Science of Scaling /a/7f6df3abbca64dca · install-map suite (doss-cli/docs/install-maps, built ~2026-06-10) · context-lake gold tier (snapshot 2026-04-05; some account states stale) · discovery playbook + question bank. Quantitative caveat: org_* transactional data not queryable this session; the healthy-vs-watchlist separation in §5 is an engagement proxy. Draft for internal discussion; not customer-facing.
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top 10 Customer ERP &amp; Ops Requirements, 1H FY26</title>
+<style>
+  :root{
+    --bg:#fafafa; --card:#ffffff; --ink:#171717; --muted:#666; --faint:#8b8b8b;
+    --line:#ebebeb; --line2:#e0e0e0; --accent:#0070f3;
+    --A:#d97706; --B:#7c3aed; --C:#dc2626; --D:#0070f3; --E:#059669; --F:#db2777; --X:#6b7280;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Geist","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;font-size:16px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:48px 24px 96px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
+  h1{font-size:38px;line-height:1.12;font-weight:700;letter-spacing:-.02em;margin:0 0 14px}
+  .lede{font-size:17px;color:var(--muted);margin:0;max-width:70ch}
+  .strip{display:flex;flex-wrap:wrap;gap:0;margin:34px 0 8px;border:1px solid var(--line);border-radius: 6px;background:var(--card);overflow:hidden}
+  .stat{flex:1 1 150px;padding:16px 18px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat .n{font-size:24px;font-weight:700;letter-spacing:-.01em}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .note{font-size:13px;color:var(--faint);margin:14px 2px 0}
+  h2.sec{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:46px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+  .arch{border:1px solid var(--line);border-radius: 6px;background:var(--card);padding:12px 14px;border-left-width:3px}
+  .arch .h{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+  .arch .name{font-weight:650;font-size:14.5px}
+  .arch .ct{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+  .arch .d{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .card{border:1px solid var(--line);border-radius: 6px;background:var(--card);padding:22px 24px;margin:14px 0;position:relative}
+  .card .top{display:flex;gap:16px;align-items:flex-start}
+  .rank{flex:0 0 auto;width:38px;height:38px;border-radius: 6px;background:#f4f4f4;border:1px solid var(--line2);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:#333}
+  .head{flex:1 1 auto;min-width:0}
+  .title{font-size:19px;font-weight:680;letter-spacing:-.01em;margin:0 0 6px;line-height:1.25}
+  .outcome{font-size:15.5px;color:#333;margin:0 0 2px}
+  .outcome b{font-weight:640}
+  .meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:16px 0 4px}
+  .dealchip{display:inline-flex;align-items:baseline;gap:6px;font-size:12.5px;color:var(--muted);font-weight:600}
+  .dealchip .big{font-size:15px;color:var(--ink)}
+  .bar{flex:1 1 160px;height:7px;background:#f0f0f0;border-radius:99px;overflow:hidden;min-width:120px}
+  .bar > span{display:block;height:100%;background:linear-gradient(90deg,#0070f3,#3291ff);border-radius:99px}
+  .spiced{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:12px 0 2px}
+  .plabel{font-size:11.5px;color:var(--faint);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-right:2px}
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px;border:1px solid var(--line2);color:#333;background:#fbfbfb}
+  .pill .dot{width:8px;height:8px;border-radius:99px;display:inline-block}
+  .pill.primary{color: var(--gray-1000);border:none}
+  .dist{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .seg{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;display:inline-flex;align-items:center;gap:5px}
+  .seg .dot{width:7px;height:7px;border-radius:99px}
+  blockquote{margin:12px 0 0;padding:10px 0 0;border-top:1px dashed var(--line2)}
+  .q{font-size:14px;color:#2b2b2b;margin:8px 0;padding-left:14px;border-left:2px solid var(--line2);line-height:1.5}
+  .q .src{display:block;font-size:12px;color:var(--faint);margin-top:3px;font-style:normal}
+  em.qt{font-style:italic}
+  .hm{border:1px dashed var(--line2);border-radius: 6px;padding:6px 4px;background:#fcfcfc}
+  .hmrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line)}
+  .hmrow:last-child{border-bottom:none}
+  .hmrow .rk{font-weight:700;color:var(--faint);width:26px;font-variant-numeric:tabular-nums}
+  .hmrow .tt{font-weight:600;font-size:14.5px;flex:1 1 auto;min-width:180px}
+  .hmrow .ct{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .callout{border:1px solid var(--line);border-left:3px solid var(--accent);background:#f5f9ff;border-radius: 6px;padding:16px 18px;margin:0 0 20px;font-size:14.5px;color:#2b2b2b;line-height:1.55}
+  .callout b{color:var(--ink)}
+  .lirdef{border:1px solid var(--line2);border-radius: 6px;background:#fbfbfb;padding:14px 16px;margin:0 0 18px;font-size:14px}
+  .lirdef .k{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+  .lirdef code{background:#fff;border:1px solid var(--line);border-radius: 4px;padding:1px 5px;font-size:13px}
+  .loop{border:1px solid var(--line);border-radius: 6px;background:var(--card);padding:20px 22px;margin:12px 0;border-top:3px solid var(--line)}
+  .loop .lh{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-bottom:3px}
+  .loop .lname{font-size:18px;font-weight:680;letter-spacing:-.01em}
+  .loop .loopchip{font-size:11.5px;font-weight:600;color:#333;background:#f4f4f4;border:1px solid var(--line2);border-radius:99px;padding:3px 9px}
+  .loop .needs{font-size:12.5px;color:var(--faint);margin:2px 0 13px}
+  .loop .refined{font-size:15px;color:#222;margin:0 0 15px}
+  .loop .refined b{font-weight:640}
+  .deploy{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;border:1px solid var(--line);border-radius: 6px;overflow:hidden;background:#fcfcfc}
+  .deploy .f{padding:11px 13px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .deploy .f:last-child{border-right:none}
+  .deploy .fl{font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+  .deploy .fv{font-size:12.7px;color:#2b2b2b;line-height:1.42}
+  .deploy .fv em{font-style:italic;color:#444}
+  footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+  footer p{margin:0 0 9px}
+  footer b{color:var(--muted)}
+  @media (max-width:560px){
+    h1{font-size:30px}.wrap{padding:32px 16px 72px}.card{padding:18px 16px}
+  }
+</style>
+<style data-tapestry="tokens">:root{
+--bg-100:#000;--bg-200:#050505;
+--g100:rgba(255,255,255,0.03);--g200:rgba(255,255,255,0.05);--g300:rgba(255,255,255,0.08);
+--ga200:#ffffff17;--ga300:#ffffff21;--ga400:#ffffff24;--ga500:#ffffff3d;
+--g500:hsl(0,0%,27%);--g600:hsl(0,0%,53%);--g700:hsl(0,0%,56%);--g900:hsl(0,0%,63%);--g1000:hsl(0,0%,93%);
+--blue-700:hsl(212,100%,48%);--blue-900:hsl(210,100%,66%);
+--teal-700:hsl(173,80%,36%);--teal-900:hsl(173,68%,55%);
+--purple-700:hsl(272,51%,54%);--purple-900:hsl(272,60%,70%);
+--amber-700:hsl(39,100%,57%);--amber-900:hsl(39,90%,50%);
+--green-700:hsl(131,41%,46%);--green-900:hsl(131,43%,57%);
+--red-700:hsl(358,75%,59%);--red-900:hsl(358,100%,69%);
+--pink-700:hsl(336,80%,58%);--pink-900:hsl(336,75%,68%);
+--font:"Geist","Geist Fallback",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+--mono:"Geist Mono","SF Mono","JetBrains Mono",monospace;
+}
+/* Light tokens. Apply when data-theme is forced to "light", OR when
+   data-theme="auto" AND the user's OS prefers light. Forced "dark" is the
+   default so no override needed. */
+:root[data-theme="light"]{--bg-100:#fff;--bg-200:#fafafa;--g100:#f2f2f2;--g200:#ebebeb;--g300:#e6e6e6;--ga200:#0000000a;--ga300:#0000000f;--ga400:#00000014;--ga500:#0000003d;--g500:hsl(0,0%,79%);--g600:hsl(0,0%,66%);--g700:hsl(0,0%,56%);--g900:hsl(0,0%,30%);--g1000:hsl(0,0%,9%);}
+@media (prefers-color-scheme:light){:root[data-theme="auto"]{--bg-100:#fff;--bg-200:#fafafa;--g100:#f2f2f2;--g200:#ebebeb;--g300:#e6e6e6;--ga200:#0000000a;--ga300:#0000000f;--ga400:#00000014;--ga500:#0000003d;--g500:hsl(0,0%,79%);--g600:hsl(0,0%,66%);--g700:hsl(0,0%,56%);--g900:hsl(0,0%,30%);--g1000:hsl(0,0%,9%);}}
+html,body{background:var(--bg-100);color:var(--g1000);font-family:var(--font);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+/* Layout variants. Default is "narrow" (920px, blog-post). Set
+   <html data-layout="wide"> for dashboard-width (1280px), "full" for
+   edge-to-edge (good for charts/diagrams that need every pixel), or "bare"
+   for zero layout opinion (the artifact owns its own padding/max-width;
+   theme tokens, prism, and charts still inject). Artifacts pin their
+   preferred variant with <meta name="tapestry-layout" content="...">,
+   applied at publish time; the chrome-bar toggle in the wrapper can still
+   override via postMessage. */
+body{margin:0 auto;padding:48px 40px 96px;max-width:920px}
+:root[data-layout="wide"] body{max-width:1280px;padding:40px 48px 96px}
+:root[data-layout="full"] body{max-width:none;padding:32px 48px 96px}
+:root[data-layout="bare"] body{max-width:none;padding:0;margin:0}
+h1{font-size:32px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;margin:0 0 12px;color:var(--g1000)}
+h2{font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1.25;margin:40px 0 12px;color:var(--g1000)}
+h3{font-size:17px;font-weight:600;line-height:1.3;margin:28px 0 10px;color:var(--g1000)}
+h4{font-size:14px;font-weight:600;line-height:1.4;margin:20px 0 8px;color:var(--g1000)}
+p{margin:0 0 12px;color:var(--g1000)}
+a{color:var(--blue-900);text-decoration:none;border-bottom:1px solid rgba(82,168,255,0.3)}
+a:hover{border-bottom-color:var(--blue-900)}
+ul,ol{margin:0 0 12px;padding-left:24px;color:var(--g1000)}
+li{margin:4px 0;line-height:1.55}
+hr{border:none;border-top:1px solid var(--ga400);margin:32px 0}
+strong,b{font-weight:600;color:var(--g1000)}
+em,i{font-style:italic}
+small{font-size:12px;color:var(--g900)}
+code{font-family:var(--mono);font-size:12.5px;background:var(--g100);border:1px solid var(--ga400);border-radius:4px;padding:1px 6px;color:var(--g1000)}
+pre code{background:transparent;border:none;padding:0}
+blockquote{margin:16px 0;padding:8px 16px;border-left:2px solid var(--ga400);color:var(--g900)}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+th{text-align:left;font-weight:500;color:var(--g900);font-size:12px;padding:8px 12px;border-bottom:1px solid var(--ga400);text-transform:uppercase;letter-spacing:0.04em;font-family:var(--mono)}
+td{padding:10px 12px;border-bottom:1px solid var(--ga200);color:var(--g1000)}
+tr:hover td{background:var(--ga200)}
+img,svg,video{max-width:100%;height:auto}
+::selection{background:rgba(0,112,243,0.35);color:#fff}
+</style>
+<style data-tapestry="components">
+.badge{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:9999px;font-size:11px;font-weight:500;line-height:1;font-family:var(--mono);letter-spacing:0.02em;border:1px solid var(--ga400)}
+.badge-exists{background:rgba(69,165,87,0.10);color:var(--green-900);border-color:rgba(69,165,87,0.25)}
+.badge-active{background:rgba(245,166,35,0.10);color:var(--amber-900);border-color:rgba(245,166,35,0.25)}
+.badge-proposed{background:rgba(0,112,243,0.12);color:var(--blue-900);border-color:rgba(0,112,243,0.30)}
+.badge-future{background:var(--g200);color:var(--g900)}
+.badge-risk{background:rgba(229,72,77,0.10);color:var(--red-900);border-color:rgba(229,72,77,0.30)}
+.badge-cut{background:var(--g200);color:var(--g600)}
+.callout{background:rgba(229,72,77,0.06);border-left:2px solid var(--red-700);border-radius:3px;padding:12px 16px;margin:16px 0;font-size:14px}
+.callout-amber{background:rgba(245,166,35,0.06);border-left:2px solid var(--amber-700);border-radius:3px;padding:12px 16px;margin:16px 0;font-size:14px}
+.meta{display:flex;align-items:center;gap:12px;color:var(--g600);font-size:12px;margin-bottom:32px;font-family:var(--mono)}
+.meta-dot{width:4px;height:4px;border-radius:50%;background:var(--g500)}
+.toc{background:var(--g100);border:1px solid var(--ga400);border-radius:4px;padding:16px 20px;margin:32px 0 8px}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--g600);margin-bottom:10px;font-weight:500}
+.toc ol{list-style:none;counter-reset:toc;padding-left:0}
+.toc li{counter-increment:toc;padding:4px 0;font-size:13px;display:flex;align-items:baseline;gap:12px}
+.toc li::before{content:counter(toc,decimal-leading-zero);font-family:var(--mono);color:var(--g500);font-size:11px}
+.toc a{color:var(--g1000);border:none;text-decoration:none}
+.toc a:hover{color:var(--blue-900)}
+.phase-row{display:grid;grid-template-columns:80px 120px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--ga200);align-items:baseline}
+.phase-row:last-child{border-bottom:none}
+.phase-num{font-family:var(--mono);font-size:11px;color:var(--g600);text-transform:uppercase;letter-spacing:0.08em}
+.phase-len{font-family:var(--mono);font-size:12px;color:var(--g900)}
+.phase-body{color:var(--g1000);font-size:14px;line-height:1.55}
+</style>
+<style data-tapestry="print">@media print{
+*,*::before,*::after{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}
+h1,h2,h3,h4,h5,h6{page-break-after:avoid;break-after:avoid-page}
+h1+*,h2+*,h3+*,h4+*{page-break-before:avoid;break-before:avoid-page}
+p{orphans:3;widows:3}
+.pill,.wip-marker,.kpi,.exec-card,.badge,.callout,.callout-amber,.phase-row,
+.card,figure,blockquote,pre,svg,img,
+.toc,.meta,.lede{page-break-inside:avoid;break-inside:avoid}
+table{break-inside:auto}
+thead{display:table-header-group}
+tfoot{display:table-footer-group}
+tr,td,th{page-break-inside:avoid;break-inside:avoid}
+ul,ol{page-break-inside:auto}
+li{page-break-inside:avoid;break-inside:avoid}
+}</style>
+<script data-tapestry="theme-listener">
+(function(){
+  function setTheme(t){ if(!t) return; if(t==='dark'||t==='light'||t==='auto') document.documentElement.setAttribute('data-theme', t); }
+  function setLayout(l){ if(!l) return; if(l==='narrow'||l==='wide'||l==='full') document.documentElement.setAttribute('data-layout', l); else if(l==='default') document.documentElement.removeAttribute('data-layout'); }
+  // Hash-based init: parent can include #theme=light&layout=wide in URL.
+  var hash = location.hash || '';
+  var mt = hash.match(/theme=(dark|light|auto)/); if (mt) setTheme(mt[1]);
+  var ml = hash.match(/layout=(narrow|wide|full)/); if (ml) setLayout(ml[1]);
+  window.addEventListener('message', function(e){
+    if (!e || !e.data) return;
+    if (e.data.type === 'tapestry:theme') setTheme(e.data.theme);
+    if (e.data.type === 'tapestry:layout') setLayout(e.data.layout);
+  });
+})();
+</script>
+<!--tapestry-runtime:v8-->
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Voice of Customer · Synthesized from Salesforce Discovery Notes</p>
+  <h1>Top&nbsp;10 Customer ERP &amp; Ops Requirements</h1>
+  <p class="lede">What buyers told us they need, pulled directly from the discovery and MEDDPICC notes on every opportunity that entered Discovery in the first half of FY26, ranked by how many distinct deals raised each need, expressed as the outcome the buyer is trying to reach, and mapped to the six SPICED buyer archetypes. The final section refines those outcomes through the <a href="https://tapestry.doss.com/a/28dd2791a8394545--value-loops---outcome-based-productization-and-the-doss-lir">Value Loops / LIR</a> lens: the simplest deployment that delivers retention.</p>
+
+  <div class="strip">
+    <div class="stat"><div class="n">77</div><div class="l">Opps entered Discovery, Jan 1&nbsp;, &nbsp;Jun 30 2026</div></div>
+    <div class="stat"><div class="n">66</div><div class="l">With substantive discovery notes</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">Requirement themes (of 14 found)</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">SPICED archetypes mapped</div></div>
+  </div>
+  <p class="note">Source: Salesforce Opportunity records (<span style="font-variant-numeric:tabular-nums">Identify Pain, Metrics, Decision Criteria, Scope, Description, Competitors Seen</span>). Ranking = count of distinct deals citing the need. Every quote below is verbatim from a real deal's notes, nothing is invented. 11 records were non-substantive (tests, renewals, placeholders) and excluded from the denominator.</p>
+
+  <h2 class="sec">The six SPICED buyer archetypes, mix across the 66 deals</h2>
+  <div class="legend">
+    <div class="arch" style="border-left-color:var(--A)"><div class="h"><span class="name">A · Drowning Operator</span><span class="ct">~17 deals</span></div><div class="d">One ops leader runs everything from spreadsheets + QuickBooks. Wants their own capacity back.</div></div>
+    <div class="arch" style="border-left-color:var(--D)"><div class="h"><span class="name">D · We've Outgrown This</span><span class="ct">~17 deals</span></div><div class="d">$30 to 50M brand past a scaling threshold; the stack can't support more growth safely.</div></div>
+    <div class="arch" style="border-left-color:var(--F)"><div class="h"><span class="name">F · Disillusioned Incumbent</span><span class="ct">~15 deals</span></div><div class="d">Already has an ERP that underdelivers; keep it as the GL, put DOSS on top as the ops record.</div></div>
+    <div class="arch" style="border-left-color:var(--E)"><div class="h"><span class="name">E · ERP Control w/o the ERP</span><span class="ct">~9 deals</span></div><div class="d">Wants ERP-grade control without an 18-month NetSuite implementation.</div></div>
+    <div class="arch" style="border-left-color:var(--C)"><div class="h"><span class="name">C · Numbers I Can't Trust</span><span class="ct">~6 deals</span></div><div class="d">Finance leader; COGS, landed cost and valuation are guesses. Wants reportable truth.</div></div>
+    <div class="arch" style="border-left-color:var(--B)"><div class="h"><span class="name">B · Retail Is Coming</span><span class="ct">~5 deals</span></div><div class="d">DTC/Amazon brand entering wholesale; needs EDI &amp; compliance before a hard go-live.</div></div>
+  </div>
+
+  <h2 class="sec">The Top 10, ranked by deals citing the need</h2>
+
+  <div class="card">
+    <div class="top">
+      <div class="rank">1</div>
+      <div class="head">
+        <p class="title">One source of truth, kill the spreadsheets &amp; manual entry</p>
+        <p class="outcome"><b>Outcome the buyer wants:</b> "Run the whole business from one set of numbers everyone trusts, not Google Sheets, QuickBooks, and re-keying between systems."</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="dealchip"><span class="big">40</span>of 66 deals</span>
+      <span class="bar"><span style="width:100%"></span></span>
+    </div>
+    <div class="spiced">
+      <span class="plabel">Primary archetype</span>
+      <span class="pill primary" style="background:var(--A)"><span class="dot" style="background:#fff"></span>A · Drowning Operator</span>
+    </div>
+    <div class="dist">
+      <span class="seg"><span class="dot" style="background:var(--A)"></span>A×13</span>
+      <span class="seg"><span class="dot" style="background:var(--D)"></span>D×9</span>
+      <span class="seg"><span class="dot" style="background:var(--C)"></span>C×6</span>
+      <span class="seg"><span class="dot" style="background:var(--F)"></span>F×6</span>
+      <span class="seg"><span class="dot" style="background:var(--B)"></span>B×4</span>
+      <span class="seg"><span class="dot" style="background:var(--E)"></span>E×2</span>
+    </div>
+    <blockquote>
+      <p class="q"><em class="qt">"Google Sheets and QuickBooks and bubblegum and duct tape."</em><span class="src">, Doich Foods</span></p>
+      <p class="q"><em class="qt">"No source of truth. SOS inventory + spreadsheets… Manual workarounds, double entries. Heavy reconciliation."</em><span class="src">, Piecework Puzzles</span></p>
+      <p class="q"><em class="qt">"All of our processes are manual" … "we are quite frankly limited to the size we are now."</em><span class="src">, Accents de Ville</span></p>
+    </blockquote>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div class="rank">2</div>
+      <div class="head">
+        <p class="title">Real-time, trustworthy inventory across channels &amp; locations</p>
+        <p class="outcome"><b>Outcome the buyer wants:</b> "Know exactly what I have, where it is, and what's committed, in real time, without a person hand-checking every number."</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="dealchip"><span class="big">33</span>of 66 deals</span>
+      <span class="bar"><span style="width:82%"></span></span>
+    </div>
+    <div class="spiced">
+      <span class="plabel">Primary archetype</span>
+      <span class="pill primary" style="background:var(--A)"><span class="dot" style="background:#fff"></span>A · Drowning Operator</span>
+      <span class="pill"><span class="dot" style="background:var(--D)"></span>tied with D · We've Outgrown This</span>
+    </div>
+    <div class="dist">
+      <span class="seg"><span class="dot" style="background:var(--A)"></span>A×8</span>
+      <span class="seg"><span class="dot" style="background:var(--D)"></span>D×8</span>
+      <span class="seg"><span class="dot" style="background:var(--F)"></span>F×7</span>
+      <span class="seg"><span class="dot" style="background:var(--E)"></span>E×4</span>
+      <span class="seg"><span class="dot" style="background:var(--B)"></span>B×3</span>
+      <span class="seg"><span class="dot" style="background:var(--C)"></span>C×2</span>
+      <span class="seg"><span class="dot" style="background:var(--X)"></span>X×1</span>
+    </div>
+    <blockquote>
+      <p class="q"><em class="qt">"No trust in inventory numbers."</em><span class="src">, MoonBrew</span></p>
+      <p class="q"><em class="qt">"Asher is triple checking each number on SKU for orders."</em><span class="src">, Skin Gym</span></p>
+      <p class="q"><em class="qt">"No inventory system of record. Inventory risk = revenue risk."</em><span class="src">, Pro Coffee Gear</span></p>
+    </blockquote>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div class="rank">3</div>
+      <div class="head">
+        <p class="title">Scale the business without scaling headcount</p>
+        <p class="outcome"><b>Outcome the buyer wants:</b> "Grow revenue and add channels without adding ops people, let the system absorb the work so we can stay lean."</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="dealchip"><span class="big">22</span>of 66 deals</span>
+      <span class="bar"><span style="width:55%"></span></span>
+    </div>
+    <div class="spiced">
+      <span class="plabel">Primary archetype</span>
+      <span class="pill primary" style="background:var(--A)"><span class="dot" style="background:#fff"></span>A · Drowning Operator</span>
+    </div>
+    <div class="dist">
+      <span class="seg"><span class="dot" style="background:var(--A)"></span>A×9</span>
+      <span class="seg"><span class="dot" style="background:var(--D)"></span>D×7</span>
+      <span class="seg"><span class="dot" style="background:var(--B)"></span>B×3</span>
+      <span class="seg"><span class="dot" style="background:var(--C)"></span>C×2</span>
+      <span class="seg"><span class="dot" style="background:var(--F)"></span>F×1</span>
+    </div>
+    <blockquote>
+      <p class="q"><em class="qt">"Scale the business without scaling headcount."</em><span class="src">, Toom</span></p>
+      <p class="q">Spend must <em class="qt">"do 5 people's work for 5 salaries."</em><span class="src">, JoJo's Chocolate</span></p>
+      <p class="q"><em class="qt">"They need systems to absorb the work so they can stay lean."</em><span class="src">, Wildwonder</span></p>
+    </blockquote>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div class="rank">4</div>
+      <div class="head">
+        <p class="title">Automated procurement, PO generation &amp; three-way match</p>
+        <p class="outcome"><b>Outcome the buyer wants:</b> "Stop hand-building purchase orders in Excel and email, give me system-generated POs and clean matching against receipts and bills."</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="dealchip"><span class="big">21</span>of 66 deals</span>
+      <span class="bar"><span style="width:52%"></span></span>
+    </div>
+    <div class="spiced">
+      <span class="plabel">Primary archetype</span>
+      <span class="pill primary" style="background:var(--A)"><span class="dot" style="background:#fff"></span>A · Drowning Operator</span>
+    </div>
+    <div class="dist">
+      <span class="seg"><span class="dot" style="background:var(--A)"></span>A×8</span>
+      <span class="seg"><span class="dot" style="background:var(--D)"></span>D×5</span>
+      <span class="seg"><span class="dot" style="background:var(--C)"></span>C×3</span>
+      <span class="seg"><span class="dot" style="background:var(--F)"></span>F×3</span>
+      <span class="seg"><span class="dot" style="background:var(--E)"></span>E×1</span>
+      <span class="seg"><span class="dot" style="background:var(--B)"></span>B×1</span>
+    </div>
+    <blockquote>
+      <p class="q"><em class="qt">"Kelly is spending the majority of his time as an SVP doing manual entry/creation of POs to co-mans."</em><span class="src">, Smash Kitchen</span></p>
+      <p class="q"><em class="qt">"PO black hole, no visibility once a PO goes to the bookkeeper."</em><span class="src">, The Pathfinder</span></p>
+    </blockquote>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div class="rank">5</div>
+      <div class="head">
+        <p class="title">Accurate COGS, landed cost &amp; margin (FIFO, freight, tariffs)</p>
+        <p class="outcome"><b>Outcome the buyer wants:</b> "Trust my margins, landed cost, duties and tariffs costed correctly at the SKU / lot level, not averaged by hand in a stack of spreadsheets."</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="dealchip"><span class="big">18</span>of 66 deals</span>
+      <span class="bar"><span style="width:45%"></span></span>
+    </div>
+    <div class="spiced">
+      <span class="plabel">Primary archetype</span>
+      <span class="pill primary" style="background:var(--C)"><span class="dot" style="background:#fff"></span>C · Numbers I Can't Trust</span>
+    </div>
+    <div class="dist">
+      <span class="seg"><span class="dot" style="background:var(--C)"></span>C×6</span>
+      <span class="seg"><span class="dot" style="background:var(--D)"></span>D×5</span>
+      <span class="seg"><span class="dot" style="background:var(--F)"></span>F×4</span>
+      <span class="seg"><span class="dot" style="background:var(--A)"></span>A×2</span>
+      <span class="seg"><span class="dot" style="background:var(--E)"></span>E×1</span>
+    </div>
+    <blockquote>
+      <p class="q"><em class="qt">"FIFO inventory costing is non-negotiable. It was explicitly called out."</em><span class="src">, LifeSeasons</span></p>
+      <p class="q"><em class="qt">"~20 spreadsheets for COGS; landed cost… hand-keyed into QuickBooks monthly."</em><span class="src">, High Camp Flasks</span></p>
+    </blockquote>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div class="rank">6</div>
+      <div class="head">
+        <p class="title">Retail / wholesale readiness &amp; EDI (SPS, ASN, 850/856/810)</p>
+        <p class="outcome"><b>Outcome the buyer wants:</b> "Ship retail-compliant on day one, EDI, ASNs and routing that meet Target / Walmart / SPS requirements before the hard go-live date."</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="dealchip"><span class="big">18</span>of 66 deals</span>
+      <span class="bar"><span style="width:45%"></span></span>
+    </div>
+    <div class="spiced">
+      <span class="plabel">Primary archetype</span>
+      <span class="pill primary" style="background:var(--B)"><span class="dot" style="background:#fff"></span>B · Retail Is Coming</span>
+    </div>
+    <div class="dist">
+      <span class="seg"><span class="dot" style="background:var(--B)"></span>B×9</span>
+      <span class="seg"><span class="dot" style="background:var(--A)"></span>A×4</span>
+      <span class="seg"><span class="dot" style="background:var(--D)"></span>D×3</span>
+      <span class="seg"><span class="dot" style="background:var(--F)"></span>F×2</span>
+    </div>
+    <blockquote>
+      <p class="q"><em class="qt">"Native sync with QuickBooks (GL), Extensiv (3PL), Shopify, and SPS Commerce (EDI for Target)."</em><span class="src">, NOON</span></p>
+      <p class="q"><em class="qt">"EDI integration with SPS Commerce / seamless SO flow."</em><span class="src">, Skin Gym</span></p>
+    </blockquote>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div class="rank">7</div>
+      <div class="head">
+        <p class="title">A system that adapts to us, flexible &amp; configurable</p>
+        <p class="outcome"><b>Outcome the buyer wants:</b> "Software that bends to how we already operate, configurable to our processes, not a forced re-org of the business."</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="dealchip"><span class="big">17</span>of 66 deals</span>
+      <span class="bar"><span style="width:42%"></span></span>
+    </div>
+    <div class="spiced">
+      <span class="plabel">Primary archetype</span>
+      <span class="pill primary" style="background:var(--E)"><span class="dot" style="background:#fff"></span>E · ERP Control Without the ERP</span>
+    </div>
+    <div class="dist">
+      <span class="seg"><span class="dot" style="background:var(--E)"></span>E×6</span>
+      <span class="seg"><span class="dot" style="background:var(--F)"></span>F×5</span>
+      <span class="seg"><span class="dot" style="background:var(--D)"></span>D×3</span>
+      <span class="seg"><span class="dot" style="background:var(--X)"></span>X×2</span>
+      <span class="seg"><span class="dot" style="background:var(--A)"></span>A×1</span>
+    </div>
+    <blockquote>
+      <p class="q"><em class="qt">"Does NOT force a change in the business / processes, but rather adapts to it."</em><span class="src">, DryWater</span></p>
+      <p class="q"><em class="qt">"Flexibility is #1, delayed ERP 4 yrs."</em><span class="src">, Canopy</span></p>
+    </blockquote>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div class="rank">8</div>
+      <div class="head">
+        <p class="title">Unified order management, routing &amp; allocation</p>
+        <p class="outcome"><b>Outcome the buyer wants:</b> "Every order from every channel in one queue, routed, split and allocated automatically instead of prioritized by hand."</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="dealchip"><span class="big">16</span>of 66 deals</span>
+      <span class="bar"><span style="width:40%"></span></span>
+    </div>
+    <div class="spiced">
+      <span class="plabel">Primary archetype</span>
+      <span class="pill primary" style="background:var(--D)"><span class="dot" style="background:#fff"></span>D · We've Outgrown This</span>
+      <span class="pill"><span class="dot" style="background:var(--A)"></span>3-way tie: A / D / F</span>
+    </div>
+    <div class="dist">
+      <span class="seg"><span class="dot" style="background:var(--A)"></span>A×4</span>
+      <span class="seg"><span class="dot" style="background:var(--D)"></span>D×4</span>
+      <span class="seg"><span class="dot" style="background:var(--F)"></span>F×4</span>
+      <span class="seg"><span class="dot" style="background:var(--E)"></span>E×2</span>
+      <span class="seg"><span class="dot" style="background:var(--B)"></span>B×1</span>
+      <span class="seg"><span class="dot" style="background:var(--X)"></span>X×1</span>
+    </div>
+    <blockquote>
+      <p class="q"><em class="qt">"No OMS to prioritize fulfillment from different channels."</em><span class="src">, LifeSeasons</span></p>
+      <p class="q"><em class="qt">"ShipHero… no order splitting."</em><span class="src">, Shibumi Shade</span></p>
+    </blockquote>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div class="rank">9</div>
+      <div class="head">
+        <p class="title">Demand planning, forecasting &amp; MRP</p>
+        <p class="outcome"><b>Outcome the buyer wants:</b> "See what to buy and make before I run out, real demand planning and MRP I don't have to rebuild in Excel every week."</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="dealchip"><span class="big">16</span>of 66 deals</span>
+      <span class="bar"><span style="width:40%"></span></span>
+    </div>
+    <div class="spiced">
+      <span class="plabel">Primary archetype</span>
+      <span class="pill primary" style="background:var(--D)"><span class="dot" style="background:#fff"></span>D · We've Outgrown This</span>
+    </div>
+    <div class="dist">
+      <span class="seg"><span class="dot" style="background:var(--D)"></span>D×6</span>
+      <span class="seg"><span class="dot" style="background:var(--A)"></span>A×4</span>
+      <span class="seg"><span class="dot" style="background:var(--B)"></span>B×3</span>
+      <span class="seg"><span class="dot" style="background:var(--C)"></span>C×1</span>
+      <span class="seg"><span class="dot" style="background:var(--E)"></span>E×1</span>
+      <span class="seg"><span class="dot" style="background:var(--F)"></span>F×1</span>
+    </div>
+    <blockquote>
+      <p class="q">On planning at their tier, <em class="qt">"says nobody has solved this tier."</em><span class="src">, JoJo's Chocolate</span></p>
+      <p class="q"><em class="qt">"Planning / MRP is a must-have."</em><span class="src">, Leap Products</span></p>
+    </blockquote>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <div class="rank">10</div>
+      <div class="head">
+        <p class="title">Offload the failing ERP, keep the GL, run ops on DOSS</p>
+        <p class="outcome"><b>Outcome the buyer wants:</b> "Keep my general ledger, lose the ERP pain, put DOSS on top as the operational system of record without another 18-month re-implementation."</p>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="dealchip"><span class="big">15</span>of 66 deals</span>
+      <span class="bar"><span style="width:37%"></span></span>
+    </div>
+    <div class="spiced">
+      <span class="plabel">Primary archetype</span>
+      <span class="pill primary" style="background:var(--F)"><span class="dot" style="background:#fff"></span>F · Disillusioned Incumbent</span>
+    </div>
+    <div class="dist">
+      <span class="seg"><span class="dot" style="background:var(--F)"></span>F×9</span>
+      <span class="seg"><span class="dot" style="background:var(--E)"></span>E×3</span>
+      <span class="seg"><span class="dot" style="background:var(--C)"></span>C×2</span>
+      <span class="seg"><span class="dot" style="background:var(--D)"></span>D×1</span>
+    </div>
+    <blockquote>
+      <p class="q"><em class="qt">"NetSuite went live incomplete… costs ballooned + workarounds everywhere."</em><span class="src">, Deako</span></p>
+      <p class="q"><em class="qt">"DOSS as operational system of record; NetSuite stays as GL via the Finance Bridge."</em><span class="src">, Shibumi Shade</span></p>
+    </blockquote>
+  </div>
+
+  <h2 class="sec">Just below the line (ranks 11 to 14)</h2>
+  <div class="hm">
+    <div class="hmrow"><span class="rk">11</span><span class="tt">Native integrations &amp; clean QuickBooks sync</span><span class="ct">15 deals · primary A</span></div>
+    <div class="hmrow"><span class="rk">12</span><span class="tt">AI-native workflows &amp; natural-language querying (DOSSbot)</span><span class="ct">14 deals · primary D</span></div>
+    <div class="hmrow"><span class="rk">13</span><span class="tt">Lot / batch traceability, expiry, recall &amp; BOM / kitting</span><span class="ct">13 deals · primary A</span></div>
+    <div class="hmrow"><span class="rk">14</span><span class="tt">Board / audit / lender-grade trustworthy financials</span><span class="ct">11 deals · primary C</span></div>
+  </div>
+
+  <h2 class="sec">Refining the outcome, the LIR lens</h2>
+  <div class="callout">
+    The needs above are stated as end-states ("know what I have," "trust my margins"). The <a href="https://tapestry.doss.com/a/28dd2791a8394545--value-loops---outcome-based-productization-and-the-doss-lir">Value Loops / LIR</a> work sharpens this: <b>churn is throughput failure, not fit failure.</b> Go-live is not the value event, customers churned because <em>"real transactional volume never ran through DOSS automatically."</em> So the outcome a buyer actually retains on is not a feature; it is a <b>recurring transactional cadence with zero manual fallback,</b> made visible by an <b>outcome receipt</b> (a CFO-forwardable digest). And the way to get there is to <b>land narrow: one productized Value Loop, ~6-week target, wiring only the 2 to 3 rails that loop needs, not the whole stack.</b>
+  </div>
+  <div class="lirdef">
+    <div class="k">The metric we're deploying to reach</div>
+    <div><b>LIR, Leading Indicator of Retention:</b> <code>P% of live ICP customers auto-process ≥ 5 transactional documents (orders + POs + invoice/journal syncs) through DOSS every week, with zero manual-fallback events in the trailing 30 days.</code> The activation event that starts the clock: <em>the first end-to-end transaction succeeds and repeats for two consecutive cycles</em>, this replaces the go-live flag. Manual-fallback (keeping/reverting to Sheets + QBO) is the inverse signal and the churn siren.</div>
+  </div>
+
+  <div class="loop" style="border-top-color:var(--C)">
+    <div class="lh"><span class="lname">C · Numbers I Can't Trust</span><span class="loopchip">Close Loop · Finance Bridge</span></div>
+    <div class="needs">Owns needs #5 accurate COGS/landed cost &amp; #14 board-grade financials · underpins #1 trust · harden this rail first (QBO GL sync is the #1 churn driver)</div>
+    <p class="refined"><b>Refined outcome:</b> not "accurate COGS" as a feature, a <b>clean month-end close, every month, in days not weeks, with journal entries the CFO will actually report</b> and no reverting to spreadsheets at close.</p>
+    <div class="deploy">
+      <div class="f"><div class="fl">Simplest rails (2)</div><div class="fv">QuickBooks GL sync + inventory valuation</div></div>
+      <div class="f"><div class="fl">Activation event</div><div class="fv"><em>"First month-end close executed in DOSS with journal entries auto-posted to GL"</em></div></div>
+      <div class="f"><div class="fl">Cadence = the LIR</div><div class="fv">Clean close every month, zero manual fallback</div></div>
+      <div class="f"><div class="fl">Land</div><div class="fv">Narrow, ~6-wk target; hardened first</div></div>
+    </div>
+  </div>
+
+  <div class="loop" style="border-top-color:var(--B)">
+    <div class="lh"><span class="lname">B · Retail Is Coming</span><span class="loopchip">Retail Loop · O2C / EDI</span></div>
+    <div class="needs">Owns need #6 retail readiness &amp; EDI · deadline-driven, so SPS delivery hardens early</div>
+    <p class="refined"><b>Refined outcome:</b> <b>live and compliant before the retail go-live date, and every retailer order round-trips automatically with zero chargebacks</b>, not "EDI capability" but a proven weekly round-trip ahead of the deadline.</p>
+    <div class="deploy">
+      <div class="f"><div class="fl">Simplest rails (3)</div><div class="fv">SPS/EDI + order intake + 3PL (ASN)</div></div>
+      <div class="f"><div class="fl">Activation event</div><div class="fv"><em>"First retailer 850 auto-creates order and compliant 856/810 flows back"</em></div></div>
+      <div class="f"><div class="fl">Cadence = the LIR</div><div class="fv">Every EDI order round-trips weekly</div></div>
+      <div class="f"><div class="fl">Land</div><div class="fv">Before the retail deadline</div></div>
+    </div>
+  </div>
+
+  <div class="loop" style="border-top-color:var(--A)">
+    <div class="lh"><span class="lname">A · Drowning Operator</span><span class="loopchip">Replenishment Loop · Co-man POs</span></div>
+    <div class="needs">Owns needs #1 source of truth, #3 scale w/o headcount, #4 PO automation (A is primary on all three), the largest cluster in the pipeline</div>
+    <p class="refined"><b>Refined outcome:</b> not "automation" in the abstract, <b>POs run themselves on a weekly cycle with zero manual fallback, so the operator gets their time back and stops being the single point of failure.</b></p>
+    <div class="deploy">
+      <div class="f"><div class="fl">Simplest rails (2 to 3)</div><div class="fv">Supplier/co-man + inventory + QBO</div></div>
+      <div class="f"><div class="fl">Activation event</div><div class="fv"><em>"First PO created → approved → sent → acknowledged by co-man"</em></div></div>
+      <div class="f"><div class="fl">Cadence = the LIR</div><div class="fv">Weekly PO cycle; "buyer time back, no missed re-orders"</div></div>
+      <div class="f"><div class="fl">Land</div><div class="fv">Narrow, ~6-wk target</div></div>
+    </div>
+  </div>
+
+  <div class="loop" style="border-top-color:var(--D)">
+    <div class="lh"><span class="lname">D · We've Outgrown This</span><span class="loopchip">Truth Loop · Inventory</span></div>
+    <div class="needs">Owns need #2 inventory (co-primary), #8 order routing, #9 planning, but planning/forecasting is a <em>later</em> loop, not the landing loop (tradeoff D2)</div>
+    <p class="refined"><b>Refined outcome:</b> <b>reconciled on-hand per SKU per location, every day, flying blind ends, so they add channels and warehouses without breaking.</b> Land the Truth Loop first; the planning loop lands next, on that trusted foundation.</p>
+    <div class="deploy">
+      <div class="f"><div class="fl">Simplest rails (2 to 3)</div><div class="fv">3PL(s) + sales channels</div></div>
+      <div class="f"><div class="fl">Activation event</div><div class="fv"><em>"First reconciled on-hand per SKU per location matching 3PL count"</em></div></div>
+      <div class="f"><div class="fl">Cadence = the LIR</div><div class="fv">Daily reconciled inventory, zero manual fallback</div></div>
+      <div class="f"><div class="fl">Land</div><div class="fv">Truth Loop first; planning is Loop 2</div></div>
+    </div>
+  </div>
+
+  <div class="loop" style="border-top-color:var(--F)">
+    <div class="lh"><span class="lname">F · Disillusioned Incumbent</span><span class="loopchip">Operational Loop + Finance Bridge</span></div>
+    <div class="needs">Owns need #10 offload the failing ERP / keep the GL · often also carries #8 routing &amp; #5 cost pain</div>
+    <p class="refined"><b>Refined outcome:</b> <b>keep the ERP as the ledger, move operations onto DOSS one loop at a time, no rip-and-replace, no second failed implementation.</b> DOSS becomes the operational system of record; the incumbent ERP stays the GL via the Finance Bridge (as Shibumi Shade framed it).</p>
+    <div class="deploy">
+      <div class="f"><div class="fl">Simplest rails (2)</div><div class="fv">The one hurting operational rail (inventory / PO / OMS) + Finance Bridge to the existing ERP GL</div></div>
+      <div class="f"><div class="fl">Activation event</div><div class="fv">First operational cycle running on DOSS with journal entries bridged back to the incumbent GL</div></div>
+      <div class="f"><div class="fl">Cadence = the LIR</div><div class="fv">Weekly operational loop + monthly bridged close, zero fallback</div></div>
+      <div class="f"><div class="fl">Land</div><div class="fv">One operational loop, not a migration</div></div>
+    </div>
+  </div>
+
+  <div class="loop" style="border-top-color:var(--E)">
+    <div class="lh"><span class="lname">E · ERP Control Without the ERP</span><span class="loopchip">The deployment model itself</span></div>
+    <div class="needs">Owns need #7 flexible/configurable · not a loop-lead in the LIR model, for E, the <em>land-narrow model is the product</em></div>
+    <p class="refined"><b>Refined outcome:</b> <b>proof of ERP-grade control from one narrow loop live in ~6 weeks, the credible answer to "I don't want another 18-month NetSuite implementation."</b> For E the deployment shape <em>is</em> the outcome: pick the single loop that matches their sharpest pain and land it, wiring only the 2 to 3 rails it needs, never the whole stack.</p>
+    <div class="deploy">
+      <div class="f"><div class="fl">Simplest rails</div><div class="fv">Only what one loop needs, "not the whole stack"</div></div>
+      <div class="f"><div class="fl">Activation event</div><div class="fv">First end-to-end transaction inside the promised window, repeated 2 cycles</div></div>
+      <div class="f"><div class="fl">Cadence = the LIR</div><div class="fv">The chosen loop's weekly cadence held</div></div>
+      <div class="f"><div class="fl">Land</div><div class="fv">~6 wks vs. the 6 to 10-mo full install E fears</div></div>
+    </div>
+  </div>
+
+  <div class="callout" style="border-left-color:var(--faint);background:#fafafa;margin-top:18px">
+    <b>Sequencing (from the LIR tradeoffs).</b> Harden the rails first, <b>QuickBooks GL sync and SPS delivery</b>, because Close and Retail carry the sharpest churn and deadline risk (D2); the Planning/forecasting loop deliberately waits. Land one loop, not the suite (D1: optimizes time-to-value, trades ACV-at-signature, price as a <b>loop ladder</b> where each subsequent loop is new S/P/CE on a trusted foundation). Measure retention on <b>transactional throughput, not WAU</b> (D3), with one composite activation event for simplicity (D4).
+  </div>
+
+  <footer>
+    <p><b>Method.</b> Population = 77 Salesforce opportunities that entered <em>Stage&nbsp;2, Discovery</em> or later between Jan&nbsp;1 and Jun&nbsp;30, 2026 (1H&nbsp;FY26), replicating the "entered discovery" scope. 66 carried substantive discovery notes; 11 (tests, renewals, placeholders) were excluded. Needs were extracted from each deal's own <b>Identify Pain, Metrics, Metrics&nbsp;L1, Decision Criteria, Scope, Description</b> and <b>Competitors Seen</b> fields, then clustered into themes and ranked by the number of distinct deals citing each. A deal can cite several themes.</p>
+    <p><b>SPICED mapping.</b> Each substantive deal was assigned one primary archetype (A, F, or X = Builder / API-first / other) from its own notes; the "primary" shown per requirement is the archetype most represented among the deals citing that need, with the full distribution beside it. Archetype definitions per <a href="https://tapestry.doss.com/a/7bcc314dffcc4d88--who-we-sell-to-a-spiced-model-of-the-doss-buyer">Who We Sell To, A SPICED Model of the DOSS Buyer</a> and <a href="https://tapestry.doss.com/a/3183d5f1e46143c9--qualified-pipeline-entered-discovery-q2-fy26---spiced-fit-by">Qualified Pipeline, Entered Discovery Q2 FY26</a>.</p>
+    <p><b>LIR lens.</b> The refinement section applies <a href="https://tapestry.doss.com/a/28dd2791a8394545--value-loops---outcome-based-productization-and-the-doss-lir">Value Loops, Outcome-Based Productization and the DOSS LIR</a>. Value Loop names, activation events, cadences and tradeoffs (D1, D4) are quoted from that page; loop→archetype pairings follow its five-loop table. The E mapping is our synthesis, E is not a loop-lead in the LIR model, so the land-narrow deployment model itself is presented as E's answer.</p>
+    <p><b>Integrity.</b> Every quotation is verbatim from a real opportunity's notes or the cited Tapestry pages; no quotes, accounts, or counts were fabricated. Re-derived from structured pipeline data; updates the April 2026 <a href="https://tapestry.doss.com/a/3df0ccc60b634559--top-10-customer-erp-ops-system-requirements">Top&nbsp;10 Customer ERP &amp; Ops Requirements</a>. Generated Jul&nbsp;3, 2026.</p>
+  </footer>
+
+</div>
+</body>
+</html>
