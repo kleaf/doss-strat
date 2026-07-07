@@ -3,6 +3,7 @@ declare module "virtual:repo-docs" {
     path: string;
     title: string;
     category: string;
+    format: "markdown" | "html";
     content: string;
   }
 

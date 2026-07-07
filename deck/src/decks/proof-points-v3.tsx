@@ -229,7 +229,7 @@ export const proofPointsV3: DeckDef = {
               <td>100–200 unit test batches; ~4-day turns</td>
               <td>Test-and-scale as default; engagement data as leading demand signal</td>
             </tr>
-            <tr className="us">
+            <tr>
               <td>e.l.f. Beauty</td>
               <td>
                 <em>13–27 week launches vs. 9+ months</em>
@@ -382,7 +382,7 @@ export const proofPointsV3: DeckDef = {
               <td>200+ agents + best interop story; much is vision/roadmap</td>
               <td>Low direct (segment)</td>
             </tr>
-            <tr className="us">
+            <tr>
               <td>3</td>
               <td>NetSuite Next</td>
               <td>

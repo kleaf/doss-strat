@@ -30,7 +30,7 @@ function docHref(doc: RepoDoc) {
 
 function rewriteInternalMarkdownLinks(content: string, docPath: string) {
   const baseDir = docPath.includes("/") ? docPath.slice(0, docPath.lastIndexOf("/")) : "";
-  return content.replace(/\[([^\]]+)\]\(([^)]+\.md)(#[^)]+)?\)/g, (_match, label: string, href: string, hash = "") => {
+  return content.replace(/\[([^\]]+)\]\(([^)]+\.(?:md|html))(#[^)]+)?\)/g, (_match, label: string, href: string, hash = "") => {
     if (/^(https?:|mailto:|#)/.test(href)) return `[${label}](${href}${hash})`;
     const normalized = `${baseDir}/${href}`
       .replace(/^\//, "")
@@ -59,6 +59,81 @@ function MarkdownView({ doc }: { doc: RepoDoc }) {
           <p>{doc.path}</p>
         </aside>
         <article className="markdown-body" dangerouslySetInnerHTML={{ __html: html }} />
+      </div>
+    </main>
+  );
+}
+
+function prepareHtmlDocument(content: string) {
+  const lightThemeStyle = `<style data-doss-light-html>
+    :root,
+    :root[data-theme="light"],
+    :root[data-theme="auto"] {
+      color-scheme: light !important;
+      --bg-100: #ffffff !important;
+      --bg-200: #fafafa !important;
+      --bg: #fafafa !important;
+      --card: #ffffff !important;
+      --ink: #171717 !important;
+      --gray-900: #4d4d4d !important;
+      --gray-1000: #171717 !important;
+      --g900: hsl(0, 0%, 30%) !important;
+      --g1000: hsl(0, 0%, 9%) !important;
+    }
+    html,
+    body {
+      background: #ffffff !important;
+      color: #171717 !important;
+      color-scheme: light !important;
+    }
+    body,
+    p,
+    li,
+    td,
+    th,
+    div,
+    span {
+      border-color: #ebebeb;
+    }
+    table,
+    thead,
+    tbody,
+    tr,
+    td,
+    th,
+    .card,
+    .block,
+    .callout,
+    .strip,
+    .matrix,
+    .summary,
+    .insight {
+      background-color: #ffffff !important;
+    }
+  </style>`;
+
+  const themed = content.replace(/<html([^>]*)>/i, (_match, attrs: string) => {
+    const withoutTheme = attrs.replace(/\sdata-theme=("[^"]*"|'[^']*'|[^\s>]*)/i, "");
+    return `<html${withoutTheme} data-theme="light">`;
+  });
+
+  if (themed.includes("</head>")) return themed.replace("</head>", `${lightThemeStyle}</head>`);
+  return `${lightThemeStyle}${themed}`;
+}
+
+function HtmlDocumentView({ doc }: { doc: RepoDoc }) {
+  const html = useMemo(() => prepareHtmlDocument(doc.content), [doc.content]);
+
+  return (
+    <main className="doc-view">
+      <a className="back-link" href="#/">← Strategy index</a>
+      <div className="doc-shell html-doc-shell">
+        <aside className="doc-meta">
+          <div className="eyebrow">{doc.category}</div>
+          <h1>{doc.title}</h1>
+          <p>{doc.path}</p>
+        </aside>
+        <iframe className="html-document" title={doc.title} srcDoc={html} sandbox="" />
       </div>
     </main>
   );
@@ -105,7 +180,7 @@ function Home() {
 
         <section className="hub-section rise" style={{ animationDelay: "0.32s" }}>
           <div className="section-head">
-            <span>Markdown table of contents</span>
+            <span>Document table of contents</span>
             <em>{docs.length} files</em>
           </div>
           <div className="doc-index">
@@ -138,7 +213,8 @@ export default function App() {
 
   if (route.kind === "doc") {
     const doc = docs.find((candidate) => candidate.path === route.path);
-    return doc ? <MarkdownView doc={doc} /> : <Home />;
+    if (!doc) return <Home />;
+    return doc.format === "html" ? <HtmlDocumentView doc={doc} /> : <MarkdownView doc={doc} />;
   }
 
   if (route.kind === "deck") {

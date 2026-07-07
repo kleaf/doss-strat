@@ -15,6 +15,20 @@ npm run dev -- --host 0.0.0.0 --port 4180
 
 Open the app index at `http://localhost:4180/`.
 
+## Protected serving
+
+For shared access, serve the built app through the Google-authenticated Express server:
+
+```sh
+GOOGLE_CLIENT_ID=... \
+GOOGLE_CLIENT_SECRET=... \
+SESSION_SECRET=$(openssl rand -hex 32) \
+PUBLIC_BASE_URL=https://your-host.example.com \
+npm run serve
+```
+
+The OAuth client must allow `PUBLIC_BASE_URL/auth/callback` as an authorized redirect URI. Access is restricted to verified Google accounts in the `doss.com` hosted domain. Override with `GOOGLE_AUTH_DOMAIN=...` only if the approved domain changes.
+
 Deep-link examples:
 
 - Document reader: `#/docs/STRATEGY.md`

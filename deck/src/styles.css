@@ -402,24 +402,6 @@ h1.headline .accent {
   white-space: nowrap;
 }
 
-.laneTable tr.us td {
-  background: rgba(13, 60, 252, 0.045);
-  border-bottom-color: rgba(13, 60, 252, 0.28);
-  color: var(--grey);
-}
-
-.laneTable tr.us td:first-child {
-  color: var(--blue);
-  padding-left: 0.8rem;
-  box-shadow: inset 3px 0 0 var(--blue);
-}
-
-.laneTable tr.us td em {
-  color: var(--blue);
-  font-style: normal;
-  font-weight: 500;
-}
-
 /* title slide */
 
 .title-slide .wordmark {
@@ -711,7 +693,7 @@ h1.headline .accent {
 }
 
 .doc-view {
-  min-height: 100%;
+  height: 100%;
   background: var(--paper);
   color: var(--ink);
   overflow-y: auto;
@@ -885,6 +867,17 @@ h1.headline .accent {
   vertical-align: top;
   line-height: 1.45;
   background: var(--paper);
+}
+
+.html-document {
+  width: 100%;
+  min-height: 78vh;
+  border: 1px solid var(--rule);
+  background: #ffffff;
+}
+
+.html-doc-shell {
+  grid-template-columns: minmax(220px, 320px) minmax(0, 980px);
 }
 
 @media (max-width: 900px) {

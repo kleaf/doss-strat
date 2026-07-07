@@ -125,7 +125,7 @@ export const strategyV1: DeckDef = {
               <td>Finance layers on existing ERPs</td>
               <td>Finance teams</td>
             </tr>
-            <tr className="us">
+            <tr>
               <td>DOSS</td>
               <td>$73M</td>
               <td>
