@@ -35,6 +35,7 @@ A doc's track is inferred purely from its path (`deck/vite.config.ts`'s `trackFr
 
 ## Rules
 
+- **Voice rule for STRATEGY.md, PROCESS.md, and decks (Kurt, iteration 18):** write present-tense, current-state only, for a DOSS board member or a customer's executive sponsor. Never narrate version evolution in the body — no "corrected from v5," "new this pass," "demoted from." History lives in ITERATIONS.md, the changelog at the bottom, hypotheses files, and git. Minimize internal jargon (SPICED archetype codenames, LIR, TTRTX); plain English over codenames.
 - Inputs are immutable after capture; thinking evolves in hypotheses/synthesis/STRATEGY.
 - Every evidence bullet in a hypothesis file must link a specific input file and date.
 - Hypothesis statuses: `untested`, `gathering evidence`, `supported`, `challenged`, `killed`, `promoted`.
