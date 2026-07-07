@@ -2,12 +2,24 @@ import { useEffect, useMemo, useState } from "react";
 import { marked } from "marked";
 import { Deck } from "./components/Deck";
 import { decks } from "./decks";
-import { docs, RepoDoc } from "virtual:repo-docs";
+import { docs, RepoDoc, Track } from "virtual:repo-docs";
 
 type Route =
   | { kind: "home" }
+  | { kind: "track"; track: Track }
   | { kind: "deck"; deckId: string; slide: number }
   | { kind: "doc"; path: string };
+
+const TRACK_META: Record<Track, { label: string; tagline: string }> = {
+  strategy: {
+    label: "Product Strategy",
+    tagline: "Market thesis, differentiation, agentic AI roadmap, proof points.",
+  },
+  process: {
+    label: "Product Process",
+    tagline: "How we plan, ship, and stay accountable to the field.",
+  },
+};
 
 marked.use({
   gfm: true,
@@ -20,12 +32,19 @@ function parseHash(): Route {
   if (parts[0] === "docs") {
     return { kind: "doc", path: decodeURIComponent(parts.slice(1).join("/")) };
   }
+  if (parts[0] === "track" && (parts[1] === "strategy" || parts[1] === "process")) {
+    return { kind: "track", track: parts[1] };
+  }
   const n = parseInt(parts[1] ?? "1", 10);
   return { kind: "deck", deckId: parts[0], slide: (Number.isNaN(n) ? 1 : n) - 1 };
 }
 
 function docHref(doc: RepoDoc) {
   return `#/docs/${encodeURIComponent(doc.path)}`;
+}
+
+function trackHref(track: Track) {
+  return `#/track/${track}`;
 }
 
 function rewriteInternalMarkdownLinks(content: string, docPath: string) {
@@ -46,12 +65,20 @@ function rewriteInternalMarkdownLinks(content: string, docPath: string) {
   });
 }
 
+function BackLink({ track }: { track: Track }) {
+  return (
+    <a className="back-link" href={trackHref(track)}>
+      ← {TRACK_META[track].label} index
+    </a>
+  );
+}
+
 function MarkdownView({ doc }: { doc: RepoDoc }) {
   const html = useMemo(() => marked.parse(rewriteInternalMarkdownLinks(doc.content, doc.path)) as string, [doc]);
 
   return (
     <main className="doc-view">
-      <a className="back-link" href="#/">← Strategy index</a>
+      <BackLink track={doc.track} />
       <div className="doc-shell">
         <aside className="doc-meta">
           <div className="eyebrow">{doc.category}</div>
@@ -126,7 +153,7 @@ function HtmlDocumentView({ doc }: { doc: RepoDoc }) {
 
   return (
     <main className="doc-view">
-      <a className="back-link" href="#/">← Strategy index</a>
+      <BackLink track={doc.track} />
       <div className="doc-shell html-doc-shell">
         <aside className="doc-meta">
           <div className="eyebrow">{doc.category}</div>
@@ -140,25 +167,76 @@ function HtmlDocumentView({ doc }: { doc: RepoDoc }) {
 }
 
 function Home() {
-  const docsByCategory = useMemo(() => {
-    return docs.reduce<Record<string, RepoDoc[]>>((groups, doc) => {
-      groups[doc.category] = groups[doc.category] ?? [];
-      groups[doc.category].push(doc);
-      return groups;
-    }, {});
+  const counts = useMemo(() => {
+    const result: Record<Track, { docs: number; decks: number }> = {
+      strategy: { docs: 0, decks: 0 },
+      process: { docs: 0, decks: 0 },
+    };
+    for (const doc of docs) result[doc.track].docs += 1;
+    for (const deck of decks) result[deck.track].decks += 1;
+    return result;
   }, []);
 
   return (
     <div className="stage">
-      <div className="home hub">
+      <div className="home chooser">
         <div className="wordmark rise">DOSS</div>
         <div className="hub-hero">
           <h1 className="rise" style={{ animationDelay: "0.1s" }}>
-            Strategy library
+            Strategy &amp; process library
           </h1>
           <p className="rise" style={{ animationDelay: "0.18s" }}>
-            One interface for the working thesis, hypotheses, research inputs, synthesis notes,
-            and presentation-mode decks.
+            Pick a track — the working thesis on what we build, or how we build it.
+          </p>
+        </div>
+
+        <div className="track-choice">
+          {(Object.keys(TRACK_META) as Track[]).map((track, index) => (
+            <a
+              className="track-card rise"
+              href={trackHref(track)}
+              key={track}
+              style={{ animationDelay: `${0.28 + index * 0.1}s` }}
+            >
+              <span className="idx">{String(index + 1).padStart(2, "0")}</span>
+              <strong>{TRACK_META[track].label}</strong>
+              <p>{TRACK_META[track].tagline}</p>
+              <em>
+                {counts[track].decks} deck{counts[track].decks === 1 ? "" : "s"} ·{" "}
+                {counts[track].docs} doc{counts[track].docs === 1 ? "" : "s"}
+              </em>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TrackHub({ track }: { track: Track }) {
+  const trackDecks = useMemo(() => decks.filter((deck) => deck.track === track), [track]);
+  const trackDocs = useMemo(() => docs.filter((doc) => doc.track === track), [track]);
+  const docsByCategory = useMemo(() => {
+    return trackDocs.reduce<Record<string, RepoDoc[]>>((groups, doc) => {
+      groups[doc.category] = groups[doc.category] ?? [];
+      groups[doc.category].push(doc);
+      return groups;
+    }, {});
+  }, [trackDocs]);
+
+  return (
+    <div className="stage">
+      <div className="home hub">
+        <a className="back-link" href="#/">
+          ← All tracks
+        </a>
+        <div className="wordmark rise">DOSS</div>
+        <div className="hub-hero">
+          <h1 className="rise" style={{ animationDelay: "0.1s" }}>
+            {TRACK_META[track].label}
+          </h1>
+          <p className="rise" style={{ animationDelay: "0.18s" }}>
+            {TRACK_META[track].tagline}
           </p>
         </div>
 
@@ -168,11 +246,13 @@ function Home() {
             <em>← → navigate · esc returns here</em>
           </div>
           <div className="deck-grid">
-            {decks.map((deck, index) => (
+            {trackDecks.map((deck, index) => (
               <a className="deck-card" href={`#/${deck.id}/1`} key={deck.id}>
                 <span className="idx">{String(index + 1).padStart(2, "0")}</span>
                 <strong>{deck.title}</strong>
-                <em>{deck.date} · {deck.slides.length} slides</em>
+                <em>
+                  {deck.date} · {deck.slides.length} slides
+                </em>
               </a>
             ))}
           </div>
@@ -181,7 +261,7 @@ function Home() {
         <section className="hub-section rise" style={{ animationDelay: "0.32s" }}>
           <div className="section-head">
             <span>Document table of contents</span>
-            <em>{docs.length} files</em>
+            <em>{trackDocs.length} files</em>
           </div>
           <div className="doc-index">
             {Object.entries(docsByCategory).map(([category, categoryDocs]) => (
@@ -217,6 +297,10 @@ export default function App() {
     return doc.format === "html" ? <HtmlDocumentView doc={doc} /> : <MarkdownView doc={doc} />;
   }
 
+  if (route.kind === "track") {
+    return <TrackHub track={route.track} />;
+  }
+
   if (route.kind === "deck") {
     const deck = decks.find((candidate) => candidate.id === route.deckId);
     if (deck) {
@@ -225,7 +309,7 @@ export default function App() {
           deck={deck}
           slideIndex={route.slide}
           onNavigate={(i) => (window.location.hash = `#/${deck.id}/${i + 1}`)}
-          onExit={() => (window.location.hash = "#/")}
+          onExit={() => (window.location.hash = trackHref(deck.track))}
         />
       );
     }

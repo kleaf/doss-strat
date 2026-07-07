@@ -4,6 +4,7 @@ export const proofPointsV3: DeckDef = {
   id: "proof-points-v3",
   title: "DOSS Proof Points — Where the AI Differentiation Is (V3)",
   date: "2026-07-06",
+  track: "strategy",
   slides: [
     // 1 — title
     <div className="title-slide">

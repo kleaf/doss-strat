@@ -7,10 +7,13 @@ const repoRoot = path.resolve(__dirname, "..");
 const virtualDocsId = "virtual:repo-docs";
 const resolvedVirtualDocsId = `\0${virtualDocsId}`;
 
+type Track = "strategy" | "process";
+
 interface DocEntry {
   path: string;
   title: string;
   category: string;
+  track: Track;
   format: "markdown" | "html";
   content: string;
 }
@@ -43,8 +46,15 @@ function titleFromHtml(content: string, filePath: string): string {
 function categoryFromPath(relativePath: string): string {
   const [top, second] = relativePath.split("/");
   if (!top || relativePath === "README.md") return "Overview";
-  if (top === "inputs" && second) return `Inputs / ${second.charAt(0).toUpperCase()}${second.slice(1)}`;
+  if ((top === "inputs" || top === "process") && second) {
+    return `${top.charAt(0).toUpperCase()}${top.slice(1)} / ${second.charAt(0).toUpperCase()}${second.slice(1)}`;
+  }
   return top.charAt(0).toUpperCase() + top.slice(1);
+}
+
+function trackFromPath(relativePath: string): Track {
+  if (relativePath === "PROCESS.md" || relativePath.startsWith("process/")) return "process";
+  return "strategy";
 }
 
 function collectDocuments(dir: string, docs: DocEntry[] = []): DocEntry[] {
@@ -64,6 +74,7 @@ function collectDocuments(dir: string, docs: DocEntry[] = []): DocEntry[] {
         path: relativePath,
         title: format === "html" ? titleFromHtml(content, relativePath) : titleFromMarkdown(content, relativePath),
         category: categoryFromPath(relativePath),
+        track: trackFromPath(relativePath),
         format,
         content,
       });

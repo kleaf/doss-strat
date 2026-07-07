@@ -4,6 +4,7 @@ export interface DeckDef {
   id: string;
   title: string;
   date: string;
+  track: "strategy" | "process";
   slides: ReactNode[];
 }
 

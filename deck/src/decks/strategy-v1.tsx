@@ -4,6 +4,7 @@ export const strategyV1: DeckDef = {
   id: "strategy-v1",
   title: "DOSS Product Strategy — Working Thesis v1",
   date: "2026-07-06",
+  track: "strategy",
   slides: [
     // 1 — title
     <div className="title-slide">
