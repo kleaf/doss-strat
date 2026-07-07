@@ -46,6 +46,7 @@ function titleFromHtml(content: string, filePath: string): string {
 function categoryFromPath(relativePath: string): string {
   const [top, second] = relativePath.split("/");
   if (!top || relativePath === "README.md") return "Overview";
+  if (top === "history") return "Version History";
   if ((top === "inputs" || top === "process") && second) {
     return `${top.charAt(0).toUpperCase()}${top.slice(1)} / ${second.charAt(0).toUpperCase()}${second.slice(1)}`;
   }

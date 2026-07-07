@@ -49,3 +49,7 @@ Additional evidence for:
 - 2026-07-06 (V4): The SPICED archetypes map the wedge by buyer: Drowning Operator, We've Outgrown This, Disillusioned Incumbent, ERP Control Without the ERP, Numbers I Can't Trust, and Retail Is Coming. All are operational-system-of-record pains, not generic ERP-suite appetite ([internal VoC](../inputs/internal/Top-10-Customer-ERP-Ops-Requirements---1H-FY26-SPICED-LIR.html)).
 
 Status note: this hypothesis is now supported by market structure, public traction, and internal discovery data; remaining validation is win/loss causality.
+
+## V5 update (2026-07-08): named account evidence across the whole value chain
+
+- 2026-07-08 (V5): The internal Value Stack framework grounds the wedge in named accounts spanning the full chain, not just survey counts: Instant Hydration ($2M Shopify↔Stord unfulfilled-order gap), Pavoi (~1,000 silently missed orders/day), Gorgie (5,000→15,000 doors), Snackwise (345K transactions on zero custom integrations), Eight Sleep (10 3PLs run simultaneously) ([Value Stack](../inputs/internal/The-DOSS-Value-Stack---TX-Loops-Figure-8s-Composites-BusinessProcesses.html)). See [H9](09-growth-engine-not-ops-platform.md) for the full pillar-by-pillar breakdown.

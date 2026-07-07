@@ -4,7 +4,7 @@
 
 - [Value Loops: Outcome-Based Productization and the DOSS LIR](../inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html) — internal strategy synthesis from SPICED buyer model, Q2 pipeline archetypes, LIR thinking, 13 install maps, 95 gold cards, churn/problems/integrations evidence, and L2L instrumentation spec.
 - [Top 10 Customer ERP & Ops Requirements, 1H FY26](../inputs/internal/Top-10-Customer-ERP-Ops-Requirements---1H-FY26-SPICED-LIR.html) — Salesforce discovery-note synthesis from 77 opportunities entering Discovery in 1H FY26; 66 substantive records; requirements ranked by distinct deals and mapped to SPICED archetypes.
-- [Iteration 6 note](../inputs/notes/2026-07-06-iteration-6-internal-value-loops-lir.md) — Kurt's ask to analyze the internal files and revise the strategy.
+- [Iteration 6 note](../history/2026-07-06-iteration-6-internal-value-loops-lir.md) — Kurt's ask to analyze the internal files and revise the strategy.
 
 ## 2. Which hypotheses moved?
 

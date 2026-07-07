@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The DOSS Value Stack: TX Loops → Figure-8s → Composites → BusinessProcesses</title>
+<style>
+:root{
+  --bg-100:#ffffff;--bg-200:#fafafa;
+  --gray-100:#f2f2f2;--gray-200:#ebebeb;--gray-300:#e6e6e6;--gray-500:#c9c9c9;
+  --gray-600:#757575;--gray-700:#6b6b6b;--gray-900:#4d4d4d;--gray-1000:#171717;
+  --alpha-100:#0000000a;--alpha-200:#0000000f;--alpha-400:#00000014;--alpha-500:#00000026;
+  --blue-700:hsl(212,100%,54%);--blue-900:hsl(211,100%,42%);
+  --teal-700:hsl(173,80%,36%);
+  --purple-700:hsl(272,51%,54%);
+  --amber-700:hsl(39,100%,57%);
+  --pink-700:hsl(336,80%,58%);
+  --green-700:hsl(131,41%,46%);--red-700:hsl(358,75%,59%);--red-900:hsl(358,66%,48%);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg-100);color:var(--gray-900);
+  font:400 14px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.page{max-width:920px;margin:0 auto;padding:56px 40px 80px}
+h1{font-size:28px;font-weight:600;letter-spacing:-.02em;color:var(--gray-1000);line-height:1.2;margin:8px 0 12px}
+h2{font-size:20px;font-weight:600;letter-spacing:-.01em;color:var(--gray-1000);margin:60px 0 16px}
+h3{font-size:15px;font-weight:600;color:var(--gray-1000);margin:28px 0 8px}
+p{margin:0 0 14px}
+.kicker{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-600)}
+.lede{font-size:16px;line-height:1.6;color:var(--gray-900)}
+.meta{display:flex;gap:24px;flex-wrap:wrap;margin:20px 0 0;padding:14px 0;border-top:1px solid var(--gray-300);border-bottom:1px solid var(--gray-300);font-size:12px;color:var(--gray-600)}
+.meta b{color:var(--gray-1000);font-weight:500}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-variant-numeric:tabular-nums}
+th{font-weight:500;color:var(--gray-900);font-size:13px;padding:8px 12px;border-bottom:1px solid var(--alpha-400);text-align:left}
+td{padding:10px 12px;border-bottom:1px solid var(--alpha-400);color:var(--gray-1000);font-size:13.5px;vertical-align:top}
+tr:hover{background:var(--alpha-100)}
+.badge{display:inline-block;border-radius:9999px;padding:2px 9px;font-size:11.5px;font-weight:500;background:var(--alpha-200);color:var(--gray-1000);white-space:nowrap}
+code{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:4px;padding:2px 6px;font:400 13px ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+.formula{background:var(--bg-200);border:1px solid var(--alpha-400);border-radius:6px;padding:20px 24px;margin:18px 0;font-size:15px;color:var(--gray-1000)}
+ul{margin:0 0 14px;padding-left:22px}
+li{margin-bottom:6px}
+.foot{margin-top:64px;padding-top:16px;border-top:1px solid var(--gray-300);font-size:12px;color:var(--gray-600);line-height:1.6}
+.fig{margin:24px 0 8px}
+.figcap{font-size:12px;color:var(--gray-600);margin:6px 0 0}
+.figrow{display:flex;gap:16px;flex-wrap:wrap;margin:24px 0 8px}
+.figrow>div{flex:1;min-width:250px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:9999px;margin-right:6px;vertical-align:baseline}
+.d-p2p{background:var(--blue-700)} .d-ims{background:var(--teal-700)} .d-oms{background:var(--purple-700)}
+.d-fin{background:var(--amber-700)} .d-umd{background:var(--pink-700)}
+.chain{font-size:13.5px;color:var(--gray-1000);white-space:nowrap}
+.chain .arr{color:var(--gray-600);padding:0 6px}
+.lvl{display:inline-block;border-radius:4px;padding:1px 8px;font-size:11.5px;font-weight:600;letter-spacing:.02em}
+h2 .lvl{margin-left:14px;vertical-align:2px}
+.lvl1{background:hsl(212,100%,96%);color:var(--blue-900)}
+.lvl2{background:hsl(173,60%,94%);color:hsl(173,80%,24%)}
+.lvl3{background:hsl(272,51%,95%);color:hsl(272,45%,38%)}
+.lvl4{background:hsl(39,100%,93%);color:hsl(30,80%,32%)}
+svg text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+
+/* ---- callout banners (solid header + neutral body) ---- */
+.vsban{border:1px solid var(--alpha-400);border-left:1px solid var(--alpha-400);background:none;border-radius:6px;overflow:hidden;margin:20px 0;padding:0}
+.vsban-head{display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:14px;font-weight:600}
+.vsban-body{padding:16px 18px;background:var(--bg-100);color:var(--gray-1000);font-size:14px}
+.vs-blue .vsban-head{background:var(--blue-700);color:hsl(0,0%,97%)}
+.vs-amber .vsban-head{background:var(--amber-700);color:#18181b}
+.numlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.numlist li{display:flex;gap:12px;margin:0;color:var(--gray-900);line-height:1.55}
+.numlist .n{flex:none;width:22px;height:22px;border-radius:9999px;background:var(--gray-100);border:1px solid var(--alpha-400);color:var(--gray-900);font-size:11.5px;font-weight:500;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.numlist b{color:var(--gray-1000)}
+/* ---- quote cards ---- */
+.quote{background:var(--bg-100);border:1px solid var(--alpha-400);border-radius:6px;padding:22px 24px;margin:18px 0}
+.quote-text{font-size:15px;line-height:1.6;color:var(--gray-1000)}
+.quote-attr{font-size:13px;color:var(--gray-900);margin-top:8px}
+/* ---- headed cards for composites / BusinessProcesses ---- */
+.ccard{background:var(--bg-100);border:1px solid var(--alpha-400);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;padding:0}
+.ccard-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:11px 16px;border-bottom:1px solid var(--alpha-400)}
+.h-l3 .ccard-head{background:hsl(272,51%,96%)}
+.h-l4 .ccard-head{background:hsl(39,100%,94%)}
+.ccard-name{font-size:14px;font-weight:600;color:var(--gray-1000)}
+.ccard-body{padding:14px 16px;display:flex;flex-direction:column;gap:11px;flex:1}
+/* ---- master-detail cards ---- */
+.cardlist{display:flex;flex-direction:column;gap:12px;margin:16px 0}
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:12px;margin:16px 0}
+.card{background:var(--bg-100);border:1px solid var(--alpha-400);border-radius:6px;padding:18px 20px}
+.card-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.card-name{font-size:15px;font-weight:600;color:var(--gray-1000)}
+.chip{border-radius:9999px;background:var(--alpha-200);padding:2px 9px;font-size:11.5px;font-weight:500;color:var(--gray-900);white-space:nowrap}
+.card-chain{font-size:13.5px;color:var(--gray-1000);margin:2px 0 14px}
+.card-chain .arr{color:var(--gray-600);padding:0 5px}
+.card-lede{font-size:13.5px;color:var(--gray-1000);margin:0 0 14px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 24px}
+.kv1{display:flex;flex-direction:column;gap:12px}
+.k{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--gray-600);margin-bottom:3px}
+.v{font-size:13px;color:var(--gray-900);line-height:1.55}
+.n-p2p{color:var(--blue-900)}.n-ims{color:hsl(173,80%,24%)}.n-oms{color:hsl(272,45%,38%)}
+.n-fin{color:hsl(30,80%,32%)}.n-umd{color:hsl(336,70%,40%)}
+/* ---- motion: transactions flowing through the loops ---- */
+.seam{transform-box:fill-box;transform-origin:center;animation:seampulse 2.4s ease-in-out infinite}
+@keyframes seampulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(1.6)}}
+.fig svg text,.figrow svg text{paint-order:stroke;stroke:rgba(255,255,255,.94);stroke-width:5px;stroke-linejoin:round;stroke-linecap:round}
+.rise{opacity:0;transform-box:fill-box;animation:riseup .7s ease-out forwards}
+@keyframes riseup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.r1{animation-delay:.1s}.r2{animation-delay:.5s}.r3{animation-delay:.9s}.r4{animation-delay:1.3s}
+@media (prefers-reduced-motion: reduce){
+  .seam,.rise{animation:none}.rise{opacity:1}
+}
+</style>
+<style data-tapestry="tokens">:root{
+/* Canon (STYLE.md): LIGHT is the default; dark is the secondary theme for
+   screen-only dashboards. Values mirror the canonical --ds-* scale. */
+--bg-100:#fff;--bg-200:#fafafa;
+--g100:#f2f2f2;--g200:#ebebeb;--g300:#e6e6e6;
+--ga100:#0000000a;--ga200:#0000000f;--ga300:#00000017;--ga400:#00000014;--ga500:#00000026;
+--g500:hsl(0,0%,79%);--g600:hsl(0,0%,46%);--g700:hsl(0,0%,42%);--g900:hsl(0,0%,30%);--g1000:hsl(0,0%,9%);
+--blue-700:hsl(212,100%,54%);--blue-900:hsl(211,100%,42%);
+--teal-700:hsl(173,80%,36%);--teal-900:hsl(173,80%,26%);
+--purple-700:hsl(272,51%,54%);--purple-900:hsl(272,45%,38%);
+--amber-700:hsl(39,100%,57%);--amber-900:hsl(30,80%,32%);
+--green-700:hsl(131,41%,46%);--green-900:hsl(131,45%,30%);
+--red-700:hsl(358,75%,59%);--red-900:hsl(358,66%,48%);
+--pink-700:hsl(336,80%,58%);--pink-900:hsl(336,70%,40%);
+--font:"Geist",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+--mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+/* Canonical --ds-* names (STYLE.md) alias the short names so artifacts
+   authored straight from the style guide work with no local token block.
+   Aliases resolve through var() so theme flips propagate. */
+--ds-background-100:var(--bg-100);--ds-background-200:var(--bg-200);
+--ds-gray-100:var(--g100);--ds-gray-200:var(--g200);--ds-gray-300:var(--g300);--ds-gray-500:var(--g500);--ds-gray-600:var(--g600);--ds-gray-700:var(--g700);--ds-gray-900:var(--g900);--ds-gray-1000:var(--g1000);
+--ds-gray-alpha-100:var(--ga100);--ds-gray-alpha-200:var(--ga200);--ds-gray-alpha-300:var(--ga300);--ds-gray-alpha-400:var(--ga400);--ds-gray-alpha-500:var(--ga500);
+--ds-blue-700:var(--blue-700);--ds-blue-900:var(--blue-900);--ds-accent-700:var(--blue-700);--ds-accent-900:var(--blue-900);
+--ds-teal-700:var(--teal-700);--ds-purple-700:var(--purple-700);
+--ds-amber-700:var(--amber-700);--ds-amber-900:var(--amber-900);
+--ds-green-700:var(--green-700);--ds-green-900:var(--green-900);
+--ds-red-700:var(--red-700);--ds-red-900:var(--red-900);--ds-pink-700:var(--pink-700);
+}
+/* Dark tokens: forced dark, or auto + OS-dark. Soft near-black (hsl 0,0%,4%)
+   per STYLE.md, never harsh #000. */
+:root[data-theme="dark"]{--bg-100:hsl(0,0%,4%);--bg-200:hsl(0,0%,7%);--g100:rgba(255,255,255,0.03);--g200:rgba(255,255,255,0.05);--g300:rgba(255,255,255,0.08);--ga100:#ffffff0f;--ga200:#ffffff17;--ga300:#ffffff21;--ga400:#ffffff24;--ga500:#ffffff3d;--g500:hsl(0,0%,27%);--g600:hsl(0,0%,53%);--g700:hsl(0,0%,56%);--g900:hsl(0,0%,63%);--g1000:hsl(0,0%,93%);--blue-900:hsl(210,100%,66%);--teal-900:hsl(173,68%,55%);--purple-900:hsl(272,60%,70%);--amber-900:hsl(39,90%,50%);--green-900:hsl(131,43%,57%);--red-900:hsl(358,100%,69%);--pink-900:hsl(336,75%,68%);}
+@media (prefers-color-scheme:dark){:root[data-theme="auto"]{--bg-100:hsl(0,0%,4%);--bg-200:hsl(0,0%,7%);--g100:rgba(255,255,255,0.03);--g200:rgba(255,255,255,0.05);--g300:rgba(255,255,255,0.08);--ga100:#ffffff0f;--ga200:#ffffff17;--ga300:#ffffff21;--ga400:#ffffff24;--ga500:#ffffff3d;--g500:hsl(0,0%,27%);--g600:hsl(0,0%,53%);--g700:hsl(0,0%,56%);--g900:hsl(0,0%,63%);--g1000:hsl(0,0%,93%);--blue-900:hsl(210,100%,66%);--teal-900:hsl(173,68%,55%);--purple-900:hsl(272,60%,70%);--amber-900:hsl(39,90%,50%);--green-900:hsl(131,43%,57%);--red-900:hsl(358,100%,69%);--pink-900:hsl(336,75%,68%);}}
+:where(html,body){background:var(--bg-100);color:var(--g1000);font-family:var(--font);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+/* Layout variants. Default is "narrow" (920px, blog-post). Set
+   <html data-layout="wide"> for dashboard-width (1280px), "full" for
+   edge-to-edge (good for charts/diagrams that need every pixel), or "bare"
+   for zero layout opinion (the artifact owns its own padding/max-width;
+   theme tokens, prism, and charts still inject). Artifacts pin their
+   preferred variant with <meta name="tapestry-layout" content="...">,
+   applied at publish time; the chrome-bar toggle in the wrapper can still
+   override via postMessage. */
+:where(body){margin:0 auto;padding:48px 40px 96px;max-width:920px}
+:root[data-layout="wide"] body{max-width:1280px;padding:40px 48px 96px}
+:root[data-layout="full"] body{max-width:none;padding:32px 48px 96px}
+:root[data-layout="bare"] body{max-width:none;padding:0;margin:0}
+:where(h1){font-size:32px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;margin:0 0 12px;color:var(--g1000)}
+:where(h2){font-size:22px;font-weight:600;letter-spacing:-0.01em;line-height:1.25;margin:40px 0 12px;color:var(--g1000)}
+:where(h3){font-size:17px;font-weight:600;line-height:1.3;margin:28px 0 10px;color:var(--g1000)}
+:where(h4){font-size:14px;font-weight:600;line-height:1.4;margin:20px 0 8px;color:var(--g1000)}
+:where(p){margin:0 0 12px;color:var(--g1000)}
+:where(a){color:var(--blue-900);text-decoration:none;border-bottom:1px solid rgba(82,168,255,0.3)}
+:where(a:hover){border-bottom-color:var(--blue-900)}
+:where(ul,ol){margin:0 0 12px;padding-left:24px;color:var(--g1000)}
+:where(li){margin:4px 0;line-height:1.55}
+:where(hr){border:none;border-top:1px solid var(--ga400);margin:32px 0}
+:where(strong,b){font-weight:600;color:var(--g1000)}
+:where(em,i){font-style:italic}
+:where(small){font-size:12px;color:var(--g900)}
+:where(code){font-family:var(--mono);font-size:12.5px;background:var(--g100);border:1px solid var(--ga400);border-radius:4px;padding:1px 6px;color:var(--g1000)}
+:where(pre code){background:transparent;border:none;padding:0}
+:where(blockquote){margin:16px 0;padding:8px 16px;border-left:2px solid var(--ga400);color:var(--g900)}
+:where(table){width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+:where(th){text-align:left;font-weight:500;color:var(--g900);font-size:12px;padding:8px 12px;border-bottom:1px solid var(--ga400);text-transform:uppercase;letter-spacing:0.04em;font-family:var(--mono)}
+:where(td){padding:10px 12px;border-bottom:1px solid var(--ga200);color:var(--g1000)}
+:where(tr:hover td){background:var(--ga200)}
+:where(img,svg,video){max-width:100%;height:auto}
+::selection{background:rgba(26,133,255,0.3)}
+</style>
+<style data-tapestry="components">
+:where(.badge){display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:9999px;font-size:11px;font-weight:500;line-height:1;font-family:var(--mono);letter-spacing:0.02em;border:1px solid var(--ga400)}
+:where(.badge-exists){background:rgba(69,165,87,0.10);color:var(--green-900);border-color:rgba(69,165,87,0.25)}
+:where(.badge-active){background:rgba(245,166,35,0.10);color:var(--amber-900);border-color:rgba(245,166,35,0.25)}
+:where(.badge-proposed){background:rgba(0,112,243,0.12);color:var(--blue-900);border-color:rgba(0,112,243,0.30)}
+:where(.badge-future){background:var(--g200);color:var(--g900)}
+:where(.badge-risk){background:rgba(229,72,77,0.10);color:var(--red-900);border-color:rgba(229,72,77,0.30)}
+:where(.badge-cut){background:var(--g200);color:var(--g600)}
+:where(.callout){background:rgba(229,72,77,0.06);border-left:2px solid var(--red-700);border-radius:3px;padding:12px 16px;margin:16px 0;font-size:14px}
+:where(.callout-amber){background:rgba(245,166,35,0.06);border-left:2px solid var(--amber-700);border-radius:3px;padding:12px 16px;margin:16px 0;font-size:14px}
+:where(.meta){display:flex;align-items:center;gap:12px;color:var(--g600);font-size:12px;margin-bottom:32px;font-family:var(--mono)}
+:where(.meta-dot){width:4px;height:4px;border-radius:50%;background:var(--g500)}
+:where(.toc){background:var(--g100);border:1px solid var(--ga400);border-radius:4px;padding:16px 20px;margin:32px 0 8px}
+:where(.toc-title){font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--g600);margin-bottom:10px;font-weight:500}
+:where(.toc ol){list-style:none;counter-reset:toc;padding-left:0}
+:where(.toc li){counter-increment:toc;padding:4px 0;font-size:13px;display:flex;align-items:baseline;gap:12px}
+:where(.toc li)::before{content:counter(toc,decimal-leading-zero);font-family:var(--mono);color:var(--g500);font-size:11px}
+:where(.toc a){color:var(--g1000);border:none;text-decoration:none}
+:where(.toc a:hover){color:var(--blue-900)}
+:where(.phase-row){display:grid;grid-template-columns:80px 120px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--ga200);align-items:baseline}
+:where(.phase-row:last-child){border-bottom:none}
+:where(.phase-num){font-family:var(--mono);font-size:11px;color:var(--g600);text-transform:uppercase;letter-spacing:0.08em}
+:where(.phase-len){font-family:var(--mono);font-size:12px;color:var(--g900)}
+:where(.phase-body){color:var(--g1000);font-size:14px;line-height:1.55}
+
+/* Canonical components (STYLE.md). Legacy .callout / .callout-amber above
+   are retained for old artifacts and deprecated for new work. */
+:where(.callout-info,.callout-neutral,.callout-success,.callout-warning,.callout-error){background:var(--bg-100);border:1px solid var(--ga400);border-left:1px solid var(--ga400);border-radius:6px;overflow:hidden;margin:16px 0;padding:0}
+:where(.callout-head){display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:14px;font-weight:600}
+:where(.callout-body){padding:12px 16px;background:var(--bg-100);color:var(--g1000);font-size:14px}
+:where(.callout-info .callout-head){background:var(--blue-700);color:hsl(0,0%,97%)}
+:where(.callout-neutral .callout-head){background:var(--g100);color:var(--g1000)}
+:where(.callout-success .callout-head){background:var(--green-700);color:hsl(0,0%,97%)}
+:where(.callout-warning .callout-head){background:var(--amber-700);color:#18181b}
+:where(.callout-error .callout-head){background:var(--red-700);color:hsl(0,0%,97%)}
+:where(.quote){background:var(--bg-100);border:1px solid var(--ga400);border-radius:6px;padding:22px 24px;margin:16px 0}
+:where(.quote-text){font-size:15px;line-height:1.6;color:var(--g1000)}
+:where(.quote-attr){font-size:13px;color:var(--g900);margin-top:8px}
+:where(.numlist){list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+:where(.numlist li){display:flex;gap:12px;margin:0;color:var(--g900);line-height:1.55}
+:where(.numlist .n){flex:none;width:22px;height:22px;border-radius:9999px;background:var(--g100);border:1px solid var(--ga400);color:var(--g900);font-size:11.5px;font-weight:500;display:flex;align-items:center;justify-content:center;margin-top:2px}
+:where(.ccard){background:var(--bg-100);border:1px solid var(--ga400);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;padding:0}
+:where(.ccard-head){display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding:11px 16px;border-bottom:1px solid var(--ga400)}
+:where(.ccard-body){padding:14px 16px;display:flex;flex-direction:column;gap:11px;flex:1}
+:where(.ccard .k){font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--g600);margin-bottom:3px}
+:where(.ccard .v){font-size:13px;color:var(--g900);line-height:1.55}
+</style>
+<style data-tapestry="print">@media print{
+*,*::before,*::after{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}
+h1,h2,h3,h4,h5,h6{page-break-after:avoid;break-after:avoid-page}
+h1+*,h2+*,h3+*,h4+*{page-break-before:avoid;break-before:avoid-page}
+p{orphans:3;widows:3}
+.pill,.wip-marker,.kpi,.exec-card,.badge,.callout,.callout-amber,.phase-row,
+.card,figure,blockquote,pre,svg,img,
+.toc,.meta,.lede{page-break-inside:avoid;break-inside:avoid}
+table{break-inside:auto}
+thead{display:table-header-group}
+tfoot{display:table-footer-group}
+tr,td,th{page-break-inside:avoid;break-inside:avoid}
+ul,ol{page-break-inside:auto}
+li{page-break-inside:avoid;break-inside:avoid}
+}</style>
+<script data-tapestry="theme-listener">
+(function(){
+  function setTheme(t){ if(!t) return; if(t==='dark'||t==='light'||t==='auto') document.documentElement.setAttribute('data-theme', t); }
+  function setLayout(l){ if(!l) return; if(l==='narrow'||l==='wide'||l==='full') document.documentElement.setAttribute('data-layout', l); else if(l==='default') document.documentElement.removeAttribute('data-layout'); }
+  // Hash-based init: parent can include #theme=light&layout=wide in URL.
+  var hash = location.hash || '';
+  var mt = hash.match(/theme=(dark|light|auto)/); if (mt) setTheme(mt[1]);
+  var ml = hash.match(/layout=(narrow|wide|full)/); if (ml) setLayout(ml[1]);
+  window.addEventListener('message', function(e){
+    if (!e || !e.data) return;
+    if (e.data.type === 'tapestry:theme') setTheme(e.data.theme);
+    if (e.data.type === 'tapestry:layout') setLayout(e.data.layout);
+  });
+})();
+</script>
+<!--tapestry-runtime:v10-->
+</head>
+<body>
+<div class="page">
+
+<div class="kicker">Framework · EPD + PMO + GTM · [PROPOSED] · Jul 6, 2026</div>
+<h1>The DOSS Value Stack</h1>
+<p class="lede">Five transactional loops on the module architecture, chained into figure-8s, materialized as living composites, consumed by the customer's named BusinessProcesses. Retention is instrumented at every level against <b>TTRTX, time-to-repeated-transactions</b>: the clock runs until transactions repeat on the business's natural rhythm. The stack is the customer's enterprise hierarchy of needs; DOSS retention deepens as they climb it.</p>
+
+<div class="meta">
+<span>Supersedes loop taxonomy in · <b>Value Loops v2 (/a/28dd2791a8394545)</b></span>
+<span>Composes with · <b>L2L instrumentation spec (l2l-app/docs, rev 3)</b></span>
+<span>Evidence · <b>13 install maps · 95 gold cards · churn + objectives corpus</b></span>
+</div>
+
+<div class="vsban vs-blue">
+<div class="vsban-head">The stack in four moves</div>
+<div class="vsban-body">
+<ul class="numlist">
+<li><span class="n">1</span><span><b>Land the TX loops.</b> Get transactions repeating on the business's natural rhythm (TTRTX). This is survival, and the churn instrument.</span></li>
+<li><span class="n">2</span><span><b>Chain loops into figure-8s.</b> Every seam reconciles on every pass; seam integrity is what Mezcla calls "button-click trust."</span></li>
+<li><span class="n">3</span><span><b>Materialize the composites.</b> Living views the customer's daily questions depend on, integrating 1p + 3p sources continuously.</span></li>
+<li><span class="n">4</span><span><b>Name the BusinessProcesses.</b> DOSS acts; exceptions surface to humans. Autonomous actions carry the highest switching cost.</span></li>
+</ul>
+</div>
+</div>
+
+<h2>1 · The architecture and its five TX loops <span class="lvl lvl1">L1 · survival</span></h2>
+
+<p>Every loop lives on exactly one surface of the module architecture, and none of them runs alone: the three operating loops weave through shared seams like a figure-8, while Op/Fin and UMD run tangent to all three. Every operational transaction posts money at a top seam and reads identity at a bottom one.</p>
+
+<div class="fig">
+<svg viewBox="0 0 840 448" width="100%" role="img" aria-label="DOSS architecture as one connected weave: P2P, IMS, OMS triple-8 with Op/Fin tangent above and UMD tangent below">
+  <defs>
+    <marker id="ma-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(212,100%,54%)"/></marker>
+    <marker id="ma-teal" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(173,80%,36%)"/></marker>
+    <marker id="ma-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(272,51%,54%)"/></marker>
+    <marker id="ma-amber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(39,100%,50%)"/></marker>
+    <marker id="ma-pink" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(336,80%,58%)"/></marker>
+  </defs>
+
+  <!-- ===== Op/Fin stadium loop (top), tangent to the three module lobes ===== -->
+  <path class="flow" d="M 160 40 L 680 40" fill="none" stroke="hsl(39,100%,50%)" stroke-width="2" marker-end="url(#ma-amber)"/>
+  <path class="flow" d="M 680 40 A 64.25 64.25 0 0 1 680 168.5" fill="none" stroke="hsl(39,100%,50%)" stroke-width="2"/>
+  <path class="flow" d="M 680 168.5 L 160 168.5" fill="none" stroke="hsl(39,100%,50%)" stroke-width="2" marker-end="url(#ma-amber)"/>
+  <path class="flow" d="M 160 168.5 A 64.25 64.25 0 0 1 160 40" fill="none" stroke="hsl(39,100%,50%)" stroke-width="2"/>
+  <text x="420" y="88" font-size="12.5" font-weight="600" fill="hsl(30,80%,32%)" text-anchor="middle">↻ Op/Fin loop</text>
+  <text x="420" y="106" font-size="10.5" fill="#4d4d4d" text-anchor="middle">transactions → journal entries → GL post → period close</text>
+  <text x="420" y="152" font-size="10" fill="#6b6b6b" text-anchor="middle">money posts up at every tangent seam</text>
+  <circle r="3.2" fill="#171717" opacity="0.8"><animateMotion dur="11s" repeatCount="indefinite" path="M 160 40 L 680 40 A 64.25 64.25 0 0 1 680 168.5 L 160 168.5 A 64.25 64.25 0 0 1 160 40"/></circle>
+
+  <!-- ===== module triple-8: P2P / IMS / OMS woven like a figure-8 ===== -->
+  <path class="flow" d="M 90 230 C 90 148, 250 148, 310 230" fill="none" stroke="hsl(212,100%,54%)" stroke-width="2" marker-end="url(#ma-blue)"/>
+  <path class="flow" d="M 310 230 C 250 312, 90 312, 90 230" fill="none" stroke="hsl(212,100%,54%)" stroke-width="2" marker-end="url(#ma-blue)"/>
+  <path class="flow" d="M 310 230 C 350 312, 490 312, 530 230" fill="none" stroke="hsl(173,80%,36%)" stroke-width="2" marker-end="url(#ma-teal)"/>
+  <path class="flow" d="M 530 230 C 490 148, 350 148, 310 230" fill="none" stroke="hsl(173,80%,36%)" stroke-width="2" marker-end="url(#ma-teal)"/>
+  <path class="flow" d="M 530 230 C 590 148, 750 148, 750 230" fill="none" stroke="hsl(272,51%,54%)" stroke-width="2" marker-end="url(#ma-purple)"/>
+  <path class="flow" d="M 750 230 C 750 312, 590 312, 530 230" fill="none" stroke="hsl(272,51%,54%)" stroke-width="2" marker-end="url(#ma-purple)"/>
+
+  <!-- module lobe names + chains -->
+  <text x="200" y="216" font-size="12.5" font-weight="600" fill="hsl(211,100%,42%)" text-anchor="middle">P2P loop</text>
+  <text x="200" y="234" font-size="9.5" fill="#4d4d4d" text-anchor="middle">PO → freight</text>
+  <text x="200" y="249" font-size="9.5" fill="#4d4d4d" text-anchor="middle">receive → invoice</text>
+  <text x="420" y="216" font-size="12.5" font-weight="600" fill="hsl(173,80%,26%)" text-anchor="middle">IMS loop</text>
+  <text x="420" y="234" font-size="9.5" fill="#4d4d4d" text-anchor="middle">receipt → move</text>
+  <text x="420" y="249" font-size="9.5" fill="#4d4d4d" text-anchor="middle">count → reconcile</text>
+  <text x="640" y="216" font-size="12.5" font-weight="600" fill="hsl(272,45%,40%)" text-anchor="middle">OMS loop</text>
+  <text x="640" y="234" font-size="9.5" fill="#4d4d4d" text-anchor="middle">order → fulfill</text>
+  <text x="640" y="249" font-size="9.5" fill="#4d4d4d" text-anchor="middle">invoice → cash</text>
+
+  <!-- module-to-module crossing seams -->
+  <circle cx="310" cy="230" r="4.5" class="seam" fill="#171717"/>
+  <circle cx="530" cy="230" r="4.5" class="seam" fill="#171717"/>
+  <text x="310" y="204" font-size="10.5" font-weight="600" fill="#171717" text-anchor="middle">seam: receipt</text>
+  <text x="310" y="266" font-size="9.5" fill="#4d4d4d" text-anchor="middle">goods become inventory</text>
+  <text x="530" y="204" font-size="10.5" font-weight="600" fill="#171717" text-anchor="middle">seam: allocation</text>
+  <text x="530" y="266" font-size="9.5" fill="#4d4d4d" text-anchor="middle">inventory commits to orders</text>
+
+  <!-- tangent seams to Op/Fin (money posts up) -->
+  <circle cx="177.5" cy="168.5" r="3.5" class="seam" fill="hsl(30,80%,32%)"/>
+  <circle cx="420" cy="168.5" r="3.5" class="seam" fill="hsl(30,80%,32%)"/>
+  <circle cx="662.5" cy="168.5" r="3.5" class="seam" fill="hsl(30,80%,32%)"/>
+  <text x="177.5" y="185" font-size="9.5" fill="#6b6b6b" text-anchor="middle">bills · JEs</text>
+  <text x="420" y="185" font-size="9.5" fill="#6b6b6b" text-anchor="middle">valuation JEs</text>
+  <text x="662.5" y="185" font-size="9.5" fill="#6b6b6b" text-anchor="middle">invoices · AR</text>
+
+  <!-- tangent seams to UMD (identity reads down) -->
+  <circle cx="177.5" cy="291.5" r="3.5" class="seam" fill="hsl(336,70%,40%)"/>
+  <circle cx="420" cy="291.5" r="3.5" class="seam" fill="hsl(336,70%,40%)"/>
+  <circle cx="662.5" cy="291.5" r="3.5" class="seam" fill="hsl(336,70%,40%)"/>
+  <text x="177.5" y="282" font-size="9.5" fill="#6b6b6b" text-anchor="middle">vendors · terms</text>
+  <text x="420" y="282" font-size="9.5" fill="#6b6b6b" text-anchor="middle">items · lots · locations</text>
+  <text x="662.5" y="282" font-size="9.5" fill="#6b6b6b" text-anchor="middle">customers · price books</text>
+
+  <!-- grand tracer: one record weaving the module triple-8 -->
+  <circle r="4" fill="#171717" opacity="0.85">
+    <animateMotion dur="16s" repeatCount="indefinite" path="M 90 230 C 90 148 250 148 310 230 C 350 312 490 312 530 230 C 590 148 750 148 750 230 C 750 312 590 312 530 230 C 490 148 350 148 310 230 C 250 312 90 312 90 230"/>
+  </circle>
+
+  <!-- ===== UMD stadium loop (bottom), tangent to the three module lobes ===== -->
+  <path class="flow" d="M 160 291.5 L 680 291.5" fill="none" stroke="hsl(336,80%,58%)" stroke-width="2" marker-end="url(#ma-pink)"/>
+  <path class="flow" d="M 680 291.5 A 64.25 64.25 0 0 1 680 420" fill="none" stroke="hsl(336,80%,58%)" stroke-width="2"/>
+  <path class="flow" d="M 680 420 L 160 420" fill="none" stroke="hsl(336,80%,58%)" stroke-width="2" marker-end="url(#ma-pink)"/>
+  <path class="flow" d="M 160 420 A 64.25 64.25 0 0 1 160 291.5" fill="none" stroke="hsl(336,80%,58%)" stroke-width="2"/>
+  <text x="420" y="310" font-size="10" fill="#6b6b6b" text-anchor="middle">identity reads down at every tangent seam</text>
+  <text x="420" y="352" font-size="12.5" font-weight="600" fill="hsl(336,70%,40%)" text-anchor="middle">↻ UMD loop</text>
+  <text x="420" y="370" font-size="10.5" fill="#4d4d4d" text-anchor="middle">change → approve → propagate → verify</text>
+  <text x="420" y="386" font-size="9.5" fill="#6b6b6b" text-anchor="middle">items · BOMs · vendors · customers · price books</text>
+  <circle r="3.2" fill="#171717" opacity="0.8"><animateMotion dur="13s" repeatCount="indefinite" path="M 160 291.5 L 680 291.5 A 64.25 64.25 0 0 1 680 420 L 160 420 A 64.25 64.25 0 0 1 160 291.5"/></circle>
+</svg>
+<div class="figcap">Fig. A · The architecture as one connected weave. P2P, IMS, and OMS run as a triple-8, crossing at the receipt and allocation seams (the dark tracer is one record making the full pass); Op/Fin and UMD run as wide loops tangent to all three lobes: every module transaction posts money at a top tangent seam and reads identity at a bottom one.</div>
+</div>
+
+<div class="cardlist">
+
+<div class="card">
+<div class="card-head"><span class="dot d-p2p"></span><span class="card-name n-p2p">P2P loop</span><span class="chip">cadence: weekly</span><span class="chip">archetype A "Drowning Operator" leads here</span></div>
+<div class="card-chain">PO<span class="arr">→</span>freight<span class="arr">→</span>receiving<span class="arr">→</span>vendor invoice (3-way)</div>
+<div class="kv">
+<div><div class="k">Day-1 rail</div><div class="v">PO form → PDF → vendor email; vendor-bill PDF parse on the return leg</div></div>
+<div><div class="k">External boundary</div><div class="v">Vendor acknowledged the PO; bill matched against PO + receipt</div></div>
+<div><div class="k">Fleet proof</div><div class="v">Carrom supplier email loop: ~140 runs, daily, zero failures, the most reliable automation on the account. Eight Sleep POs live in Phase 1.</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="dot d-ims"></span><span class="card-name n-ims">IMS loop</span><span class="chip">cadence: daily</span><span class="chip">archetype D "We've Outgrown This" leads here</span></div>
+<div class="card-chain">receipt<span class="arr">→</span>movement / transfer<span class="arr">→</span>count / adjustment<span class="arr">→</span>reconciled position</div>
+<div class="kv">
+<div><div class="k">Day-1 rail</div><div class="v">3PL daily CSV/portal-export ingest; cycle-count form</div></div>
+<div><div class="k">External boundary</div><div class="v">3PL's own count matches DOSS on-hand within tolerance</div></div>
+<div><div class="k">Fleet proof</div><div class="v">Magic Mind Extensiv nightly sync 14/14 clean; Spread the Love daily sync 30/30.</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="dot d-oms"></span><span class="card-name n-oms">OMS loop</span><span class="chip">cadence: daily/weekly</span><span class="chip">archetype B "Retail Is Coming" leads here</span></div>
+<div class="card-chain">order intake<span class="arr">→</span>fulfillment<span class="arr">→</span>invoice<span class="arr">→</span>cash</div>
+<div class="kv">
+<div><div class="k">Day-1 rail</div><div class="v">Native SO form/portal; retailer PO-PDF parse; Stripe-linked invoice PDF</div></div>
+<div><div class="k">External boundary</div><div class="v">Partner accepted the documents (855/856/810); payment webhook fired</div></div>
+<div><div class="k">Fleet proof</div><div class="v">Snackwise: 345K executions on zero integrations, renewed on it. Mezcla EDI order-to-cash 850→810 live weekly.</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="dot d-fin"></span><span class="card-name n-fin">Op/Fin loop</span><span class="chip">cadence: daily JEs · monthly close</span><span class="chip">archetypes C + F lead here</span></div>
+<div class="card-chain">transactions<span class="arr">→</span>journal entries<span class="arr">→</span>GL post<span class="arr">→</span>period close</div>
+<div class="kv">
+<div><div class="k">Day-1 rail</div><div class="v">Close checklist + JE batch (Sauz's Slack-gated close is the working prototype)</div></div>
+<div><div class="k">External boundary</div><div class="v">The GL accepted the entry; books closed without Excel backfill</div></div>
+<div><div class="k">Fleet proof</div><div class="v">Magic Mind JE push 62/14d clean; Sauz Feb/Mar/Apr closes executed through DOSS → QBO.</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="dot d-umd"></span><span class="card-name n-umd">UMD loop</span><span class="chip">cadence: event-driven (resets, new items, price changes)</span></div>
+<div class="card-chain">item / BOM / vendor / price change<span class="arr">→</span>approval<span class="arr">→</span>propagation to every channel alias</div>
+<div class="kv">
+<div><div class="k">Day-1 rail</div><div class="v">Single-record form + approval; Landing ingest seeds the initial graph</div></div>
+<div><div class="k">External boundary</div><div class="v">The change is live on every alias: Shopify handle, ASIN, EDI item, vendor SKU</div></div>
+<div><div class="k">Fleet proof</div><div class="v">Eight Sleep single-SKU approval path works (bulk CSV is the broken half); Ark's 30-40 hand-built price sheets/week are the demand signal.</div></div>
+</div>
+</div>
+
+</div>
+
+<p><b>Taxonomy reconciliation vs Value Loops v2:</b> Replenishment → P2P loop · Truth → IMS loop · Retail → OMS loop · Close → Op/Fin loop. Traceability is reclassified as a figure-8 (§2). D5 revised: UMD keeps its role as the activation gate inside every loop AND gets its own change-transaction loop; master-data changes are temporally flowing transactions too. GTM mapping unchanged: archetype A leads with P2P, B with OMS, C/F with Op/Fin, D with IMS.</p>
+
+<div class="quote">
+<div class="quote-text">"I only see 4 SOs in the system which were manually created. Shouldn't we be seeing all orders flowing into DOSS?"</div>
+<div class="quote-attr">MHH, Jan 13 2026; the account had four manually created SOs at the time</div>
+</div>
+
+<h3>The metric: TTRTX [PROPOSED]</h3>
+<div class="formula">
+<b>TTRTX (time-to-repeated-transactions):</b> kickoff → the loop's transaction chain completes in <b>N consecutive cadence periods</b> (default N=3) at the external boundary, zero work-leaving-DOSS events.
+<div style="margin-top:10px;font-size:13px;color:var(--gray-900)">TTX (first transaction, any rail) remains the week-1 clock; TTRTX subsumes TTA as the primary clock. The LIR reads repetition: P% of live ICP customers hold every declared loop's cadence each period.</div>
+</div>
+
+<h2>2 · Figure-8s: loops of loops <span class="lvl lvl2">L2 · controls + visibility</span></h2>
+
+<p>A figure-8 chains TX loops through a shared crossing. The lobes are the loops, already cycling on their own; the crossing is the seam where a record must hand off cleanly between them every cycle. That crossing is where the fleet breaks today, which is why the figure-8 is the control: the weave forces the seam to reconcile on every pass.</p>
+
+<div class="quote">
+<div class="quote-text">"Everything business-critical works, but I want button-click trust. Do something and forget it, not monitor three other systems."</div>
+<div class="quote-attr">Justin, Mezcla, Jan 2026</div>
+</div>
+
+<div class="fig">
+<svg viewBox="0 0 840 262" width="100%" role="img" aria-label="Cost Components figure-8: P2P, IMS, and Op/Fin loops woven through two seams">
+  <defs>
+    <marker id="mb-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(212,100%,54%)"/></marker>
+    <marker id="mb-teal" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(173,80%,36%)"/></marker>
+    <marker id="mb-amber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(39,100%,50%)"/></marker>
+  </defs>
+  <text x="420" y="22" font-size="13" font-weight="600" fill="#171717" text-anchor="middle">Cost Components: landed cost · COGS · inventory valuation</text>
+
+  <!-- lobe 1: P2P (flow: top rightward, bottom leftward) -->
+  <path d="M 90 140 C 90 58, 250 58, 310 140" class="flow" fill="none" stroke="hsl(212,100%,54%)" stroke-width="2" marker-end="url(#mb-blue)"/>
+  <path d="M 310 140 C 250 222, 90 222, 90 140" class="flow" fill="none" stroke="hsl(212,100%,54%)" stroke-width="2" marker-end="url(#mb-blue)"/>
+  <!-- lobe 2: IMS -->
+  <path d="M 310 140 C 350 222, 490 222, 530 140" class="flow" fill="none" stroke="hsl(173,80%,36%)" stroke-width="2" marker-end="url(#mb-teal)"/>
+  <path d="M 530 140 C 490 58, 350 58, 310 140" class="flow" fill="none" stroke="hsl(173,80%,36%)" stroke-width="2" marker-end="url(#mb-teal)"/>
+  <!-- lobe 3: Op/Fin -->
+  <path d="M 530 140 C 590 58, 750 58, 750 140" class="flow" fill="none" stroke="hsl(39,100%,50%)" stroke-width="2" marker-end="url(#mb-amber)"/>
+  <path d="M 750 140 C 750 222, 590 222, 530 140" class="flow" fill="none" stroke="hsl(39,100%,50%)" stroke-width="2" marker-end="url(#mb-amber)"/>
+
+  <!-- seam crossings -->
+  <circle cx="310" cy="140" r="4.5" class="seam" fill="#171717"/>
+  <circle cx="530" cy="140" r="4.5" class="seam" fill="#171717"/>
+  <text x="310" y="126" font-size="11" font-weight="600" fill="#171717" text-anchor="middle">seam 1: receipt</text>
+  <text x="310" y="160" font-size="10.5" fill="#4d4d4d" text-anchor="middle">cost lands on the lot</text>
+  <text x="530" y="126" font-size="11" font-weight="600" fill="#171717" text-anchor="middle">seam 2: consumption</text>
+  <text x="530" y="160" font-size="10.5" fill="#4d4d4d" text-anchor="middle">COGS leaves the ledger</text>
+
+  <!-- lobe labels + stations -->
+  <text x="195" y="94" font-size="12.5" font-weight="600" fill="hsl(211,100%,42%)" text-anchor="middle">P2P loop</text>
+  <text x="195" y="110" font-size="10.5" fill="#4d4d4d" text-anchor="middle">PO cost + freight in</text>
+  <text x="195" y="216" font-size="10.5" fill="#4d4d4d" text-anchor="middle">variance re-prices next PO</text>
+  <text x="420" y="94" font-size="12.5" font-weight="600" fill="hsl(173,80%,26%)" text-anchor="middle">IMS loop</text>
+  <text x="420" y="110" font-size="10.5" fill="#4d4d4d" text-anchor="middle">lot cost · valuation</text>
+  <text x="420" y="216" font-size="10.5" fill="#4d4d4d" text-anchor="middle">counts true the value up</text>
+  <text x="640" y="94" font-size="12.5" font-weight="600" fill="hsl(30,80%,32%)" text-anchor="middle">Op/Fin loop</text>
+  <text x="640" y="110" font-size="10.5" fill="#4d4d4d" text-anchor="middle">COGS JE · landed cost post</text>
+  <text x="640" y="216" font-size="10.5" fill="#4d4d4d" text-anchor="middle">close verifies the period</text>
+
+  <!-- tracer through the full weave -->
+  <circle r="4" fill="#171717" opacity="0.85">
+    <animateMotion dur="14s" repeatCount="indefinite" path="M 90 140 C 90 58 250 58 310 140 C 350 222 490 222 530 140 C 590 58 750 58 750 140 C 750 222 590 222 530 140 C 490 58 350 58 310 140 C 250 222 90 222 90 140"/>
+  </circle>
+</svg>
+<div class="figcap">Fig. B1 · The exemplar figure-8, drawn as it runs. Three loops, two seams; the tracer is a cost record making the full weave: PO → receipt seam → lot valuation → consumption seam → COGS post, and back along the reconciling underside. Eight Sleep's 70% receiving no-match is seam 1 failing; Verve's 44% COGS-JE failure is seam 2.</div>
+</div>
+
+<div class="fig">
+<svg viewBox="0 0 840 262" width="100%" role="img" aria-label="Lot Tracking figure-8: P2P, IMS, and OMS loops woven through two seams">
+  <defs>
+    <marker id="mc-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(212,100%,54%)"/></marker>
+    <marker id="mc-teal" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(173,80%,36%)"/></marker>
+    <marker id="mc-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(272,51%,54%)"/></marker>
+  </defs>
+  <text x="420" y="22" font-size="13" font-weight="600" fill="#171717" text-anchor="middle">Lot Tracking: grower/co-man to retailer DC, recall-ready</text>
+
+  <path d="M 90 140 C 90 58, 250 58, 310 140" class="flow" fill="none" stroke="hsl(212,100%,54%)" stroke-width="2" marker-end="url(#mc-blue)"/>
+  <path d="M 310 140 C 250 222, 90 222, 90 140" class="flow" fill="none" stroke="hsl(212,100%,54%)" stroke-width="2" marker-end="url(#mc-blue)"/>
+  <path d="M 310 140 C 350 222, 490 222, 530 140" class="flow" fill="none" stroke="hsl(173,80%,36%)" stroke-width="2" marker-end="url(#mc-teal)"/>
+  <path d="M 530 140 C 490 58, 350 58, 310 140" class="flow" fill="none" stroke="hsl(173,80%,36%)" stroke-width="2" marker-end="url(#mc-teal)"/>
+  <path d="M 530 140 C 590 58, 750 58, 750 140" class="flow" fill="none" stroke="hsl(272,51%,54%)" stroke-width="2" marker-end="url(#mc-purple)"/>
+  <path d="M 750 140 C 750 222, 590 222, 530 140" class="flow" fill="none" stroke="hsl(272,51%,54%)" stroke-width="2" marker-end="url(#mc-purple)"/>
+
+  <circle cx="310" cy="140" r="4.5" class="seam" fill="#171717"/>
+  <circle cx="530" cy="140" r="4.5" class="seam" fill="#171717"/>
+  <text x="310" y="126" font-size="11" font-weight="600" fill="#171717" text-anchor="middle">seam 1: lot created</text>
+  <text x="310" y="160" font-size="10.5" fill="#4d4d4d" text-anchor="middle">receipt without a lot = blind spot</text>
+  <text x="530" y="126" font-size="11" font-weight="600" fill="#171717" text-anchor="middle">seam 2: lot allocated</text>
+  <text x="530" y="160" font-size="10.5" fill="#4d4d4d" text-anchor="middle">shipment picks the lot it claims</text>
+
+  <text x="195" y="94" font-size="12.5" font-weight="600" fill="hsl(211,100%,42%)" text-anchor="middle">P2P loop</text>
+  <text x="195" y="110" font-size="10.5" fill="#4d4d4d" text-anchor="middle">receiving w/ lot + COA</text>
+  <text x="195" y="216" font-size="10.5" fill="#4d4d4d" text-anchor="middle">supplier lot lineage back</text>
+  <text x="420" y="94" font-size="12.5" font-weight="600" fill="hsl(173,80%,26%)" text-anchor="middle">IMS loop</text>
+  <text x="420" y="110" font-size="10.5" fill="#4d4d4d" text-anchor="middle">lot ledger · expiry · holds</text>
+  <text x="420" y="216" font-size="10.5" fill="#4d4d4d" text-anchor="middle">counts verify lot balances</text>
+  <text x="640" y="94" font-size="12.5" font-weight="600" fill="hsl(272,45%,40%)" text-anchor="middle">OMS loop</text>
+  <text x="640" y="110" font-size="10.5" fill="#4d4d4d" text-anchor="middle">lot-coded ASN out (FSMA 204)</text>
+  <text x="640" y="216" font-size="10.5" fill="#4d4d4d" text-anchor="middle">retailer acceptance closes it</text>
+
+  <circle r="4" fill="#171717" opacity="0.85">
+    <animateMotion dur="14s" repeatCount="indefinite" path="M 90 140 C 90 58 250 58 310 140 C 350 222 490 222 530 140 C 590 58 750 58 750 140 C 750 222 590 222 530 140 C 490 58 350 58 310 140 C 250 222 90 222 90 140"/>
+  </circle>
+</svg>
+<div class="figcap">Fig. B2 · Lot Tracking (was "Traceability loop" in v2; reclassified as a figure-8). The tracer is a lot: created at receiving, held in the ledger, claimed by the outbound ASN. Sauz's receipts-without-lots (RT-415, 2,851 cases short) is seam 1; Mezcla's Costco FSMA deadline rides seam 2.</div>
+</div>
+
+<div class="figrow">
+<div>
+<svg viewBox="0 0 560 234" width="100%" role="img" aria-label="Order Routing figure-8: OMS and IMS">
+  <defs>
+    <marker id="md-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(272,51%,54%)"/></marker>
+    <marker id="md-teal" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(173,80%,36%)"/></marker>
+  </defs>
+  <text x="280" y="20" font-size="12.5" font-weight="600" fill="#171717" text-anchor="middle">Order Routing</text>
+  <path d="M 40 120 C 40 50, 220 50, 280 120" class="flow" fill="none" stroke="hsl(272,51%,54%)" stroke-width="2" marker-end="url(#md-purple)"/>
+  <path d="M 280 120 C 220 190, 40 190, 40 120" class="flow" fill="none" stroke="hsl(272,51%,54%)" stroke-width="2" marker-end="url(#md-purple)"/>
+  <path d="M 280 120 C 340 190, 520 190, 520 120" class="flow" fill="none" stroke="hsl(173,80%,36%)" stroke-width="2" marker-end="url(#md-teal)"/>
+  <path d="M 520 120 C 520 50, 340 50, 280 120" class="flow" fill="none" stroke="hsl(173,80%,36%)" stroke-width="2" marker-end="url(#md-teal)"/>
+  <circle cx="280" cy="120" r="4" class="seam" fill="#171717"/>
+  <text x="160" y="112" font-size="11.5" font-weight="600" fill="hsl(272,45%,40%)" text-anchor="middle">OMS</text>
+  <text x="160" y="126" font-size="10" fill="#4d4d4d" text-anchor="middle">orders, all channels</text>
+  <text x="400" y="112" font-size="11.5" font-weight="600" fill="hsl(173,80%,26%)" text-anchor="middle">IMS</text>
+  <text x="400" y="126" font-size="10" fill="#4d4d4d" text-anchor="middle">positions by location</text>
+  <text x="280" y="216" font-size="10.5" fill="#4d4d4d" text-anchor="middle">seam: route decision · right order, right location, no oversell</text>
+  <circle r="3.5" fill="#171717" opacity="0.85">
+    <animateMotion dur="10s" repeatCount="indefinite" path="M 40 120 C 40 50 220 50 280 120 C 340 190 520 190 520 120 C 520 50 340 50 280 120 C 220 190 40 190 40 120"/>
+  </circle>
+</svg>
+<div class="figcap">Fig. B3 · Pavoi's silent routing failures (~1,000 missed orders) and Echelon's bundle churn both live at this seam.</div>
+</div>
+<div>
+<svg viewBox="0 0 560 234" width="100%" role="img" aria-label="Automated Replenishment figure-8: IMS and P2P">
+  <defs>
+    <marker id="me-teal" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(173,80%,36%)"/></marker>
+    <marker id="me-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(212,100%,54%)"/></marker>
+  </defs>
+  <text x="280" y="20" font-size="12.5" font-weight="600" fill="#171717" text-anchor="middle">Automated Replenishment</text>
+  <path d="M 40 120 C 40 50, 220 50, 280 120" class="flow" fill="none" stroke="hsl(173,80%,36%)" stroke-width="2" marker-end="url(#me-teal)"/>
+  <path d="M 280 120 C 220 190, 40 190, 40 120" class="flow" fill="none" stroke="hsl(173,80%,36%)" stroke-width="2" marker-end="url(#me-teal)"/>
+  <path d="M 280 120 C 340 190, 520 190, 520 120" class="flow" fill="none" stroke="hsl(212,100%,54%)" stroke-width="2" marker-end="url(#me-blue)"/>
+  <path d="M 520 120 C 520 50, 340 50, 280 120" class="flow" fill="none" stroke="hsl(212,100%,54%)" stroke-width="2" marker-end="url(#me-blue)"/>
+  <circle cx="280" cy="120" r="4" class="seam" fill="#171717"/>
+  <text x="160" y="112" font-size="11.5" font-weight="600" fill="hsl(173,80%,26%)" text-anchor="middle">IMS</text>
+  <text x="160" y="126" font-size="10" fill="#4d4d4d" text-anchor="middle">positions + velocity</text>
+  <text x="400" y="112" font-size="11.5" font-weight="600" fill="hsl(211,100%,42%)" text-anchor="middle">P2P</text>
+  <text x="400" y="126" font-size="10" fill="#4d4d4d" text-anchor="middle">PO recs → approved POs</text>
+  <text x="280" y="216" font-size="10.5" fill="#4d4d4d" text-anchor="middle">seam: reorder trigger · human-modifiable forecast, no missed re-orders</text>
+  <circle r="3.5" fill="#171717" opacity="0.85">
+    <animateMotion dur="11s" repeatCount="indefinite" path="M 40 120 C 40 50 220 50 280 120 C 340 190 520 190 520 120 C 520 50 340 50 280 120 C 220 190 40 190 40 120"/>
+  </circle>
+</svg>
+<div class="figcap">Fig. B4 · Kahawa's false replenishment triggers are this seam misfiring; 13 customers want the loop with a human-modifiable forecast.</div>
+</div>
+<div>
+<svg viewBox="0 0 560 234" width="100%" role="img" aria-label="Rev Rec figure-8: OMS and Op/Fin">
+  <defs>
+    <marker id="mf-purple" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(272,51%,54%)"/></marker>
+    <marker id="mf-amber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(39,100%,50%)"/></marker>
+  </defs>
+  <text x="280" y="20" font-size="12.5" font-weight="600" fill="#171717" text-anchor="middle">Rev Rec</text>
+  <path d="M 40 120 C 40 50, 220 50, 280 120" class="flow" fill="none" stroke="hsl(272,51%,54%)" stroke-width="2" marker-end="url(#mf-purple)"/>
+  <path d="M 280 120 C 220 190, 40 190, 40 120" class="flow" fill="none" stroke="hsl(272,51%,54%)" stroke-width="2" marker-end="url(#mf-purple)"/>
+  <path d="M 280 120 C 340 190, 520 190, 520 120" class="flow" fill="none" stroke="hsl(39,100%,50%)" stroke-width="2" marker-end="url(#mf-amber)"/>
+  <path d="M 520 120 C 520 50, 340 50, 280 120" class="flow" fill="none" stroke="hsl(39,100%,50%)" stroke-width="2" marker-end="url(#mf-amber)"/>
+  <circle cx="280" cy="120" r="4" class="seam" fill="#171717"/>
+  <text x="160" y="112" font-size="11.5" font-weight="600" fill="hsl(272,45%,40%)" text-anchor="middle">OMS</text>
+  <text x="160" y="126" font-size="10" fill="#4d4d4d" text-anchor="middle">fulfillment events</text>
+  <text x="400" y="112" font-size="11.5" font-weight="600" fill="hsl(30,80%,32%)" text-anchor="middle">Op/Fin</text>
+  <text x="400" y="126" font-size="10" fill="#4d4d4d" text-anchor="middle">revenue timing · deferrals</text>
+  <text x="280" y="216" font-size="10.5" fill="#4d4d4d" text-anchor="middle">seam: recognition event · revenue on fulfillment, not invoice date</text>
+  <circle r="3.5" fill="#171717" opacity="0.85">
+    <animateMotion dur="12s" repeatCount="indefinite" path="M 40 120 C 40 50 220 50 280 120 C 340 190 520 190 520 120 C 520 50 340 50 280 120 C 220 190 40 190 40 120"/>
+  </circle>
+</svg>
+<div class="figcap">Fig. B5 · Pavoi's Rev Rec (missed 6/1, core now complete) and Sauz's COGS-on-ship-date decision both define this seam.</div>
+</div>
+</div>
+
+<div class="cardlist">
+
+<div class="card">
+<div class="card-head"><span class="card-name">Cost Components</span><span class="chip">landed cost · COGS · inventory valuation</span><span class="chip">Fig. B1</span></div>
+<div class="card-chain"><span class="dot d-p2p"></span>P2P<span class="arr">→</span><span class="dot d-ims"></span>IMS<span class="arr">→</span><span class="dot d-fin"></span>Op/Fin<span class="arr">→</span>variance flows back</div>
+<div class="card-lede">The control: fully-burdened unit cost, trustable COGS, defensible inventory valuation.</div>
+<div class="kv">
+<div><div class="k">Seam 1 · receipt</div><div class="v">Cost lands on the lot. Eight Sleep's 70% receiving no-match is this seam failing, and it blocks the entire WAC build.</div></div>
+<div><div class="k">Seam 2 · consumption</div><div class="v">COGS leaves the ledger. Verve's COGS JE fails 44% of the time while invoices run 23/23 clean in the same window.</div></div>
+<div><div class="k">Demand</div><div class="v">12 customers want landed cost; the WAC engine is Eight Sleep's $240K Phase 2.</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="card-name">Lot Tracking</span><span class="chip">was "Traceability loop" in v2</span><span class="chip">Fig. B2</span></div>
+<div class="card-chain"><span class="dot d-p2p"></span>P2P<span class="arr">→</span><span class="dot d-ims"></span>IMS<span class="arr">→</span><span class="dot d-oms"></span>OMS</div>
+<div class="card-lede">The control: recall-ready lot lineage from grower/co-man to retailer DC; FSMA 204 lot codes on outbound ASNs.</div>
+<div class="kv">
+<div><div class="k">Seam 1 · lot created</div><div class="v">A receipt without a lot is a permanent blind spot. Sauz RT-415: 2,851 cases short because the lot never existed.</div></div>
+<div><div class="k">Seam 2 · lot allocated</div><div class="v">The shipment must pick the lot it claims. Mezcla's Costco FSMA deadline (Summer 2026) rides this seam, currently unowned.</div></div>
+<div><div class="k">Demand</div><div class="v">14 customers named lot/traceability; medical-device and food compliance both land here.</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="card-name">Order Routing</span><span class="chip">Fig. B3</span></div>
+<div class="card-chain"><span class="dot d-oms"></span>OMS<span class="arr">↔</span><span class="dot d-ims"></span>IMS</div>
+<div class="card-lede">The control: right order to the right location, no oversell across channels.</div>
+<div class="kv">
+<div><div class="k">The seam · route decision</div><div class="v">Every order consults live positions before committing; failures are silent.</div></div>
+<div><div class="k">Where it breaks today</div><div class="v">Pavoi: ~1,000 missed orders (Apr 20) from silent routing failures on missing channel IDs. Echelon churned on bundle routing through ShipBob.</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="card-name">Automated Replenishment</span><span class="chip">Fig. B4</span></div>
+<div class="card-chain"><span class="dot d-ims"></span>IMS<span class="arr">→</span><span class="dot d-p2p"></span>P2P</div>
+<div class="card-lede">The control: positions + velocity trigger PO recommendations; no missed re-orders, no panic buys.</div>
+<div class="kv">
+<div><div class="k">The seam · reorder trigger</div><div class="v">A human-modifiable forecast decides when inventory state becomes a purchase. Trust requires the trigger to never fire on bad data.</div></div>
+<div><div class="k">Where it breaks today</div><div class="v">Kahawa's Base Product ID bug fired false replenishment triggers with real financial consequences. 13 customers are asking for planning they can override by hand.</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="card-name">Rev Rec</span><span class="chip">Fig. B5</span></div>
+<div class="card-chain"><span class="dot d-oms"></span>OMS<span class="arr">→</span><span class="dot d-fin"></span>Op/Fin</div>
+<div class="card-lede">The control: revenue recognized on fulfillment events, not invoice dates.</div>
+<div class="kv">
+<div><div class="k">The seam · recognition event</div><div class="v">Fulfillment tells finance when revenue is real; deferrals handled without a spreadsheet.</div></div>
+<div><div class="k">Where it breaks today</div><div class="v">Pavoi's Rev Rec core completed only after a missed 6/1 deadline. Sauz's COGS-on-ship-date decision defines the same seam from the cost side.</div></div>
+</div>
+</div>
+
+</div>
+
+<h2>3 · Living composites <span class="lvl lvl3">L3 · insights</span></h2>
+
+<p>A composite is a living view materialized from loops and figure-8s: many:many relationships packaged into one answer, kept alive by integrating 1p and 3p sources continuously. A composite is only as alive as the loops feeding it, which is why L3 cannot be sold without L1 holding cadence.</p>
+
+<div class="quote">
+<div class="quote-text">"From a CFO standpoint, by the time I've gotten the data, it's 24 to 48 hours old and I'm stuck making assumptions. It's not valid inventory. I don't even feel comfortable reporting on it."</div>
+<div class="quote-attr">Ryan Katz, CFO (prospect), Feb 2026</div>
+</div>
+
+<div class="cardgrid">
+
+<div class="ccard h-l3">
+<div class="ccard-head"><span class="ccard-name">Inventory Positions across locations</span><span class="chip">money + quantity</span><span class="chip">consumer: ops + finance</span></div>
+<div class="ccard-body">
+<div><div class="k">Fed by</div><div class="v">IMS loop · Order Routing · Cost Components</div></div>
+<div><div class="k">Sources kept living</div><div class="v">DOSS ledger + every 3PL/WMS + FBA/FBT + in-transit (Flexport)</div></div>
+<div><div class="k">Demand evidence</div><div class="v">Instant Hydration's $2M Shopify↔Stord unfulfilled-order gap IS this composite missing. Carrom: "flying blind right now with what we actually have."</div></div>
+</div>
+</div>
+
+<div class="ccard h-l3">
+<div class="ccard-head"><span class="ccard-name">3-Way Match</span><span class="chip">consumer: finance</span></div>
+<div class="ccard-body">
+<div><div class="k">Fed by</div><div class="v">P2P loop · Cost Components</div></div>
+<div><div class="k">Sources kept living</div><div class="v">PO + receipt + vendor bill (parsed PDF / Bill.com / Ramp)</div></div>
+<div><div class="k">Demand evidence</div><div class="v">Named "the core value prop for accounting" in the SLM churn post-mortem; its absence is why they left.</div></div>
+</div>
+</div>
+
+<div class="ccard h-l3">
+<div class="ccard-head"><span class="ccard-name">Orders/Sales across channels</span><span class="chip">consumer: ops</span></div>
+<div class="ccard-body">
+<div><div class="k">Fed by</div><div class="v">OMS loop · Order Routing</div></div>
+<div><div class="k">Sources kept living</div><div class="v">Shopify + Amazon + TikTok + EDI partners + B2B portal</div></div>
+<div><div class="k">Demand evidence</div><div class="v">ABA: "I have fully lost track of all orders... can we put everything in 1 list?"</div></div>
+</div>
+</div>
+
+<div class="ccard h-l3">
+<div class="ccard-head"><span class="ccard-name">Margin Profiles by SKU</span><span class="chip">consumer: CEO + finance</span></div>
+<div class="ccard-body">
+<div><div class="k">Fed by</div><div class="v">Cost Components · OMS loop · UMD loop</div></div>
+<div><div class="k">Sources kept living</div><div class="v">Fully-burdened cost + channel revenue + fees/freight</div></div>
+<div><div class="k">Demand evidence</div><div class="v">Magic Mind SKU-profitability ask; Verve SKU profitability was the reason to replace CIN7.</div></div>
+</div>
+</div>
+
+<div class="ccard h-l3">
+<div class="ccard-head"><span class="ccard-name">COGS Report / Month-End Snapshot</span><span class="chip">posts to the 3p GL</span><span class="chip">consumer: CFO + lender + auditor</span></div>
+<div class="ccard-body">
+<div><div class="k">Fed by</div><div class="v">Op/Fin loop · Cost Components · Rev Rec</div></div>
+<div><div class="k">Sources kept living</div><div class="v">DOSS valuation + QBO/IES/NetSuite GL + 3PL cycle counts</div></div>
+<div><div class="k">Demand evidence</div><div class="v">Tag Wall's TD Bank credit line hinged on it; Verve's CFO defines Phase 1 done by it.</div></div>
+</div>
+</div>
+
+</div>
+
+<h2>4 · BusinessProcesses <span class="lvl lvl4">L4 · autonomous actions</span></h2>
+
+<p>Proper nouns: the processes by which the customer defines how they work. Each consumes composites and, at maturity, acts autonomously through DOSS (ExecutorContract mode <code>agent</code> / <code>agentWithApproval</code>).</p>
+
+<div class="cardgrid">
+
+<div class="ccard h-l4">
+<div class="ccard-head"><span class="ccard-name">Close the Books</span><span class="chip">highest retention weight</span></div>
+<div class="ccard-body">
+<div><div class="k">Consumes</div><div class="v">Month-End Snapshot · 3-Way Match</div></div>
+<div><div class="k">Autonomous action</div><div class="v">The close executes in DOSS on a clock and posts to the 3p GL; exceptions are surfaced, not hunted.</div></div>
+<div><div class="k">Demand evidence</div><div class="v">29 customers. Realized at Sauz and Tersus; churn-proven at SLM and Tag Wall.</div></div>
+</div>
+</div>
+
+<div class="ccard h-l4">
+<div class="ccard-head"><span class="ccard-name">Supply/Demand Planning → Automated Procurement</span></div>
+<div class="ccard-body">
+<div><div class="k">Consumes</div><div class="v">Inventory Positions · Margin by SKU · retailer forecasts</div></div>
+<div><div class="k">Autonomous action</div><div class="v">The Replenishment figure-8 issues PO recommendations → approved POs, no planner spreadsheet.</div></div>
+<div><div class="k">Demand evidence</div><div class="v">13 customers want modifiable planning; Smash Foods MRP = FG forecast → BOM explosion → PO recs.</div></div>
+</div>
+</div>
+
+<div class="ccard h-l4">
+<div class="ccard-head"><span class="ccard-name">SKU-Mix / Performance / Pricing Analysis</span></div>
+<div class="ccard-body">
+<div><div class="k">Consumes</div><div class="v">Margin by SKU · Orders across channels</div></div>
+<div><div class="k">Autonomous action</div><div class="v">Price-book updates propagate via the UMD loop; Ark's 30-40 weekly sheets auto-generate.</div></div>
+<div><div class="k">Demand evidence</div><div class="v">Ark: 70% of team time on pricing today; Magic Mind profitability ask.</div></div>
+</div>
+</div>
+
+<div class="ccard h-l4">
+<div class="ccard-head"><span class="ccard-name">Onboarding a Sales Channel</span></div>
+<div class="ccard-body">
+<div><div class="k">Consumes</div><div class="v">Orders across channels · Order Routing</div></div>
+<div><div class="k">Autonomous action</div><div class="v">New retailer/marketplace live on the day-1 rail in week 1; EDI swaps in underneath.</div></div>
+<div><div class="k">Demand evidence</div><div class="v">#1 critical event in the SPICED model; Gorgie 5k→15k doors; Clean Age's Walmart reset.</div></div>
+</div>
+</div>
+
+<div class="ccard h-l4">
+<div class="ccard-head"><span class="ccard-name">Onboarding a 3PL</span><span class="chip">preferred partners = rapid path</span></div>
+<div class="ccard-body">
+<div><div class="k">Consumes</div><div class="v">Inventory Positions</div></div>
+<div><div class="k">Autonomous action</div><div class="v">Preferred-partner playbook: credentials → CSV day-1 rail → API; positions reconciled in days.</div></div>
+<div><div class="k">Demand evidence</div><div class="v">Eight Sleep runs 10 3PLs; Echelon churned on one.</div></div>
+</div>
+</div>
+
+<div class="ccard h-l4">
+<div class="ccard-head"><span class="ccard-name">Onboarding Vendors / Co-mans</span></div>
+<div class="ccard-body">
+<div><div class="k">Consumes</div><div class="v">3-Way Match · Lot Tracking</div></div>
+<div><div class="k">Autonomous action</div><div class="v">Vendor master + email rail + doc exchange (COA/spec) live immediately.</div></div>
+<div><div class="k">Demand evidence</div><div class="v">Athena's co-man receipt gap: #1 architectural risk four straight WPRs, 8+ co-mans.</div></div>
+</div>
+</div>
+
+<div class="ccard h-l4">
+<div class="ccard-head"><span class="ccard-name">Expanding into a Geo</span></div>
+<div class="ccard-body">
+<div><div class="k">Consumes</div><div class="v">All of the above + entity-scoped Op/Fin</div></div>
+<div><div class="k">Autonomous action</div><div class="v">New entity, currency, and compliance spun up on the existing loops.</div></div>
+<div><div class="k">Demand evidence</div><div class="v">Eight Sleep Qatar/Kuwait/Bahrain; Selkirk's Malaysia e-invoicing deadline.</div></div>
+</div>
+</div>
+
+</div>
+
+<h2>5 · The enterprise Maslow and where the LIR plugs in</h2>
+
+<div class="fig">
+<svg viewBox="0 0 860 360" width="100%" role="img" aria-label="Enterprise hierarchy of needs pyramid with LIR instrumentation per level">
+  <polygon class="rise r4" points="430,24 350,104 510,104" fill="hsl(39,100%,93%)" stroke="hsl(39,100%,57%)" stroke-width="1"/>
+  <polygon class="rise r3" points="350,104 510,104 560,184 300,184" fill="hsl(272,51%,95%)" stroke="hsl(272,51%,54%)" stroke-width="1"/>
+  <polygon class="rise r2" points="300,184 560,184 610,264 250,264" fill="hsl(173,60%,94%)" stroke="hsl(173,80%,36%)" stroke-width="1"/>
+  <polygon class="rise r1" points="250,264 610,264 660,344 200,344" fill="hsl(212,100%,96%)" stroke="hsl(212,100%,54%)" stroke-width="1"/>
+  <text x="430" y="82" font-size="12.5" font-weight="600" fill="#171717" text-anchor="middle">L4 BusinessProcesses</text>
+  <text x="430" y="97" font-size="11" fill="#4d4d4d" text-anchor="middle">autonomous actions</text>
+  <text x="430" y="152" font-size="12.5" font-weight="600" fill="#171717" text-anchor="middle">L3 Composites</text>
+  <text x="430" y="167" font-size="11" fill="#4d4d4d" text-anchor="middle">insights</text>
+  <text x="430" y="232" font-size="12.5" font-weight="600" fill="#171717" text-anchor="middle">L2 Figure-8s</text>
+  <text x="430" y="247" font-size="11" fill="#4d4d4d" text-anchor="middle">controls + visibility</text>
+  <text x="430" y="312" font-size="12.5" font-weight="600" fill="#171717" text-anchor="middle">L1 TX Loops</text>
+  <text x="430" y="327" font-size="11" fill="#4d4d4d" text-anchor="middle">survival</text>
+  <text x="180" y="308" font-size="12" fill="#6b6b6b" text-anchor="end">"the business runs"</text>
+  <text x="180" y="228" font-size="12" fill="#6b6b6b" text-anchor="end">"I can trust the numbers"</text>
+  <text x="180" y="148" font-size="12" fill="#6b6b6b" text-anchor="end">"I can see the business"</text>
+  <text x="180" y="78" font-size="12" fill="#6b6b6b" text-anchor="end">"it runs itself"</text>
+  <text x="680" y="300" font-size="12" font-weight="600" fill="#171717">LIR-1 · throughput (the headline)</text>
+  <text x="680" y="316" font-size="11.5" fill="#4d4d4d">P% hold every declared loop's cadence</text>
+  <text x="680" y="332" font-size="11.5" fill="#4d4d4d">each period · TTRTX per loop</text>
+  <text x="680" y="220" font-size="12" font-weight="600" fill="#171717">LIR-2 · integrity</text>
+  <text x="680" y="236" font-size="11.5" fill="#4d4d4d">figure-8 chains reconcile: zero</text>
+  <text x="680" y="252" font-size="11.5" fill="#4d4d4d">unexplained deltas at each seam</text>
+  <text x="680" y="140" font-size="12" font-weight="600" fill="#171717">LIR-3 · dependence</text>
+  <text x="680" y="156" font-size="11.5" fill="#4d4d4d">composites consumed: views queried,</text>
+  <text x="680" y="172" font-size="11.5" fill="#4d4d4d">snapshots posted to the 3p GL</text>
+  <text x="680" y="60" font-size="12" font-weight="600" fill="#171717">LIR-4 · autonomy</text>
+  <text x="680" y="76" font-size="11.5" fill="#4d4d4d">agent-executed process actions</text>
+  <text x="680" y="92" font-size="11.5" fill="#4d4d4d">per period (approved or autonomous)</text>
+</svg>
+<div class="figcap">Fig. C · The enterprise hierarchy of needs. LIR-1 is the churn instrument; LIR-2 through LIR-4 are trust, dependence, and irreplaceability, the expansion/NRR instruments.</div>
+</div>
+
+<div class="cardgrid">
+
+<div class="card">
+<div class="card-head"><span class="lvl lvl1">L1</span><span class="card-name">TX Loops</span><span class="chip">LIR-1 · the headline</span></div>
+<div class="kv1">
+<div><div class="k">Retention meaning</div><div class="v">Churn prevention. Every confirmed churn failed here.</div></div>
+<div><div class="k">Metric</div><div class="v">TTRTX per declared loop; LIR-1 = P% of ICP hold cadence every period.</div></div>
+<div><div class="k">Instrumentation source</div><div class="v">Loop Metric Registry views on org_* (per-customer, schema-variant).</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="lvl lvl2">L2</span><span class="card-name">Figure-8s</span><span class="chip">LIR-2 · integrity</span></div>
+<div class="kv1">
+<div><div class="k">Retention meaning</div><div class="v">Trust: seam integrity ("button-click trust", Mezcla).</div></div>
+<div><div class="k">Metric</div><div class="v">Seam integrity: unexplained deltas per cycle → zero.</div></div>
+<div><div class="k">Instrumentation source</div><div class="v">Cross-loop reconciliation queries; the Pavoi "source-to-ledger, zero unexplained delta" gate, generalized.</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="lvl lvl3">L3</span><span class="card-name">Composites</span><span class="chip">LIR-3 · dependence</span></div>
+<div class="kv1">
+<div><div class="k">Retention meaning</div><div class="v">Dependence. The customer's daily questions answered only here.</div></div>
+<div><div class="k">Metric</div><div class="v">Composite consumption: queries/views per week; snapshots posted to the 3p GL per period.</div></div>
+<div><div class="k">Instrumentation source</div><div class="v">View telemetry + GL post confirmations.</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><span class="lvl lvl4">L4</span><span class="card-name">BusinessProcesses</span><span class="chip">LIR-4 · autonomy</span></div>
+<div class="kv1">
+<div><div class="k">Retention meaning</div><div class="v">Irreplaceability. DOSS acts, not just records.</div></div>
+<div><div class="k">Metric</div><div class="v">Autonomous actions per period; % of process steps at ExecutorContract mode ≠ human.</div></div>
+<div><div class="k">Instrumentation source</div><div class="v">L2LEvent fold + ExecutorContract telemetry: the automation-coverage dial, per install.</div></div>
+</div>
+</div>
+
+</div>
+
+<p><b>How the levels compose commercially:</b> L1 defends ni/mo:out and is the go-live gate (TTRTX inside the install window). L2 is hypercare exit and the trust repair for red accounts. L3 is the renewal case (the composite the CFO cannot close without). L4 is expansion and the Operations Cloud thesis: the autonomous layer is the hardest to migrate off. A customer's stack level is itself an account-health signal.</p>
+
+<h2>6 · Worked example: Close the Books, decomposed</h2>
+
+<p>The highest-weight BusinessProcess, decomposed through all four levels; the template for any L4 promise:</p>
+
+<table>
+<tr><th>Level</th><th>What must be true</th><th>Predicate (external boundary)</th></tr>
+<tr><td><span class="lvl lvl1">L1</span></td><td>P2P, IMS, OMS, Op/Fin loops each holding cadence (POs matched, positions reconciled daily, invoices flowing, JEs posting)</td><td>each loop's TTRTX achieved; N consecutive periods at boundary</td></tr>
+<tr><td><span class="lvl lvl2">L2</span></td><td>Cost Components figure-8 reconciles: receipt→lot cost→valuation with zero unexplained delta; Rev Rec timing correct</td><td>seam deltas = 0 across the close window</td></tr>
+<tr><td><span class="lvl lvl3">L3</span></td><td>Month-End Snapshot composite materializes and posts to the 3p GL (QBO/IES/NetSuite)</td><td>GL accepted the period's entries; no Excel backfill</td></tr>
+<tr><td><span class="lvl lvl4">L4</span></td><td><b>Close the Books</b>: close runs on a clock, exceptions surfaced to Kaley/Betsy/Anand instead of hunted; DOSS drafts the close</td><td>close completed in ≤X days, agent-drafted, human-approved, 2+ consecutive months</td></tr>
+</table>
+
+<p>Sauz shows the ascent: L1 held (Feb close first ran) → account health flipped → L2 hardened (lot defects worked same-day via the close checklist) → L3 (three consecutive closes posting to QBO) → L4 (close on a clock) is the open proposal. Tag Wall shows the failure mode: L1 money-writers broken (Bill.com, IES dormant) means no L3 snapshot, which cost them a credit-line renewal at the bank.</p>
+
+<h2>7 · What this changes, and next</h2>
+
+<div class="vsban vs-blue">
+<div class="vsban-head">What this changes</div>
+<div class="vsban-body">
+<ul class="numlist">
+<li><span class="n">1</span><span><b>L2L spec alignment [PROPOSED].</b> <code>LoopDeclaration.leadLoop</code> enum becomes the five architecture loops; <code>loopActivated</code> becomes cadence-first (TTRTX); figure-8s enter as <code>ChainDeclaration</code> (2+ loops + seam predicates) gating hypercare exit; composites and BusinessProcesses become the SUS/expansion register. Routes through playbook ratification per D22/R2.</span></li>
+<li><span class="n">2</span><span><b>The registry grows one column.</b> Each Loop Metric Registry entry tags its level (loop / seam / composite / process) so LIR-1 through LIR-4 roll up from one table.</span></li>
+<li><span class="n">3</span><span><b>Sales motion.</b> Sell the L4 proper noun (the customer's own language), contract the L1 loops that make it real, gate the program on TTRTX. The SPICED Impact statement is the L4 BusinessProcess.</span></li>
+<li><span class="n">4</span><span><b>The sequencing rule.</b> Never sell L(n) before L(n-1) holds cadence: a composite built on stalled loops reports numbers the customer cannot trust, and the fleet's trust failures (Kahawa, Mezcla) are all L2 promises on unstable L1.</span></li>
+</ul>
+</div>
+</div>
+
+<div class="vsban vs-amber">
+<div class="vsban-head">Still blocked: the instrumentation gap</div>
+<div class="vsban-body">The LIR-1 baseline needs org_* access: superset MCP unexposed and <code>SANDBOX_POOL_URL</code> unset, confirmed blocked across three sessions. LIR-3/LIR-4 need view + executor telemetry, which is EPD instrumentation work to scope. The manual-creation-ratio query is written and waiting for any environment where /data-investigate resolves.</div>
+</div>
+
+<div class="foot">
+[PROPOSED] framework doc, v1.1 (2026-07-06), authored from Wiley's whiteboard (architecture sandwich, 5 TX loops, figure-8s, composites, BusinessProcesses, enterprise-Maslow levels) + the lir-value-delivery session evidence base: 13 install maps (doss-cli/docs/install-maps), 95 gold cards, churn/problems/integrations gold tier, 28-row objectives harvest, 26-cycle transaction census. v1.1: loops redrawn as circulating circuits with chain stations; figure-8s redrawn as true lemniscate weaves (lobes = loops, crossings = seams, animated tracer = the record making the full pass). v1.2: catalog tables (loops, figure-8s, composites, BusinessProcesses, LIR levels) converted to master-detail cards; CSS motion added (dash flow, seam pulse, pyramid build, hover accelerate). v1.3: Fig. A rebuilt as one connected weave (module triple-8 crossing at receipt/allocation seams; Op/Fin and UMD as stadium loops tangent to all three lobes with money/identity tangent seams); white halo backing on all diagram text. v1.4: composites + BusinessProcesses converted to headed cards (level-tinted header bands); blue banner callouts (stack-in-four-moves, what-this-changes) + amber blocked banner; customer quote cards added (MHH, Mezcla, Ryan Katz). v1.5: tone pass (antithesis punchlines, self-narrating attributions, epic labels, em-dashes stripped); solid loop lines with traveling dots; mellow banner numerals; level-tag spacing. v1.6: banner classes namespaced (vsban) so the Tapestry viewer's own callout CSS cannot inject its red left rail. Supersedes the loop taxonomy in Value Loops v2 (tapestry /a/28dd2791a8394545); composes with the L2L instrumentation spec (l2l-app/docs/l2l-value-loops-instrumentation.md, rev 3). TTRTX supersedes the TTX/TTA pair as the primary clock. Local file: ~/Documents/doss-value-stack.html.
+</div>
+
+</div>
+</body>
+</html>

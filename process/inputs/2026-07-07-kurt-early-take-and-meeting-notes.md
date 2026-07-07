@@ -1,6 +1,6 @@
 # Kurt's early take + raw notes + staff meeting log — product process
 
-**Source:** Kurt, 2026-07-07 (pasted verbatim as part of [iteration 13](../../inputs/notes/2026-07-07-iteration-13-product-process-track.md)). Preserved as-is; internal jargon (BIDEC, ZSL, Mission0, PFMs) is not expanded here — see Signal section for what could and couldn't be resolved.
+**Source:** Kurt, 2026-07-07 (pasted verbatim as part of [iteration 13](../../history/2026-07-07-iteration-13-product-process-track.md)). Preserved as-is; internal jargon (BIDEC, ZSL, Mission0, PFMs) is not expanded here — see Signal section for what could and couldn't be resolved.
 
 ---
 

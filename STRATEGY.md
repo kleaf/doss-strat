@@ -1,6 +1,6 @@
 # DOSS Strategy — Working Thesis
 
-> **Status:** v4, 2026-07-06. v4 incorporates internal Salesforce discovery, SPICED buyer archetypes, install-map/churn evidence, and the Value Loops / LIR model from `inputs/internal/`. Earlier: v1 research refinement, v2 agentic-AI core ([deep dive](deepdives/2026-07-06-agentic-ai-v2.md)), v3 proof points ([deep dive](deepdives/2026-07-06-proof-points-v3.md)). Iteration trail: [ITERATIONS.md](ITERATIONS.md). Evidence status per claim lives in [hypotheses/](hypotheses/).
+> **Status:** v5, 2026-07-08. v5 incorporates the internal Value Stack framework (TX loops → figure-8s → composites → BusinessProcesses) from `inputs/internal/`, and re-elevates customer pain and customer value above process/architecture detail — the mechanism is real and stays in this document, but it no longer leads. Earlier: v1 research refinement, v2 agentic-AI core ([deep dive](deepdives/2026-07-06-agentic-ai-v2.md)), v3 proof points ([deep dive](deepdives/2026-07-06-proof-points-v3.md)), v4 loop-shaped operating thesis. Iteration trail: [ITERATIONS.md](ITERATIONS.md). Evidence status per claim lives in [hypotheses/](hypotheses/).
 
 ## Where DOSS stands today (facts, not strategy)
 
@@ -11,11 +11,61 @@
 - **Internal buyer evidence:** 77 1H FY26 opportunities entered Discovery; 66 had substantive notes. Top needs: one source of truth (40/66), trustworthy inventory (33/66), scale without headcount (22/66), PO automation / three-way match (21/66), accurate COGS / landed cost / margin (18/66), retail / EDI readiness (18/66), adaptability (17/66), order routing (16/66), planning/MRP (16/66), offload failing ERP while keeping the GL (15/66) ([internal VoC](inputs/internal/Top-10-Customer-ERP-Ops-Requirements---1H-FY26-SPICED-LIR.html)).
 - **Internal retention evidence:** confirmed churns and silent accounts share the same failure mode: real transaction volume never flowed through DOSS automatically, or flowed and then left. Go-live is not the value event; the first successful end-to-end transaction, repeated at cadence and verified at the external boundary, is ([Value Loops / LIR](inputs/internal/Value-Loops---Outcome-Based-Productization-and-the-DOSS-LIR.html)).
 
-## The refined thesis
+## The growth engine thesis
+
+**DOSS is not just an ERP or an operations platform — it is the growth engine for companies that make physical goods, starting with CPG.** Growth for these businesses is capped by four things breaking down before revenue can scale: they can't close the books fast enough to trust their own numbers, can't launch new products without weeks of manual busywork, can't guarantee the product is actually where it needs to be, and can't stand up new sales channels fast enough to catch a retail or marketplace window. DOSS's job is to remove all four caps — not just record what happened after the fact. "Operations cloud" remains the lane and "adaptive ERP" remains the underlying mechanism (below); **growth engine is the destination promise**, and it is what should lead every customer- and exec-facing narrative from here forward.
+
+## The four customer growth pillars
+
+Real evidence below is drawn from the internal Value Stack framework ([TX Loops → Figure-8s → Composites → BusinessProcesses](inputs/internal/The-DOSS-Value-Stack---TX-Loops-Figure-8s-Composites-BusinessProcesses.html)) — translated out of its internal architecture language into what it actually says about customers, because that architecture is the mechanism, not the message.
+
+### 1. Closing the books
+
+**Pain:** Tag Wall's bank credit-line renewal hinged on a COGS report DOSS couldn't yet produce reliably — the underlying money-writers were broken, so no trustworthy snapshot existed when the bank asked. Verve's CFO won't call the DOSS implementation "done" until the COGS report is trustworthy; today, COGS journal entries still fail 44% of the time even while invoicing runs clean in the same window. SLM's own churn post-mortem named the three-way match as "the core value prop for accounting" — its absence is why they left.
+
+**DOSS answer:** the close runs on a clock inside DOSS and posts straight to the GL (QuickBooks, NetSuite, IES) — no Excel backfill, exceptions surfaced instead of hunted.
+
+**Proof:** Sauz ran three consecutive months of real closes through DOSS → QBO; Magic Mind pushed 62 clean journal entries in 14 days; 29 customers have named this their primary ask.
+
+**Growth link:** a brand that trusts its own numbers can raise capital and extend credit lines. Closing the books isn't bookkeeping — it's the gate to everything else a growing company needs to do.
+
+### 2. Introducing new products
+
+**Pain:** Ark spends **70% of its team's time every week** hand-building 30–40 pricing sheets. New SKUs, BOM changes, and price updates don't propagate cleanly to every channel a product touches. Eight Sleep's single-SKU approval path works, but bulk changes are "the broken half."
+
+**DOSS answer:** one change — item, BOM, vendor, or price — approved once and propagated automatically to every channel alias (Shopify listing, Amazon ASIN, EDI item code, vendor SKU) instead of being manually re-keyed everywhere.
+
+**Proof:** Verve replaced Cin7 specifically for SKU-profitability visibility; Magic Mind is asking for the same today.
+
+**Growth link:** product-innovation velocity is the entire premise of the macro bet ([H6](hypotheses/06-stable-markets-dynamic-systems.md)) — a brand that can't launch new SKUs fast can't compete no matter how good its back-office operations are. **This is also the least mature of the four pillars today** — see Open Questions.
+
+### 3. Ensuring product availability
+
+**Pain:** Instant Hydration had a **$2M gap** between Shopify and its 3PL (Stord) in unfulfilled orders that neither system was really tracking. Carrom says flatly they're "flying blind." Pavoi silently missed **~1,000 orders in a single day** from a routing bug. Echelon churned entirely over bundle-routing failures through its 3PL.
+
+**DOSS answer:** one reconciled inventory position across every 3PL, warehouse, and channel, feeding automated replenishment and order routing that only commits inventory it can actually see.
+
+**Proof:** Magic Mind's 3PL sync runs 14/14 clean, nightly; Spread the Love runs 30/30, daily; 13 customers are explicitly asking for replenishment they can override by hand, not a black box.
+
+**Growth link:** every missed order or phantom stockout is lost revenue, and at the extreme (Echelon) a lost customer entirely. Availability isn't an ops metric — it's top-line growth left on the table.
+
+### 4. Introducing new sales channels
+
+**Pain:** launching a new retailer, marketplace, or region is named the single most critical event in DOSS's own buyer research (the SPICED model) — and it's won or lost on speed: Clean Age had a live Walmart reset to hit; Selkirk had a hard e-invoicing deadline in Malaysia.
+
+**DOSS answer:** a new channel goes live on a fast "day-1 rail" (native forms, portal, PDF parsing) in week one, with EDI and deeper integration hardening underneath the same record afterward — the channel doesn't wait for the integration to be perfect.
+
+**Proof:** Gorgie scaled from 5,000 to 15,000 doors on DOSS; Snackwise ran 345,000 transactions through zero custom integrations and renewed specifically because of it; Eight Sleep runs 10 different 3PLs simultaneously; Mezcla stood up weekly EDI order-to-cash cadence (850→810).
+
+**Growth link:** the most direct growth lever of the four — every new channel DOSS turns on fast is revenue surface a brand couldn't otherwise have reached.
+
+## The mechanism: how the growth engine runs
+
+The four pillars above are the promise; this section is the machinery that makes them real — internal, not customer-facing, and it should never be what leads a strategy conversation again.
 
 **DOSS is the operations cloud for mid-market physical-goods brands: it lands beside the GL by activating one productized Value Loop, becomes indispensable as real transactions flow through it automatically, and compounds into the adaptive ERP as AI keeps those loops running, improving, and expanding.**
 
-The V4 revision is the move from a category thesis to an operating thesis. "Operations cloud" is still the lane, and "adaptive ERP" is still the destination. The new spine is: **one loop live, external boundary verified, recurring throughput measured, outcome receipt delivered.**
+The V4 revision was the move from a category thesis to an operating thesis. The new spine is: **one loop live, external boundary verified, recurring throughput measured, outcome receipt delivered.** The V5 Value Stack document supersedes the earlier "Value Loops v2" taxonomy with a four-level stack — **TX Loops (survival) → Figure-8s (trust/integrity) → Composites (insight) → BusinessProcesses (autonomy)** — and maps directly onto the four pillars above: Close the Books and Onboarding a Sales Channel are already named BusinessProcesses (Level 4) in that framework; Ensuring Availability is served by the Inventory Positions composite plus the Order Routing and Automated Replenishment figure-8s; **Introducing New Products is served by the underlying master-data (UMD) loop but is not yet named as its own BusinessProcess** — the gap flagged above.
 
 ## The strategic moves, in order
 
@@ -91,6 +141,8 @@ Current public proof is "hours saved" — useful, but it prices like productivit
 
 One customer who can say "DOSS closed our books in days with CFO-trustable COGS" or "DOSS prevented $X of retail deductions" is worth fifty who saved 20 hours per week.
 
+Two of the four growth pillars still lack a named outcome receipt: **"new SKU live on every channel alias the same day it's approved"** (Introducing New Products) and **"new retailer live and compliant within N days"** (Introducing New Sales Channels, distinct from the ongoing Retail loop receipt above). Both should be added once the underlying loop/process work is trustworthy enough to make the claim.
+
 ## The macro bet (unchanged, now operationalized)
 
 Demand for physical goods is AI-stable: people still buy coffee, detergent, beauty products, snacks, and household goods. But the companies making them face accelerating product, channel, retailer, and fulfillment complexity. Internal discovery now gives the macro story operational teeth: buyers are asking for real-time inventory across channels, retail readiness, order routing, planning/MRP, and scale without headcount. The adaptive ERP wins that world only if it is first trusted as the system where real transaction loops run.
@@ -108,15 +160,18 @@ The clock remains NetSuite Next and the broader incumbent move to agentic UX. V4
 
 ## Top open questions
 
-1. What are the 12-week baseline values for LIR: N, P, document throughput, and work-leaving-DOSS events, by ICP fence?
-2. Which two loops are the company committing to harden first: Close/QBO boundary and Retail partner-ack telemetry, as internal evidence suggests?
-3. What is the exact activation predicate for each lead loop, and can Sales, EPD, and PMO all inspect it in the same registry?
-4. Which customer can produce the first CFO-forwardable outcome receipt for Close, Retail, Replenishment, or Truth?
-5. How should pricing/packaging preserve suite ACV while making loop-shaped delivery and expansion explicit?
-6. What does Intuit strategic alignment imply long-term: permanent GL boundary, or eventual constraint on adaptive-system ambitions?
+1. **Should "Introducing New Products" become a named, first-class BusinessProcess** (a peer to Close the Books and Onboarding a Sales Channel), given Kurt's four-pillar framing names it as equally important but the internal architecture doesn't yet? What would its external boundary/activation predicate be?
+2. What are the 12-week baseline values for LIR: N, P, document throughput, and work-leaving-DOSS events, by ICP fence?
+3. Which two loops are the company committing to harden first: Close/QBO boundary and Retail partner-ack telemetry, as internal evidence suggests?
+4. What is the exact activation predicate for each lead loop, and can Sales, EPD, and PMO all inspect it in the same registry?
+5. Which customer can produce the first CFO-forwardable outcome receipt for Close, Retail, Replenishment, or Truth — and who can produce the first for the two still-missing pillar receipts (new-product-live, new-channel-live)?
+6. How should pricing/packaging preserve suite ACV while making loop-shaped delivery and expansion explicit?
+7. What does Intuit strategic alignment imply long-term: permanent GL boundary, or eventual constraint on adaptive-system ambitions?
+8. Does "growth engine" replace "adaptive ERP" as the external category claim, or stay an internal narrative frame while positioning still says "operations cloud"? Needs a deliberate answer, not drift.
 
 ## Changelog
 
+- **2026-07-08** — v5. Incorporated the internal Value Stack framework (TX loops → figure-8s → composites → BusinessProcesses, supersedes Value Loops v2). Re-elevated customer pain/value above process detail: new "growth engine" destination framing and four named customer pillars (closing the books, introducing new products, ensuring product availability, introducing new sales channels), each with real customer evidence. Flagged "Introducing New Products" as not yet a named BusinessProcess — a gap. H9 opened; H2/H6 evidence updated.
 - **2026-07-06** — v4. Internal Value Loops / LIR revision: strategy now centers on loop-shaped delivery, external-boundary activation, transactional-throughput retention metrics, and outcome receipts. Internal 1H FY26 VoC evidence incorporated; H1–H8 updated. H7 refined: deductions remain high-value but follow Retail rail hardening; Close and Retail boundaries are first hardening priorities.
 - **2026-07-06** — v3. Proof points gathered (3 surveys): exceptions wedge sharpened to deductions/compliance (hard dollars); "Zara loop, productized" adopted as the differentiation narrative; competitor agentic offerings bucketed A–F and ranked (incumbents recommend-don't-act; autonomy is enterprise-only; ops implementation agents are whitespace); Fishbowl and Dynamics-MCP added as watch items. H2/H4/H7/H8 evidence updated.
 - **2026-07-06** — v2. Agentic-AI core elaborated: implementation agent + runtime agency ladder (exceptions → replenishment → forecasting-as-ingredient → demand shaping), LLM/ML division of labor, loop-as-moat. New deep dive; H7, H8 opened.

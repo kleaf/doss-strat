@@ -44,3 +44,7 @@ Additional evidence for:
 - 2026-07-06 (V4): Internal discovery shows buyers are already feeling the complexity pressure the macro thesis predicts: real-time inventory across channels/locations (33/66), scale without headcount (22/66), retail/EDI readiness (18/66), order routing/allocation (16/66), and demand planning/MRP (16/66) ([internal VoC](../inputs/internal/Top-10-Customer-ERP-Ops-Requirements---1H-FY26-SPICED-LIR.html)).
 
 Status note: this strengthens the supply-side acceleration side qualitatively, but the hypothesis still needs external SKU/channel/proliferation trend data before moving beyond gathering evidence.
+
+## V5 update (2026-07-08): the "introducing new products" pillar is direct evidence
+
+- 2026-07-08 (V5): Ark spends 70% of its team's time hand-building 30–40 pricing sheets a week just to keep products current across channels; Verve and Magic Mind both cite SKU-profitability/new-product visibility as a top ask ([Value Stack](../inputs/internal/The-DOSS-Value-Stack---TX-Loops-Figure-8s-Composites-BusinessProcesses.html)). This is the macro thesis's "accelerating product innovation" half showing up as acute, named, present-tense customer pain — not just a forward-looking market bet. See [H9](09-growth-engine-not-ops-platform.md).
