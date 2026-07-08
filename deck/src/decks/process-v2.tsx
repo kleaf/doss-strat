@@ -2,7 +2,7 @@ import { DeckDef, Rise } from "../components/Deck";
 
 export const processV2: DeckDef = {
   id: "process-v2",
-  title: "DOSS Product Process — Roadmap Alignment & Accountability v2",
+  title: "DOSS Product Process — Roadmap Alignment & Accountability",
   date: "2026-07-08",
   track: "process",
   slides: [
@@ -19,20 +19,20 @@ export const processV2: DeckDef = {
       <Rise order={3}>
         <div className="meta">
           <span>Product &amp; engineering process</span>
-          <span>Reconciled · v2</span>
+          <span>Current process + focused improvements</span>
           <span>July 2026</span>
         </div>
       </Rise>
     </div>,
 
-    // 2 — what's already real
+    // 2 — current process
     <>
       <Rise order={0}>
-        <div className="kicker">Correction from v1</div>
+        <div className="kicker">Current process</div>
       </Rise>
       <Rise order={1}>
         <h1 className="headline">
-          More is real than <span className="accent">v1 gave credit for</span>
+          DOSS already has the core <span className="accent">operating system</span>
         </h1>
       </Rise>
       <Rise order={2}>
@@ -61,8 +61,9 @@ export const processV2: DeckDef = {
       </Rise>
       <Rise order={3}>
         <p className="prose" style={{ marginTop: "2rem", fontSize: "1.05rem" }}>
-          None of v1's proposed mechanisms should be built as new, parallel machinery. The real
-          job is narrower — and matches exactly what Kurt asked for this pass.
+          The answer is not a new parallel process. It is to use the lifecycle already in place,
+          then tighten a few fields and ownership points where roadmap evidence and delivery
+          commitments need more discipline.
         </p>
       </Rise>
     </>,
@@ -70,7 +71,46 @@ export const processV2: DeckDef = {
     // 3 — the two things missing
     <>
       <Rise order={0}>
-        <div className="kicker">What's actually missing</div>
+        <div className="kicker">Operating questions</div>
+      </Rise>
+      <Rise order={1}>
+        <h1 className="headline">Three questions every committed project answers</h1>
+      </Rise>
+      <div className="board">
+        <Rise order={2}>
+          <div className="cell hot-cell">
+            <span className="id">01</span>
+            <h4>What are we doing?</h4>
+            <span className="status hot">definition of done</span>
+          </div>
+        </Rise>
+        <Rise order={3}>
+          <div className="cell hot-cell">
+            <span className="id">02</span>
+            <h4>How will we know it worked?</h4>
+            <span className="status hot">KPI / outcome</span>
+          </div>
+        </Rise>
+        <Rise order={4}>
+          <div className="cell hot-cell">
+            <span className="id">03</span>
+            <h4>When will we deliver it?</h4>
+            <span className="status hot">owned timeline</span>
+          </div>
+        </Rise>
+      </div>
+      <Rise order={5}>
+        <p className="prose" style={{ marginTop: "2rem", fontSize: "1.05rem" }}>
+          These are Kurt's independently-arrived-at pillars. They do not require reinventing the
+          lifecycle — they require making the existing lifecycle answer the questions explicitly.
+        </p>
+      </Rise>
+    </>,
+
+    // 4 — the two gaps
+    <>
+      <Rise order={0}>
+        <div className="kicker">Where to improve</div>
       </Rise>
       <Rise order={1}>
         <h1 className="headline">Two gaps, named precisely</h1>
@@ -81,8 +121,8 @@ export const processV2: DeckDef = {
             <span className="card-num">Gap 01</span>
             <h3>Roadmap ↔ customer need</h3>
             <p>
-              Intake asks "why now" but nothing requires citing named accounts, ARR at stake, or a
-              VoC signal before a candidate is triaged.
+              Intake asks "why now" but does not require named customers, ARR/pipeline at stake,
+              or the success measure that says whether the work mattered.
             </p>
           </div>
         </Rise>
@@ -91,45 +131,42 @@ export const processV2: DeckDef = {
             <span className="card-num">Gap 02</span>
             <h3>Delivery commitment ownership</h3>
             <p>
-              The RACI's "Accountable" owner changes every stage. Nobody owns the ship-date
-              promise end-to-end, and no metric tracks whether commitments are kept.
+              The RACI's "Accountable" owner changes every stage. Nobody owns the definition of
+              done, KPI, and ship-date promise end-to-end.
             </p>
           </div>
         </Rise>
       </div>
     </>,
 
-    // 4 — Addition A
+    // 5 — Addition A
     <>
       <Rise order={0}>
         <div className="kicker">Addition A</div>
       </Rise>
       <Rise order={1}>
         <h1 className="headline">
-          A customer-evidence gate on <span className="accent">Intake</span>
+          A customer-evidence and KPI gate on <span className="accent">Intake</span>
         </h1>
       </Rise>
       <Rise order={2}>
         <p className="prose">
-          Add one required field to the existing Intake one-pager: <strong>Customer
-          Evidence</strong> — named accounts or account count, ARR/pipeline at stake, and a
-          citation of the growth pillar it serves (Close the Books · Introducing New Products ·
-          Ensuring Availability · Introducing New Sales Channels). This becomes a third resourcing
-          question at the existing weekly Triage: <em>do we have the owner, do we have capacity,
-          do we have the customer evidence.</em> No candidate advances past "Not Started" without
-          it.
+          Add two required fields to the existing Intake one-pager: <strong>Customer
+          Evidence</strong> — named accounts or account count, ARR/pipeline at stake, and a VoC or
+          growth-pillar citation — plus <strong>Success Measure</strong>, the KPI or
+          customer/business outcome that says whether the work mattered.
         </p>
       </Rise>
       <Rise order={3}>
         <p className="prose" style={{ marginTop: "1.4rem", fontSize: "1rem" }}>
-          Scales naturally with the doc's own listening model: Applications (richest listening)
-          cites the richest evidence; Platform (least listening, Wiley/Arnav-directed) cites
-          technical conviction explicitly instead of leaving the field blank.
+          This becomes a third resourcing question at weekly Triage, alongside owner and capacity:
+          <em> do we know the customer evidence and success measure?</em> No candidate advances
+          past "Not Started" without it.
         </p>
       </Rise>
     </>,
 
-    // 5 — Addition B: commitment + DRI
+    // 6 — Addition B: commitment + DRI
     <>
       <Rise order={0}>
         <div className="kicker">Addition B — part 1</div>
@@ -160,14 +197,14 @@ export const processV2: DeckDef = {
             <span className="n">03</span>
             <span>
               A <strong>DRI per committed project</strong> — the term the org already uses for
-              PRDs — accountable end-to-end, idea through adoption, not just per stage.
+              PRDs — accountable end-to-end for the definition of done, KPI, and timeline.
             </span>
           </li>
         </ol>
       </Rise>
     </>,
 
-    // 6 — Addition B: say/do
+    // 7 — Addition B: say/do
     <>
       <Rise order={0}>
         <div className="kicker">Addition B — part 2</div>
@@ -207,7 +244,7 @@ export const processV2: DeckDef = {
       </Rise>
     </>,
 
-    // 7 — supporting fixes
+    // 8 — supporting fixes
     <>
       <Rise order={0}>
         <div className="kicker">Two supporting fixes</div>
@@ -219,11 +256,11 @@ export const processV2: DeckDef = {
         <Rise order={2}>
           <div className="card">
             <span className="card-num">Fix 01</span>
-            <h3>Staged rollout, decoupled from PRD tier</h3>
+            <h3>Customer-facing release check</h3>
             <p>
-              A "customer rollout required? ring plan?" field on Release — tier measures
-              scope/clarity, not customer-facing blast radius. A small Tier 3 change can still
-              need staged rollout.
+              Add one plain Release question: <strong>will customers notice this change?</strong>{" "}
+              If yes, name who sees it first and who tells Sales/CS. That question is independent
+              of PRD tier; even a small change can need careful communication.
             </p>
           </div>
         </Rise>
@@ -240,29 +277,27 @@ export const processV2: DeckDef = {
       </div>
     </>,
 
-    // 8 — corrected diagnosis
+    // 9 — governance role
     <>
       <Rise order={0}>
-        <div className="kicker">Corrected diagnosis</div>
+        <div className="kicker">Governance role</div>
       </Rise>
       <Rise order={1}>
         <h1 className="headline">
-          "Wiley writing PRDs" isn't ambiguous — it's <span className="accent">adherence</span>
+          Product writes the PRD; <span className="accent">Wiley approves it</span>
         </h1>
       </Rise>
       <Rise order={2}>
         <p className="prose">
-          v1 read this as a fuzzy shaping/building boundary needing a new framework. The
-          documented RACI already assigns the PM as Accountable for PRD authorship at every
-          applicable stage; Wiley is the Process Owner and Approver the process already defines
-          for him. The fix isn't conceptual — it's routing PRD authorship through the PM (Joyce
-          for OS) per the process that already exists, and reserving Wiley's time for the
-          approver role.
+          The documented RACI already assigns PM as Accountable for PRD authorship at every
+          applicable stage. Wiley's role is not to create the PRD from scratch; Product brings him
+          the PRD, customer evidence, KPI, definition of done, and tradeoff recommendation so he
+          can review, push, and approve the decision at CEO altitude.
         </p>
       </Rise>
     </>,
 
-    // 9 — rollout
+    // 10 — rollout
     <>
       <Rise order={0}>
         <div className="kicker">Rolling this out</div>
@@ -273,46 +308,9 @@ export const processV2: DeckDef = {
       <Rise order={2}>
         <p className="prose">
           Both additions attach to tools and meetings already in weekly use. Introduce the
-          Customer Evidence field and the Commitment/DRI fields at the next weekly Staff Mtg;
-          start the say/do trend line at the next quarterly SLT review once a baseline exists.
+          Customer Evidence, Success Measure, Commitment, and DRI fields at the next weekly Staff
+          Mtg; start the say/do trend line at the next quarterly SLT review once a baseline exists.
         </p>
-      </Rise>
-    </>,
-
-    // 10 — open questions
-    <>
-      <Rise order={0}>
-        <div className="kicker">Still open</div>
-      </Rise>
-      <Rise order={1}>
-        <h1 className="headline">
-          What we still don't <span className="accent">know</span>
-        </h1>
-      </Rise>
-      <Rise order={2}>
-        <ol className="biglist">
-          <li>
-            <span className="n">Q·01</span>
-            <span>
-              What do <strong>BIDEC, ZSL, Mission0, BYOFE, "bootloader"</strong> refer to? Absent
-              from both Kurt's notes and the real lifecycle doc.
-            </span>
-          </li>
-          <li>
-            <span className="n">Q·02</span>
-            <span>
-              What's the <strong>current say/do rate</strong>, if tracked informally today — is
-              there a baseline to compare against?
-            </span>
-          </li>
-          <li>
-            <span className="n">Q·03</span>
-            <span>
-              Is <strong>"why now"</strong> in the existing Intake template already doing this job
-              informally — and if so, why doesn't it feel sufficient?
-            </span>
-          </li>
-        </ol>
       </Rise>
     </>,
   ],
